@@ -30,8 +30,9 @@ public class directionalLockScript : MonoBehaviour
     void AddSeqeunce(char dir)
     {
         curSequence.Add(dir);
+        Debug.Log(dir);
 
-        seqText.text = curSequence.ToString();
+        seqText.text = string.Join("-", curSequence);
 
         if (curSequence.Count == targetLength)
         {
