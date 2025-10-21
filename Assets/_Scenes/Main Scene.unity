@@ -567,6 +567,17 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1482162736 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2586145790389987366, guid: 101dc7fd5b592cd469cd41cef5ecfb89, type: 3}
+  m_PrefabInstance: {fileID: 8778901003050628662}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1511697461
 GameObject:
   m_ObjectHideFlags: 0
@@ -1254,6 +1265,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: DirectionalLock
       objectReference: {fileID: 0}
+    - target: {fileID: 5154251409174063415, guid: 101dc7fd5b592cd469cd41cef5ecfb89, type: 3}
+      propertyPath: seqText
+      value: 
+      objectReference: {fileID: 1482162736}
     - target: {fileID: 5540546640089306856, guid: 101dc7fd5b592cd469cd41cef5ecfb89, type: 3}
       propertyPath: m_Camera
       value: 
