@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Linq; // Added this line to use Enumerable.Repeat, though we don't strictly need it here.
 
 public class Whiteboard : MonoBehaviour
 {
@@ -18,34 +19,37 @@ public class Whiteboard : MonoBehaviour
 
     void Start()
     {
-        // If a texture is already assigned in the Inspector, use it and exit.
         if (texture) 
         {
             _renderer.material.mainTexture = texture;
             return;
         }
 
-        // Create a new texture
+        // Create a new Texture2D
         texture = new Texture2D((int)textureSize.x, (int)textureSize.y);
         
-        // **********************************************
-        // THE FIX: Initialize the texture to pure white
-        // **********************************************
+        // --- CHALKBOARD INITIALIZATION: Dark Green ---
         
-        // 1. Create an array of white colors for the entire texture
+        // Define the dark green color (R=0.0, G=0.25, B=0.0, A=1.0)
+        // Adjust the 0.25f value if you want a lighter or darker green.
+        Color chalkboardColor = new Color(0.0f, 0.25f, 0.0f, 1.0f); 
+        
+        // Create an array of colors to fill the entire texture
         Color[] colors = new Color[(int)(textureSize.x * textureSize.y)];
+        
+        // Fill the array with the solid dark green color
         for (int i = 0; i < colors.Length; i++)
         {
-            colors[i] = Color.white; // Assigning pure white (R=1, G=1, B=1, A=1)
+            colors[i] = chalkboardColor;
         }
 
-        // 2. Apply the white colors to the texture
+        // Apply the solid colors to the texture
         texture.SetPixels(colors);
         
-        // 3. Apply the changes to the GPU
+        // Upload the changes to the GPU
         texture.Apply();
 
-        // 4. Assign the texture to the material
+        // Assign the texture to the material
         _renderer.material.mainTexture = texture;
     }
 }
