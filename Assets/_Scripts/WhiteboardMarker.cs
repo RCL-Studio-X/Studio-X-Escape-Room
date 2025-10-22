@@ -20,6 +20,7 @@ public class WhiteboardMarker : MonoBehaviour
     private Vector2 _lastTouchPos;
     private bool _touchedLastFrame;
     private Quaternion _lastTouchRot;
+    private Rigidbody markerRb;
 
     private void Start()
     {
@@ -28,6 +29,7 @@ public class WhiteboardMarker : MonoBehaviour
         var colorCount = penSize * penSize;
         _colors = Enumerable.Repeat(baseColor, colorCount).ToArray();
         _tipHeight = tip.localScale.y;
+        markerRb = GetComponent<Rigidbody>();
     }
 
     private void Update()
@@ -45,6 +47,9 @@ public class WhiteboardMarker : MonoBehaviour
         {
             _whiteboard = null;
             _touchedLastFrame = false;
+
+            markerRb.constraints = RigidbodyConstraints.None;
+
             return;
         }
 
@@ -58,6 +63,8 @@ public class WhiteboardMarker : MonoBehaviour
         }
 
         _whiteboard ??= touchedTransform.GetComponent<Whiteboard>();
+
+        markerRb.constraints = RigidbodyConstraints.FreezeRotation;
 
         _touchPos.Set(_touch.textureCoord.x, _touch.textureCoord.y);
 
