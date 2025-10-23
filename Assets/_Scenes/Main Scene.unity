@@ -159,7 +159,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 471126819}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -479,7 +479,7 @@ GameObject:
   - component: {fileID: 872883078}
   - component: {fileID: 872883080}
   m_Layer: 0
-  m_Name: Marker V2
+  m_Name: Chalk
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1229,7 +1229,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: eb6c13c2d1feca247bb55be78d37d6a4, type: 2}
+  - {fileID: 2100000, guid: 02c43501c035f424088dab7fc813243c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1273,7 +1273,7 @@ GameObject:
   - component: {fileID: 1484813791}
   - component: {fileID: 1484813794}
   m_Layer: 0
-  m_Name: Whiteboard Fenway
+  m_Name: Chalkboard
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1291,7 +1291,8 @@ Transform:
   m_LocalPosition: {x: 3.74, y: 1, z: 2.395}
   m_LocalScale: {x: 0.17737973, y: 0.17737973, z: 0.17737973}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 6917233045600933393}
   m_Father: {fileID: 618145767459511973}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
 --- !u!64 &1484813791
@@ -1339,7 +1340,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 1938a23f1d4aa4468a2f638feabae30b, type: 2}
+  - {fileID: 2100000, guid: 53852efc580984e6aa97e86c9331b558, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1382,6 +1383,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   texture: {fileID: 0}
+  fillColor: {r: 0.04395871, g: 0.23773581, b: 0.065115936, a: 0}
   textureSize: {x: 2048, y: 2048}
 --- !u!1 &1511697461
 GameObject:
@@ -2000,17 +2002,17 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7787190347367053352}
-  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0, z: 1.355}
-  m_LocalScale: {x: 0.001760208, y: 0.001760208, z: 0.001760208}
+  m_LocalRotation: {x: 0.5, y: 0.5, z: -0.5, w: 0.5}
+  m_LocalPosition: {x: 0, y: 0, z: -5.863127}
+  m_LocalScale: {x: 0.00992339, y: 0.009923387, z: 0.00992339}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1445425907}
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1484813789}
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 3.737, y: 0.843}
+  m_AnchoredPosition: {x: -0.88510656, y: 0.016913414}
   m_SizeDelta: {x: 133.7, y: 33.2}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &7787190347367053352
@@ -2028,7 +2030,7 @@ GameObject:
   - component: {fileID: 8778138303084030816}
   - component: {fileID: 4162172203046414697}
   m_Layer: 5
-  m_Name: --- INTERFACE --- (1)
+  m_Name: White Board UI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2217,6 +2219,5 @@ SceneRoots:
   - {fileID: 1063677036}
   - {fileID: 618145767459511973}
   - {fileID: 6348387873296008935}
-  - {fileID: 6917233045600933393}
   - {fileID: 1511697465}
   - {fileID: 639064304}
