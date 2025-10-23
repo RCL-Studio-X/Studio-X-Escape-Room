@@ -36,7 +36,7 @@ public class directionalLockScript : MonoBehaviour
 
         if (curSequence.Count == targetLength)
         {
-            if (curSequence.ToString() == targetSequence)
+            if (string.Join("", curSequence) == targetSequence)
             {
                 locked = false;
             }
