@@ -20,20 +20,34 @@ public class Whiteboard : MonoBehaviour
 
     void Start()
     {
-        if (texture) 
+        if (texture)
         {
             _renderer.material.mainTexture = texture;
             return;
         }
 
         texture = new Texture2D((int)textureSize.x, (int)textureSize.y);
-        
+
         // Create an array with that color for every pixel
         Color[] fillPixels = new Color[texture.width * texture.height];
-        
+
         for (int i = 0; i < fillPixels.Length; i++)
             fillPixels[i] = fillColor;
-        
+
+        // Set the pixels and apply the change
+        texture.SetPixels(fillPixels);
+        texture.Apply();
+
+        _renderer.material.mainTexture = texture;
+    }
+    
+    public void resetDrawing()
+    {
+         Color[] fillPixels = new Color[texture.width * texture.height];
+
+        for (int i = 0; i < fillPixels.Length; i++)
+            fillPixels[i] = fillColor;
+
         // Set the pixels and apply the change
         texture.SetPixels(fillPixels);
         texture.Apply();
