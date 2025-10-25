@@ -5,7 +5,8 @@ using System.Collections.Generic;
 
 public class directionalLockScript : MonoBehaviour
 {
-    public Button upButton, downButton, leftButton,rightButton;
+    public Button upButton, downButton, leftButton, rightButton;
+    public AudioSource audio;
     public bool locked;
     public string targetSequence;
     private int targetLength;
@@ -38,6 +39,7 @@ public class directionalLockScript : MonoBehaviour
         {
             if (string.Join("", curSequence) == targetSequence)
             {
+                audio.Play();
                 locked = false;
             }
             else 

@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class fobLock : MonoBehaviour
 {
+    public AudioSource audio;
     public GameObject fob;
     public bool locked;
 
@@ -19,8 +20,9 @@ public class fobLock : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.name == fob.name) {
+        if (locked && other.name == fob.name) {
             locked = false;
+            audio.Play();
         }
     }
 }
