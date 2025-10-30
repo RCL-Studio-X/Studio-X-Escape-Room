@@ -1,13 +1,14 @@
 using UnityEngine;
 using UnityEditor;
 using UnityEngine.UI;
+using System.Collections;
 using System.Collections.Generic;
 
 public class directionalLockScript : MonoBehaviour
 {
     public Button upButton, downButton, leftButton, rightButton;
     public AudioSource audio;
-    public bool locked;
+    public bool locked = true;
     public string targetSequence;
     private int targetLength;
 
@@ -15,23 +16,30 @@ public class directionalLockScript : MonoBehaviour
     
     public List<char> curSequence;
 
+    // C# does private by default for access if not specified.
+    SkinnedMeshRenderer skinnedMeshRenderer;
+
+    // Awake is called with the script is initialized, so also just once like start but before Start() is called.
+    void Awake()
+    {
+        skinnedMeshRenderer = GetComponent<SkinnedMeshRenderer> ();
+        curSequence = new List<char>();
+        targetLength = targetSequence.Length;
+    }
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        curSequence = new List<char>();
-        targetLength = targetSequence.Length;
-        locked = true;
-
-        upButton.onClick.AddListener(() => AddSeqeunce('u'));
-        downButton.onClick.AddListener(() => AddSeqeunce('d'));
-        leftButton.onClick.AddListener(() => AddSeqeunce('l'));
-        rightButton.onClick.AddListener(() => AddSeqeunce('r'));
+        // Adding AddSequence as the function to run for the Listeners
+        upButton.onClick.AddListener(() => AddSequence('u'));
+        downButton.onClick.AddListener(() => AddSequence('d'));
+        leftButton.onClick.AddListener(() => AddSequence('l'));
+        rightButton.onClick.AddListener(() => AddSequence('r'));
     }
 
-    void AddSeqeunce(char dir)
+    void AddSequence(char dir)
     {
         curSequence.Add(dir);
-        Debug.Log(dir);
 
         seqText.text = string.Join("-", curSequence);
 
@@ -41,6 +49,7 @@ public class directionalLockScript : MonoBehaviour
             {
                 audio.Play();
                 locked = false;
+                StartCoroutine(UnlockBlendshape());
             }
             else 
             {
@@ -49,8 +58,16 @@ public class directionalLockScript : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
+    IEnumerator UnlockBlendshape() {
+        for (float s = 0f; s < 100f; s++) {
+            skinnedMeshRenderer.SetBlendShapeWeight (0, s);
+            yield return null;
+        }
     }
+
+    // Update is called once per frame
+    // void Update()
+    // {
+
+    // }
 }
