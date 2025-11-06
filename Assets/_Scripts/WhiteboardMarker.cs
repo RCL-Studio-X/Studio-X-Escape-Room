@@ -97,9 +97,5 @@ public class WhiteboardMarker : MonoBehaviour
         _touchedLastFrame = true;
 
     }
-    public void UpdatePosition()
-    {
-        Vector3 direction = firsthand.selectingInteractor.transform.position - transform.position;
-        markerRb.linearVelocity = direction * velocityScale;
-    }
+  
 }
