@@ -137,7 +137,7 @@ GameObject:
   - component: {fileID: 2697074405675118221}
   - component: {fileID: 8597181294869251646}
   m_Layer: 0
-  m_Name: Dir Lock
+  m_Name: DirectionalLock
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -235,8 +235,9 @@ MonoBehaviour:
   leftButton: {fileID: 8640915589977790419}
   rightButton: {fileID: 7764918726212317477}
   audio: {fileID: 7586321842889778966}
-  locked: 0
+  locked: 1
   targetSequence: uuuu
+  ui: {fileID: 3783153377534165416}
   seqText: {fileID: 4605847909014016994}
   curSequence: 
 --- !u!82 &7586321842889778966
@@ -884,7 +885,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 0.7490196}
+  m_Color: {r: 0, g: 0, b: 0, a: 0.6509804}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
