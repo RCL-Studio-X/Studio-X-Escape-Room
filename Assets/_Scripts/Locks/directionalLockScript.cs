@@ -12,6 +12,7 @@ public class directionalLockScript : MonoBehaviour
     public string targetSequence;
     private int targetLength;
 
+    public GameObject ui;
     public Text seqText;
     
     public List<char> curSequence;
@@ -49,6 +50,7 @@ public class directionalLockScript : MonoBehaviour
             {
                 audio.Play();
                 locked = false;
+                ui.SetActive(false);
                 StartCoroutine(UnlockBlendshape());
             }
             else 

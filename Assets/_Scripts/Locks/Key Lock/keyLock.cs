@@ -11,7 +11,13 @@ public class keyLock : MonoBehaviour
     {
     }
 
-    // Update is called once per frame
+    public void Unlock()
+    {
+        locked = false;
+        audio.Play();
+    }
+
+   // Update is called once per frame
     // void Update()
     // {   
     //     if (locked && gameObject.GetComponent<UnityEngine.XR.Interaction.Toolkit.Interactors.XRSocketInteractor>().hasSelection) {
