@@ -95,5 +95,11 @@ public class WhiteboardMarker : MonoBehaviour
 
         _lastTouchPos.Set(x, y);
         _touchedLastFrame = true;
+
+    }
+    public void UpdatePosition()
+    {
+        Vector3 direction = firsthand.selectingInteractor.transform.position - transform.position;
+        markerRb.linearVelocity = direction * velocityScale;
     }
 }
