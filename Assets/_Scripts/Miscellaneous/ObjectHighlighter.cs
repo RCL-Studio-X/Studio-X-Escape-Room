@@ -6,7 +6,7 @@ public class ObjectHighlighter : MonoBehaviour
     [SerializeField] private string outlineLayerName = "Outline";
 
     private int outlineLayer;
-    private gameObject lastHighlightedObject;
+    private GameObject lastHighlightedObject;
 
     void Start()
     {
@@ -22,7 +22,7 @@ public class ObjectHighlighter : MonoBehaviour
     {
         Ray ray = Camera.main.ScreenPointToRay(new Vector2(Screen.width * .5f, Screen.height * .5f));
 
-        if (Physics.Raycast(ray, out RaycastHit, raycastDistance))
+        if (Physics.Raycast(ray, out RaycastHit hit, raycastDistance))
         {
             if (hit.collider.TryGetComponent(out HighlightTag target))
             {
