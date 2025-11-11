@@ -3,6 +3,9 @@ using UnityEditor;
 using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.Events;
+using UnityEngine.XR.Interaction.Toolkit;
+using UnityEngine.XR.Interaction.Toolkit.Interactables;
 
 public class directionalLockScript : MonoBehaviour
 {
@@ -19,10 +22,12 @@ public class directionalLockScript : MonoBehaviour
 
     // C# does private by default for access if not specified.
     SkinnedMeshRenderer skinnedMeshRenderer;
-
+    
     // Awake is called with the script is initialized, so also just once like start but before Start() is called.
     void Awake()
     {
+        
+
         skinnedMeshRenderer = GetComponent<SkinnedMeshRenderer> ();
         curSequence = new List<char>();
         targetLength = targetSequence.Length;
@@ -64,6 +69,13 @@ public class directionalLockScript : MonoBehaviour
         for (float s = 0f; s < 100f; s++) {
             skinnedMeshRenderer.SetBlendShapeWeight (0, s);
             yield return null;
+        }
+    }
+
+    public void EnterUI()
+    {
+        if (locked) {
+            ui.SetActive(true);
         }
     }
 
