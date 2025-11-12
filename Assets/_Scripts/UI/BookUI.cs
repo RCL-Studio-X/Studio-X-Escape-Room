@@ -32,7 +32,7 @@ public class BookUI : MonoBehaviour
     IEnumerator nextPageFunction()
     {
         pageList[currentPageIndex].enabled = false;
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(.1f);
         currentPageIndex += 1;
         pageList[currentPageIndex].enabled = true;
     }
