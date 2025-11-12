@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using NUnit.Framework;
 using TMPro;
@@ -15,18 +16,24 @@ public class BookUI : MonoBehaviour
     {
 
     }
-    
+
     public void nextPage()
     {
-        if (pageList[pageList.Count-1])
+        if (pageList[pageList.Count - 1])
         {
             nextButton.interactable = false;
-        } else
+        }
+        else
         {
-            pageList[currentPageIndex].enabled = false;
-            currentPageIndex += 1;
-            pageList[currentPageIndex].enabled = true;
+            StartCoroutine(nextPageFunction());
         }
     }
-
+    
+    IEnumerator nextPageFunction()
+    {
+        pageList[currentPageIndex].enabled = false;
+        yield return new WaitForSeconds(1);
+        currentPageIndex += 1;
+        pageList[currentPageIndex].enabled = true;
+    }
 }
