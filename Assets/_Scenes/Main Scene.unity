@@ -1131,6 +1131,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 671529568}
+  - {fileID: 236381781}
   m_Father: {fileID: 1470267690}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &980823376
@@ -1574,7 +1575,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 562598088}
-  - {fileID: 236381781}
   - {fileID: 2033282155}
   - {fileID: 1806570454}
   - {fileID: 980823375}
@@ -2436,7 +2436,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42a37b89504ad3c4189413cddb57f62a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  outlineLayerName: Outline
+  outlineRenderingMask:
+    serializedVersion: 2
+    m_Bits: 5
 --- !u!1 &618145767459511972
 GameObject:
   m_ObjectHideFlags: 0
@@ -2540,6 +2542,10 @@ PrefabInstance:
     - target: {fileID: 2683571288073911644, guid: a15a185014e87be48bd0a2ce0cc4248d, type: 3}
       propertyPath: m_Layer
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2697074405675118221, guid: a15a185014e87be48bd0a2ce0cc4248d, type: 3}
+      propertyPath: m_InteractionManager
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 2697074405675118221, guid: a15a185014e87be48bd0a2ce0cc4248d, type: 3}
       propertyPath: m_HoverExited.m_PersistentCalls.m_Calls.Array.size
@@ -3057,23 +3063,39 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 1470267690}
+    m_TransformParent: {fileID: 980823375}
     m_Modifications:
+    - target: {fileID: 5948146211302580116, guid: 95744109999382442a8e09d8a2262ff9, type: 3}
+      propertyPath: m_RetainTransformParent
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7326798177194927281, guid: 95744109999382442a8e09d8a2262ff9, type: 3}
       propertyPath: m_Name
       value: keys_fob_Aadi
       objectReference: {fileID: 0}
     - target: {fileID: 7991026979608378891, guid: 95744109999382442a8e09d8a2262ff9, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 7991026979608378891, guid: 95744109999382442a8e09d8a2262ff9, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 7991026979608378891, guid: 95744109999382442a8e09d8a2262ff9, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 7991026979608378891, guid: 95744109999382442a8e09d8a2262ff9, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.8258226
+      value: 55.65001
       objectReference: {fileID: 0}
     - target: {fileID: 7991026979608378891, guid: 95744109999382442a8e09d8a2262ff9, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.27178073
+      value: 0.9500027
       objectReference: {fileID: 0}
     - target: {fileID: 7991026979608378891, guid: 95744109999382442a8e09d8a2262ff9, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.12288888
+      value: 1.25
       objectReference: {fileID: 0}
     - target: {fileID: 7991026979608378891, guid: 95744109999382442a8e09d8a2262ff9, type: 3}
       propertyPath: m_LocalRotation.w
