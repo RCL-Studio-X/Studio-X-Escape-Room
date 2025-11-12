@@ -25,15 +25,10 @@ public class BookUI : MonoBehaviour
         }
         else
         {
-            StartCoroutine(nextPageFunction());
+            currentPageIndex += 1;
+            pageList[currentPageIndex-1].enabled = false;
+            pageList[currentPageIndex].enabled = true;
         }
     }
     
-    IEnumerator nextPageFunction()
-    {
-        pageList[currentPageIndex].enabled = false;
-        yield return new WaitForSeconds(.1f);
-        currentPageIndex += 1;
-        pageList[currentPageIndex].enabled = true;
-    }
 }
