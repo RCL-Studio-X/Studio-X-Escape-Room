@@ -37,9 +37,10 @@ public class directionalLockScript : MonoBehaviour
         downButton.onClick.AddListener(() => AddSequence('d'));
         leftButton.onClick.AddListener(() => AddSequence('l'));
         rightButton.onClick.AddListener(() => AddSequence('r'));
+        clearButton.onClick.AddListener(() => ClearSequence());
     }
 
-    void AddSequence(char dir)
+    private void AddSequence(char dir)
     {
         curSequence.Add(dir);
         
@@ -59,6 +60,11 @@ public class directionalLockScript : MonoBehaviour
                 curSequence.Clear();
             }
         }
+    }
+
+    private void ClearSequence()
+    {
+        
     }
 
     private void changeIndicatorToColor(int index, string color)
