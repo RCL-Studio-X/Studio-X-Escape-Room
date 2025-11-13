@@ -18,6 +18,8 @@ public class directionalLockScript : MonoBehaviour
     public Button clearButton;
     [Tooltip("Button used to submit the entered sequence.")]
     public Button enterButton;
+    [Tooltip("Button used to exit the UI Canvas")]
+    public Button exitButton;
 
     [Header("Indicators")]
     [Tooltip("Indicator lights that show the current input.")]
@@ -59,6 +61,7 @@ public class directionalLockScript : MonoBehaviour
         rightButton.onClick.AddListener(() => AddSequence('r'));
         clearButton.onClick.AddListener(ClearSequence);
         enterButton.onClick.AddListener(EnterDirectionalSequence);
+        exitButton.onClick.AddListener(ExitUI);
     }
 
     private void AddSequence(char dir)
@@ -89,7 +92,8 @@ public class directionalLockScript : MonoBehaviour
             locked = false;
             StartCoroutine(UnlockBlendshape());
             ChangeAllIndicatorsColor("green");
-
+            
+            SetButtonsInteractable(false);
             StartCoroutine(HideUIAfterDelay(1.5f));  
             return;
         }
@@ -104,6 +108,12 @@ public class directionalLockScript : MonoBehaviour
         ChangeAllIndicatorsColor("white");
         curSequence.Clear();
         SetButtonsInteractable(true);
+    }
+
+    private void ExitUI()
+    {
+        ClearSequence();
+        userInterface.SetActive(false);
     }
 
     private void ChangeIndicatorToColor(int index, string color)
@@ -133,7 +143,8 @@ public class directionalLockScript : MonoBehaviour
         if (textButtons)
         {
             clearButton.interactable = state;
-            enterButton.interactable = state;   
+            enterButton.interactable = state;
+            exitButton.interactable = state;
         }
     }
 
