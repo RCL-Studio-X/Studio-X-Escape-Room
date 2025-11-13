@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class fobLock : MonoBehaviour
 {
-    public AudioSource audio;
+    public AudioSource audioSource;
     public GameObject fob;
     public bool locked;
 
@@ -22,7 +22,7 @@ public class fobLock : MonoBehaviour
     {
         if (locked && other.name == fob.name) {
             locked = false;
-            audio.Play();
+            audioSource.Play();
         }
     }
 }

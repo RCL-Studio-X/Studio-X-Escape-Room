@@ -4,7 +4,7 @@ using UnityEngine;
 public class keyLock : MonoBehaviour
 {
     public bool locked = true;
-    public AudioSource audio;
+    public AudioSource audioSource;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -14,7 +14,7 @@ public class keyLock : MonoBehaviour
     public void Unlock()
     {
         locked = false;
-        audio.Play();
+        audioSource.Play();
     }
 
    // Update is called once per frame
