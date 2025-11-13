@@ -15,7 +15,7 @@ public class directionalLockScript : MonoBehaviour
     public string targetSequence;
     private int targetLength;
 
-    public GameObject ui;
+    public GameObject userInterface;
     
     public List<char> curSequence;
     
@@ -24,7 +24,7 @@ public class directionalLockScript : MonoBehaviour
     // Awake is called with the script is initialized, so also just once like start but before Start() is called.
     void Awake()
     {
-        skinnedMeshRenderer = GetComponent<SkinnedMeshRenderer> ();
+        skinnedMeshRenderer = GetComponent<SkinnedMeshRenderer>();
         curSequence = new List<char>();
         targetLength = targetSequence.Length;
     }
@@ -38,50 +38,65 @@ public class directionalLockScript : MonoBehaviour
         leftButton.onClick.AddListener(() => AddSequence('l'));
         rightButton.onClick.AddListener(() => AddSequence('r'));
         clearButton.onClick.AddListener(() => ClearSequence());
+        enterButton.onClick.AddListener(() => EnterDirectionalSequence());
     }
 
     private void AddSequence(char dir)
     {
-        curSequence.Add(dir);
-        
-        
+        if (curSequence.Count >= targetLength)
+            return;
 
-        if (curSequence.Count == targetLength)
+        curSequence.Add(dir);
+        ChangeIndicatorToColor(curSequence[curSequence.Count - 1], "blue");
+    }
+
+    public void EnterDirectionalSequence()
+    {
+        if (curSequence.Count != targetLength)
+            return;
+
+        if (string.Join("", curSequence) == targetSequence)
         {
-            if (string.Join("", curSequence) == targetSequence)
-            {
-                GetComponent<AudioSource>().Play();
-                locked = false;
-                ui.SetActive(false);
-                StartCoroutine(UnlockBlendshape());
-            }
-            else 
-            {
-                curSequence.Clear();
-            }
+            audioSource.Play();
+            locked = false;
+            StartCoroutine(UnlockBlendshape());
+            ChangeAllIndicatorsColor("green");
+            // todo: coroutine to set the active state of the userInterface to false after a specified number of seconds (param in coroutine function)
+            
+        } else {
+            // todo: coroutine to flash the indicator lights from white to red
+            // coroutine function should have param for num of seconds it flashes for and the flashing interval
+            // temporarily disable the buttons clickability during this coroutine
         }
     }
 
     private void ClearSequence()
     {
-        
+        ChangeAllIndicatorsColor("white");
+        curSequence.Clear();
     }
 
-    private void changeIndicatorToColor(int index, string color)
+    private void ChangeIndicatorToColor(int index, string color)
     {
+        if (!directionalLockIndicators[index])
+            return;
         
+        directionalLockIndicators[index].ChangeIndicatorImage(color);
+    }
+
+    private void ChangeAllIndicatorsColor(string color)
+    {
+        for (int i = 0; i < targetLength; i++)
+            ChangeIndicatorToColor(curSequence[i], color); 
     }
 
     IEnumerator UnlockBlendshape() {
         for (float s = 0f; s < 100f; s++) {
-            skinnedMeshRenderer.SetBlendShapeWeight (0, s);
+            if (skinnedMeshRenderer)
+                skinnedMeshRenderer.SetBlendShapeWeight (0, s);
+            else
+                Debug.Log("No skinned mesh renderer found on the directional lock GameObject.");
             yield return null;
         }
     }
-
-    // Update is called once per frame
-    // void Update()
-    // {
-
-    // }
 }
