@@ -425,7 +425,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7aae5439dceb2548a0774deb91dc4ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  audio: {fileID: 562598091}
+  audioSource: {fileID: 0}
   fob: {fileID: 236381778}
   locked: 1
 --- !u!82 &562598091
@@ -1702,6 +1702,7 @@ GameObject:
   - component: {fileID: 1806570461}
   - component: {fileID: 1806570462}
   - component: {fileID: 1806570463}
+  - component: {fileID: 1806570464}
   m_Layer: 0
   m_Name: Key Lock
   m_TagString: Untagged
@@ -1882,10 +1883,34 @@ MonoBehaviour:
       m_Calls: []
   m_HoverEntered:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1806570464}
+        m_TargetAssemblyTypeName: HighlightTarget, Assembly-CSharp
+        m_MethodName: changeToOutlineLayer
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_HoverExited:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1806570464}
+        m_TargetAssemblyTypeName: HighlightTarget, Assembly-CSharp
+        m_MethodName: changeToOriginalLayer
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_FirstSelectEntered:
     m_PersistentCalls:
       m_Calls: []
@@ -2030,7 +2055,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   locked: 1
-  audio: {fileID: 1806570463}
+  audioSource: {fileID: 0}
 --- !u!82 &1806570463
 AudioSource:
   m_ObjectHideFlags: 0
@@ -2128,6 +2153,21 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &1806570464
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1806570453}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bf72cf93c89ab884f973c4d5ad482fd9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  originalLayer: 0
+  outlineLayerName: Outline
+  visualRoot: {fileID: 0}
 --- !u!1 &2033282149
 GameObject:
   m_ObjectHideFlags: 0
@@ -2459,6 +2499,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1470267690}
     m_Modifications:
+    - target: {fileID: 9798379825017558, guid: a15a185014e87be48bd0a2ce0cc4248d, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 353053161360418296, guid: a15a185014e87be48bd0a2ce0cc4248d, type: 3}
       propertyPath: m_Name
       value: DirectionalLock
@@ -2518,6 +2562,14 @@ PrefabInstance:
     - target: {fileID: 954888636729232261, guid: a15a185014e87be48bd0a2ce0cc4248d, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 2697074405675118221, guid: a15a185014e87be48bd0a2ce0cc4248d, type: 3}
+      propertyPath: m_LastHoverExited.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ChangeToOriginalLayer
+      objectReference: {fileID: 0}
+    - target: {fileID: 2697074405675118221, guid: a15a185014e87be48bd0a2ce0cc4248d, type: 3}
+      propertyPath: m_FirstHoverEntered.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ChangeToOutlineLayer
       objectReference: {fileID: 0}
     - target: {fileID: 3344394751817681450, guid: a15a185014e87be48bd0a2ce0cc4248d, type: 3}
       propertyPath: m_Camera
