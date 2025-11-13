@@ -20,7 +20,7 @@ public class BookUI : MonoBehaviour
 
     public void nextPage()
     {
-        if (currentPageIndex<pageList.Count - 1)
+        if (currentPageIndex<=pageList.Count - 1)
         {
             pageList[currentPageIndex].gameObject.SetActive(false);
             currentPageIndex += 1;
@@ -31,6 +31,24 @@ public class BookUI : MonoBehaviour
             if(currentPageIndex== pageList.Count-1)
             {
                 nextButton.interactable=false;
+            }
+        } 
+    }
+
+
+    public void prevPage()
+    {
+        if (currentPageIndex<=pageList.Count - 1)
+        {
+            pageList[currentPageIndex].gameObject.SetActive(false);
+            currentPageIndex -= 1;
+            pageList[currentPageIndex].gameObject.SetActive(true);
+
+            nextButton.interactable=true;
+
+            if(currentPageIndex== 0)
+            {
+                prevButton.interactable=false;
             }
         } 
     }
