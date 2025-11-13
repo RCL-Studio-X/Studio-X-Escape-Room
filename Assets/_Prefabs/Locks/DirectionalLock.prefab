@@ -361,11 +361,17 @@ MonoBehaviour:
   downButton: {fileID: 1654181692142678650}
   leftButton: {fileID: 8640915589977790419}
   rightButton: {fileID: 7764918726212317477}
-  audio: {fileID: 7586321842889778966}
+  clearButton: {fileID: 7812016757070632992}
+  enterButton: {fileID: 6227296984662998129}
+  directionalLockIndicators:
+  - {fileID: 4790563250126969432}
+  - {fileID: 4227378371633086018}
+  - {fileID: 6902180881296542869}
+  - {fileID: 939326299159447284}
+  audioSource: {fileID: 7586321842889778966}
   locked: 1
   targetSequence: uuuu
-  ui: {fileID: 3783153377534165416}
-  seqText: {fileID: 4605847909014016994}
+  userInterface: {fileID: 3783153377534165416}
   curSequence: 
 --- !u!82 &7586321842889778966
 AudioSource:
@@ -1142,7 +1148,7 @@ GameObject:
   - component: {fileID: 8342409957136921263}
   - component: {fileID: 4637601303067147158}
   m_Layer: 5
-  m_Name: UI Canvas attempt 2
+  m_Name: UI Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

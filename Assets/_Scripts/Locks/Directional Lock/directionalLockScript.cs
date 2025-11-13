@@ -1,102 +1,177 @@
 using UnityEngine;
-using UnityEditor;
 using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
-using System;
 
 public class directionalLockScript : MonoBehaviour
 {
-    public Button upButton, downButton, leftButton, rightButton;
-    public Button clearButton, enterButton;
+    [Header("Buttons")]
+    [Tooltip("Button pressed for Up input.")]
+    public Button upButton;
+    [Tooltip("Button pressed for Down input.")]
+    public Button downButton;
+    [Tooltip("Button pressed for Left input.")]
+    public Button leftButton;
+    [Tooltip("Button pressed for Right input.")]
+    public Button rightButton;
+    [Tooltip("Button used to clear the current sequence.")]
+    public Button clearButton;
+    [Tooltip("Button used to submit the entered sequence.")]
+    public Button enterButton;
+
+    [Header("Indicators")]
+    [Tooltip("Indicator lights that show the current input.")]
     public directionalLockIndicator[] directionalLockIndicators;
+
+    [Header("Audio")]
+    [Tooltip("Audio source played when successfully unlocked.")]
     public AudioSource audioSource;
+
+    [Header("State")]
+    [Tooltip("When true, the lock is currently locked.")]
     public bool locked = true;
+
+    [Header("Target Sequence")]
+    [Tooltip("Directional sequence required to unlock.")]
     public string targetSequence;
-    private int targetLength;
 
+    [Header("User Interface")]
+    [Tooltip("UI object that hides after the lock succeeds.")]
     public GameObject userInterface;
-    
-    public List<char> curSequence;
-    
-    private SkinnedMeshRenderer skinnedMeshRenderer;
 
-    // Awake is called with the script is initialized, so also just once like start but before Start() is called.
-    void Awake()
+    public List<char> curSequence;
+
+    private int _targetLength;
+    private SkinnedMeshRenderer _skinnedMeshRenderer;
+
+    private void Awake()
     {
-        skinnedMeshRenderer = GetComponent<SkinnedMeshRenderer>();
+        _skinnedMeshRenderer = GetComponent<SkinnedMeshRenderer>();
         curSequence = new List<char>();
-        targetLength = targetSequence.Length;
+        _targetLength = targetSequence.Length;
     }
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    private void Start()
     {
-        // Adding AddSequence as the function to run for the Listeners
         upButton.onClick.AddListener(() => AddSequence('u'));
         downButton.onClick.AddListener(() => AddSequence('d'));
         leftButton.onClick.AddListener(() => AddSequence('l'));
         rightButton.onClick.AddListener(() => AddSequence('r'));
-        clearButton.onClick.AddListener(() => ClearSequence());
-        enterButton.onClick.AddListener(() => EnterDirectionalSequence());
+        clearButton.onClick.AddListener(ClearSequence);
+        enterButton.onClick.AddListener(EnterDirectionalSequence);
     }
 
     private void AddSequence(char dir)
     {
-        if (curSequence.Count >= targetLength)
+        if (curSequence.Count >= _targetLength)
             return;
 
         curSequence.Add(dir);
-        ChangeIndicatorToColor(curSequence[curSequence.Count - 1], "blue");
+        
+        if (curSequence.Count == _targetLength)
+            SetButtonsInteractable(false, textButtons:false);
+        
+        ChangeIndicatorToColor(curSequence.Count - 1, "blue");
     }
 
-    public void EnterDirectionalSequence()
+    private void EnterDirectionalSequence()
     {
-        if (curSequence.Count != targetLength)
+        if (curSequence.Count != _targetLength)
             return;
 
-        if (string.Join("", curSequence) == targetSequence)
+        var sequenceString = string.Join("", curSequence);
+
+        if (sequenceString == targetSequence)
         {
-            audioSource.Play();
+            if (audioSource is { })
+                audioSource.Play();
+
             locked = false;
             StartCoroutine(UnlockBlendshape());
             ChangeAllIndicatorsColor("green");
-            // todo: coroutine to set the active state of the userInterface to false after a specified number of seconds (param in coroutine function)
-            
-        } else {
-            // todo: coroutine to flash the indicator lights from white to red
-            // coroutine function should have param for num of seconds it flashes for and the flashing interval
-            // temporarily disable the buttons clickability during this coroutine
+
+            StartCoroutine(HideUIAfterDelay(1.5f));  
+            return;
         }
+        
+
+        StartCoroutine(FlashIndicators("white", "red", 1.2f, 0.15f));
+        SetButtonsInteractable(false);
     }
 
     private void ClearSequence()
     {
         ChangeAllIndicatorsColor("white");
         curSequence.Clear();
+        SetButtonsInteractable(true);
     }
 
     private void ChangeIndicatorToColor(int index, string color)
     {
-        if (!directionalLockIndicators[index])
+        if (directionalLockIndicators[index] is not { } indicator)
             return;
-        
-        directionalLockIndicators[index].ChangeIndicatorImage(color);
+
+        indicator.ChangeIndicatorImage(color);
     }
 
     private void ChangeAllIndicatorsColor(string color)
     {
-        for (int i = 0; i < targetLength; i++)
-            ChangeIndicatorToColor(curSequence[i], color); 
+        for (int i = 0; i < curSequence.Count; i++)
+            ChangeIndicatorToColor(i, color);
     }
 
-    IEnumerator UnlockBlendshape() {
-        for (float s = 0f; s < 100f; s++) {
-            if (skinnedMeshRenderer)
-                skinnedMeshRenderer.SetBlendShapeWeight (0, s);
-            else
-                Debug.Log("No skinned mesh renderer found on the directional lock GameObject.");
+    private void SetButtonsInteractable(bool state, bool directionButtons = true, bool textButtons = true)
+    {
+        if (directionButtons)
+        {
+            upButton.interactable = state;
+            downButton.interactable = state;
+            leftButton.interactable = state;
+            rightButton.interactable = state;
+        }
+
+        if (textButtons)
+        {
+            clearButton.interactable = state;
+            enterButton.interactable = state;   
+        }
+    }
+
+    private IEnumerator UnlockBlendshape()
+    {
+        for (float s = 0f; s < 100f; s++)
+        {
+            if (_skinnedMeshRenderer)
+                _skinnedMeshRenderer.SetBlendShapeWeight(0, s);
+
             yield return null;
         }
+    }
+
+    private IEnumerator HideUIAfterDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+
+        if (userInterface is { })
+            userInterface.SetActive(false);
+    }
+
+    private IEnumerator FlashIndicators(string baseColor, string flashColor, float totalTime, float interval)
+    {
+        float elapsed = 0f;
+        bool flashing = false;
+
+        while (elapsed < totalTime)
+        {
+            flashing = !flashing;
+            ChangeAllIndicatorsColor(flashing ? flashColor : baseColor);
+
+            yield return new WaitForSeconds(interval);
+            elapsed += interval;
+        }
+
+        ChangeAllIndicatorsColor(baseColor);
+        SetButtonsInteractable(true);
+        ClearSequence();
     }
 }
