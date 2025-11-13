@@ -14,21 +14,25 @@ public class BookUI : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        pageList[currentPageIndex].gameObject.SetActive(true);
 
     }
 
     public void nextPage()
     {
-        if (pageList[pageList.Count - 1])
+        if (currentPageIndex<pageList.Count - 1)
         {
-            nextButton.interactable = false;
-        }
-        else
-        {
+            pageList[currentPageIndex].gameObject.SetActive(false);
             currentPageIndex += 1;
-            pageList[currentPageIndex-1].enabled = false;
-            pageList[currentPageIndex].enabled = true;
-        }
+            pageList[currentPageIndex].gameObject.SetActive(true);
+
+            prevButton.interactable=true;
+
+            if(currentPageIndex== pageList.Count-1)
+            {
+                nextButton.interactable=false;
+            }
+        } 
     }
     
 }
