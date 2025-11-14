@@ -1,56 +1,66 @@
-using System.Collections;
 using System.Collections.Generic;
-using NUnit.Framework;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class BookUI : MonoBehaviour
 {
-    public List<TextMeshProUGUI> pageList;
-    public Button nextButton;
-    public Button prevButton;
-    public int currentPageIndex=0;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    public List<TextMeshProUGUI> pageList; // All page content elements
+    public Button nextButton;              // Button to go to the next page
+    public Button prevButton;              // Button to go to the previous page
+    
+    private int currentPageIndex = 0;      
+
     void Start()
     {
+        // Check pageList has pages
+        if (pageList == null || pageList.Count == 0)
+        {
+            Debug.LogError("Page list is empty or null in BookUI.");
+            return;
+        }
+
+        // Set up initial state (Page 0 active, buttons disabled/enabled)
+        UpdatePageDisplay();
+        
+        // Prev button should be disabled at the start (on page 0)
+        prevButton.interactable = false;
+    }
+    
+    // Helper function to update page visibility and button interactability
+    private void UpdatePageDisplay()
+    {
+        // Deactivate all pages first
+        foreach (var page in pageList)
+        {
+            page.gameObject.SetActive(false);
+        }
+        
+        // Activate the current page
         pageList[currentPageIndex].gameObject.SetActive(true);
 
+        // Update button states
+        prevButton.interactable = (currentPageIndex > 0);
+        nextButton.interactable = (currentPageIndex < pageList.Count - 1);
     }
 
     public void nextPage()
     {
-        if (currentPageIndex<=pageList.Count - 1)
+        // Check if there is a next page available
+        if (currentPageIndex < pageList.Count - 1)
         {
-            pageList[currentPageIndex].gameObject.SetActive(false);
-            currentPageIndex += 1;
-            pageList[currentPageIndex].gameObject.SetActive(true);
-
-            prevButton.interactable=true;
-
-            if(currentPageIndex== pageList.Count-1)
-            {
-                nextButton.interactable=false;
-            }
-        } 
+            currentPageIndex++;
+            UpdatePageDisplay();
+        }
     }
-
 
     public void prevPage()
     {
-        if (currentPageIndex<=pageList.Count - 1)
+        // Check if there is a previous page available
+        if (currentPageIndex > 0)
         {
-            pageList[currentPageIndex].gameObject.SetActive(false);
-            currentPageIndex -= 1;
-            pageList[currentPageIndex].gameObject.SetActive(true);
-
-            nextButton.interactable=true;
-
-            if(currentPageIndex== 0)
-            {
-                prevButton.interactable=false;
-            }
-        } 
+            currentPageIndex--;
+            UpdatePageDisplay();
+        }
     }
-    
 }
