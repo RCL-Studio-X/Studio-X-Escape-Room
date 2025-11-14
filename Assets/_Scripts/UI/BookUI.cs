@@ -8,6 +8,8 @@ public class BookUI : MonoBehaviour
     public List<TextMeshProUGUI> pageList; // All page content elements
     public Button nextButton;              // Button to go to the next page
     public Button prevButton;              // Button to go to the previous page
+    public Canvas bookCanvas;
+    public Button openButton;
     
     private int currentPageIndex = 0;      
 
@@ -62,5 +64,17 @@ public class BookUI : MonoBehaviour
             currentPageIndex--;
             UpdatePageDisplay();
         }
+    }
+
+    public void openBook()
+    {
+        bookCanvas.gameObject.SetActive(true);
+        openButton.interactable = false;
+    }
+
+    public void closeBook()
+    {
+        bookCanvas.gameObject.SetActive(false);
+        openButton.interactable = true;
     }
 }
