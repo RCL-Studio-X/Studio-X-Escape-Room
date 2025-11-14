@@ -1,7 +1,9 @@
-﻿using UnityEditor;
+﻿using System;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
+using Object = UnityEngine.Object;
 
 namespace RenderFeatures.Blur
 {
@@ -33,7 +35,7 @@ namespace RenderFeatures.Blur
             m_Material.SetFloat(VerticalBlurId, m_DefaultSettings.VerticalBlur);
         }
 
-        public override void Configure(CommandBuffer cmd, RenderTextureDescriptor cameraTextureDescriptor)
+        [Obsolete] public override void Configure(CommandBuffer cmd, RenderTextureDescriptor cameraTextureDescriptor)
         {
             // Set the blur texture size to the same as the camera target size.
             m_BlurTextureDescriptor.width = cameraTextureDescriptor.width;
@@ -43,7 +45,7 @@ namespace RenderFeatures.Blur
             RenderingUtils.ReAllocateIfNeeded(ref m_BlurTextureHandle, m_BlurTextureDescriptor, name: "_BlurTexture");
         }
 
-        public override void Execute(ScriptableRenderContext context, ref RenderingData renderingData)
+        [Obsolete] public override void Execute(ScriptableRenderContext context, ref RenderingData renderingData)
         {
             // Get a command buffer from the pool.
             var cmd = CommandBufferPool.Get();

@@ -1,8 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
+using Object = UnityEngine.Object;
 
 namespace RenderFeatures
 {
@@ -54,7 +56,7 @@ namespace RenderFeatures
             m_FullscreenMaterial.SetFloat(SaturationId, m_Settings.Saturation);
         }
 
-        public override void OnCameraSetup(CommandBuffer cmd, ref RenderingData renderingData)
+        [Obsolete] public override void OnCameraSetup(CommandBuffer cmd, ref RenderingData renderingData)
         {
             var cameraTextureDescriptor = renderingData.cameraData.cameraTargetDescriptor;
             cameraTextureDescriptor.colorFormat = m_Settings.RenderTextureFormat;
@@ -84,7 +86,7 @@ namespace RenderFeatures
             m_RendererList = context.CreateRendererList(ref param);
         }
 
-        public override void Execute(ScriptableRenderContext context, ref RenderingData renderingData)
+        [Obsolete] public override void Execute(ScriptableRenderContext context, ref RenderingData renderingData)
         {
             // Make sure we have a valid material
             if (m_FullscreenMaterial == null)
