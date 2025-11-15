@@ -1,28 +1,39 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 public class fobLock : MonoBehaviour
 {
-    public AudioSource audio;
+    [Header("Audio")]
+    [Tooltip("Audio source that plays when the lock is unlocked.")]
+    public AudioSource audioSource;
+
+    [Header("Fob Reference")]
+    [Tooltip("The fob object that can unlock this lock.")]
     public GameObject fob;
-    public bool locked;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        locked = true;
-    }
+    [Header("Lock State")]
+    [Tooltip("Indicates whether the lock starts in a locked state.")]
+    public bool locked = true;
 
-    // Update is called once per frame
+    [Header("Events")]
+    [Tooltip("Event invoked when the lock becomes unlocked.")]
+    public UnityEvent onUnlocked;
+
     void Update()
     {
-        
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (locked && other.name == fob.name) {
+        if (!locked)
+            return;
+
+        // Compare by instance equality, avoids null comparisons and keeps performance safe
+        if (other.gameObject == fob)
+        {
             locked = false;
-            audio.Play();
+            audioSource.Play();
+            onUnlocked?.Invoke();
         }
     }
 }
