@@ -136,7 +136,7 @@ Transform:
   m_GameObject: {fileID: 267388396739090348}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 1.1, y: -8, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -243,14 +243,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 515519041885713728}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.7038997, y: -0, z: -0, w: 0.71029943}
-  m_LocalPosition: {x: 0.053, y: -0.28, z: -0.1296}
+  m_LocalRotation: {x: -0.7095966, y: -0, z: -0, w: -0.7046082}
+  m_LocalPosition: {x: 0.053, y: -0.2497, z: -0.0951}
   m_LocalScale: {x: 0.001453513, y: 0.001453513, z: 0.001453513}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 4373475621843596187}
   m_Father: {fileID: 843099576710398393}
-  m_LocalEulerAnglesHint: {x: -89.482, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -269.596, y: 0, z: 0}
 --- !u!54 &4565974353070300645
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -687,7 +687,7 @@ Transform:
   m_GameObject: {fileID: 4153470306144220652}
   serializedVersion: 2
   m_LocalRotation: {x: 0.71029943, y: -0, z: -0, w: 0.7038997}
-  m_LocalPosition: {x: 0.0649, y: -0.2997, z: -0.3558}
+  m_LocalPosition: {x: 0.0649, y: -0.1999, z: -0.3549}
   m_LocalScale: {x: 0.001453513, y: 0.001453513, z: 0.001453513}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -885,13 +885,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4713709133775320314}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -1, y: -0, z: 0, w: 0}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5150528674812431637}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -180, z: 180}
 --- !u!33 &1982180284845555481
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -1098,19 +1098,6 @@ MonoBehaviour:
         m_TargetAssemblyTypeName: LidOpener, Assembly-CSharp
         m_MethodName: Open
         m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: UnityEngine.XR.Interaction.Toolkit.Interactables.XRGrabInteractable,
-          Unity.XR.Interaction.Toolkit
-        m_MethodName: set_enabled
-        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
