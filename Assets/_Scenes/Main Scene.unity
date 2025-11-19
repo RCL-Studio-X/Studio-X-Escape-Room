@@ -529,10 +529,6 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6070181093595211931, guid: d85ba42b2ebf0436895b5005522189be, type: 3}
-      propertyPath: pageList.Array.size
-      value: 2
-      objectReference: {fileID: 0}
     - target: {fileID: 7979920833144840673, guid: d85ba42b2ebf0436895b5005522189be, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -1026,30 +1022,11 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7035106879523236734, guid: e31fd6c406b374204a5e5a213a9eb1ef, type: 3}
-      propertyPath: pageList.Array.size
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 7035106879523236734, guid: e31fd6c406b374204a5e5a213a9eb1ef, type: 3}
-      propertyPath: 'pageList.Array.data[2]'
-      value: 
-      objectReference: {fileID: 909274011}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e31fd6c406b374204a5e5a213a9eb1ef, type: 3}
---- !u!114 &909274011 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3015780266472041818, guid: e31fd6c406b374204a5e5a213a9eb1ef, type: 3}
-  m_PrefabInstance: {fileID: 909274010}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &980823371
 GameObject:
   m_ObjectHideFlags: 0
@@ -1458,42 +1435,6 @@ PrefabInstance:
     - target: {fileID: 362432223493012867, guid: 28dcd8dc8612146959ef4ed36fd546e3, type: 3}
       propertyPath: m_Name
       value: Book (Hidden Nature)
-      objectReference: {fileID: 0}
-    - target: {fileID: 1907668866431094694, guid: 28dcd8dc8612146959ef4ed36fd546e3, type: 3}
-      propertyPath: pageList.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 5803544572489948034, guid: 28dcd8dc8612146959ef4ed36fd546e3, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5803544572489948034, guid: 28dcd8dc8612146959ef4ed36fd546e3, type: 3}
-      propertyPath: m_AnchorMin.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5803544572489948034, guid: 28dcd8dc8612146959ef4ed36fd546e3, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5803544572489948034, guid: 28dcd8dc8612146959ef4ed36fd546e3, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7350015117546217682, guid: 28dcd8dc8612146959ef4ed36fd546e3, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7350015117546217682, guid: 28dcd8dc8612146959ef4ed36fd546e3, type: 3}
-      propertyPath: m_AnchorMin.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7350015117546217682, guid: 28dcd8dc8612146959ef4ed36fd546e3, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7350015117546217682, guid: 28dcd8dc8612146959ef4ed36fd546e3, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8476557415722010976, guid: 28dcd8dc8612146959ef4ed36fd546e3, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2303,14 +2244,6 @@ PrefabInstance:
     - target: {fileID: 3032941895765526241, guid: 00c6ea116049e44efb2d3ba29af33dc6, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4281659451043291996, guid: 00c6ea116049e44efb2d3ba29af33dc6, type: 3}
-      propertyPath: pageList.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4281659451043291996, guid: 00c6ea116049e44efb2d3ba29af33dc6, type: 3}
-      propertyPath: 'pageList.Array.data[1]'
-      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 5262559793133855566, guid: 00c6ea116049e44efb2d3ba29af33dc6, type: 3}
       propertyPath: m_LocalPosition.x
