@@ -6,11 +6,11 @@ using UnityEngine.UI;
 public class PageUI : MonoBehaviour
 {
     private float zFowardPos = .15f;
-    private float zbackPos = .25f;
+    private float zbackPos = .2f;
     public GameObject tabFoward; 
     public GameObject tabBack; 
 
-    void Start()
+    void Update()
     {
         Vector3 forwardPos = new Vector3(tabFoward.transform.position.x, tabFoward.transform.position.y, zFowardPos);
         
