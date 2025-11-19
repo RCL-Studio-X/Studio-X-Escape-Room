@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.Events;
 
 public class directionalLockScript : MonoBehaviour
 {
@@ -41,6 +42,10 @@ public class directionalLockScript : MonoBehaviour
     [Tooltip("UI object that hides after the lock succeeds.")]
     public GameObject userInterface;
 
+    [Header("Events")]
+    [Tooltip("Event invoked when the lock becomes unlocked.")]
+    public UnityEvent onUnlocked;
+    
     public List<char> curSequence;
 
     private int _targetLength;
@@ -90,6 +95,8 @@ public class directionalLockScript : MonoBehaviour
                 audioSource.Play();
 
             locked = false;
+            onUnlocked?.Invoke();
+            
             StartCoroutine(UnlockBlendshape());
             ChangeAllIndicatorsColor("green");
             

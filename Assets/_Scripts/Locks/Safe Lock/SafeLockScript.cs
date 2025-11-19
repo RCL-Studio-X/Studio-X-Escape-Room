@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.Events;
 
 public class SafeLockScript : MonoBehaviour
 {
@@ -45,6 +46,10 @@ public class SafeLockScript : MonoBehaviour
     [Tooltip("UI object that hides after the lock succeeds.")]
     public GameObject userInterface;
 
+    [Header("Events")]
+    [Tooltip("Event invoked when the lock becomes unlocked.")]
+    public UnityEvent onUnlocked;
+    
     public List<char> curSequence;
 
     private int _targetLength;
@@ -101,6 +106,7 @@ public class SafeLockScript : MonoBehaviour
                 audioSource.Play();
 
             locked = false;
+            onUnlocked?.Invoke();
             // StartCoroutine(UnlockBlendshape()); Commenting out skinMeshrendered stuff for now
             ChangeAllIndicatorsColor("green");
             

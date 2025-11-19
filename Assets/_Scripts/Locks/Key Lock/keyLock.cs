@@ -1,11 +1,16 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 
 public class keyLock : MonoBehaviour
 {
     public bool locked = true;
     public AudioSource audioSource;
-
+    
+    [Header("Events")]
+    [Tooltip("Event invoked when the lock becomes unlocked.")]
+    public UnityEvent onUnlocked;
+    
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -15,6 +20,7 @@ public class keyLock : MonoBehaviour
     {
         locked = false;
         audioSource.Play();
+        onUnlocked?.Invoke();
     }
 
    // Update is called once per frame

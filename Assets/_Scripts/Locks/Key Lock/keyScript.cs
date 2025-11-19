@@ -47,7 +47,7 @@ public class keyScript : MonoBehaviour
                 unlockCheck = false;
                 yield break;
             }
-            Debug.Log("checkUnlock: Alive");
+            // Debug.Log("checkUnlock: Alive");
             yield return null;
         }
         //Debug.Log("Out of While loop");
