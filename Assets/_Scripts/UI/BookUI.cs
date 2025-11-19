@@ -11,6 +11,7 @@ public class BookUI : MonoBehaviour
     public Canvas bookCanvas;
     public Button openButton;
     
+    
     private int currentPageIndex = 0;      
 
     void Start()
