@@ -893,6 +893,8 @@ GameObject:
   - component: {fileID: 353001650}
   - component: {fileID: 353001649}
   - component: {fileID: 353001648}
+  - component: {fileID: 353001652}
+  - component: {fileID: 353001651}
   m_Layer: 0
   m_Name: Exit Collider
   m_TagString: Untagged
@@ -909,8 +911,8 @@ Transform:
   m_GameObject: {fileID: 353001646}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0.36519712, z: -0, w: 0.9309302}
-  m_LocalPosition: {x: 4.2, y: 0.72, z: -6.6}
-  m_LocalScale: {x: 9.182907, y: 3.895409, z: 2.115683}
+  m_LocalPosition: {x: 5.53, y: 0.72, z: -8.03}
+  m_LocalScale: {x: 9.182907, y: 20.619555, z: 5.983363}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 618145767459511973}
@@ -989,6 +991,47 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 353001646}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &353001651
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 353001646}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3d77d838150838f4bbeb710ee013e69e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  defaultSceneName: End Menu
+--- !u!114 &353001652
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 353001646}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ecd2840060fc6264da34c7fc3dd1c2ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetGameObject: {fileID: 1148007702}
+  onTriggerEntered:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 353001651}
+        m_TargetAssemblyTypeName: SceneChanger, Assembly-CSharp
+        m_MethodName: ChangeScene
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: End Menu
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &385802885
 GameObject:
   m_ObjectHideFlags: 0
@@ -3230,6 +3273,11 @@ Transform:
   - {fileID: 1457254046}
   m_Father: {fileID: 618145767459511973}
   m_LocalEulerAnglesHint: {x: 0, y: 0.96, z: 0}
+--- !u!1 &1148007702 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8242463091353387567, guid: 2cffcabdcd6971745b2d7406b28aa484, type: 3}
+  m_PrefabInstance: {fileID: 8444508584531495228}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1207975471
 GameObject:
   m_ObjectHideFlags: 0
@@ -4216,7 +4264,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0.36519712, z: -0, w: 0.9309302}
   m_LocalPosition: {x: 3.208, y: 0.72, z: -5.525}
-  m_LocalScale: {x: 6.160092, y: 3.8679466, z: 0.78229225}
+  m_LocalScale: {x: 6.160092, y: 20.474188, z: 0.78229225}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 618145767459511973}
@@ -4907,11 +4955,11 @@ MeshCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 5
-  m_Convex: 1
+  m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -2138796739762357153, guid: 12b563c62be6a234084f872f4cfc427d, type: 3}
 --- !u!64 &2147141342
@@ -5704,8 +5752,12 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2030864308136127464, guid: 2cffcabdcd6971745b2d7406b28aa484, type: 3}
-      propertyPath: teleportationEnabled
+      propertyPath: smoothMotionEnabled
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2030864308136127464, guid: 2cffcabdcd6971745b2d7406b28aa484, type: 3}
+      propertyPath: teleportationEnabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2998861658704789168, guid: 2cffcabdcd6971745b2d7406b28aa484, type: 3}
       propertyPath: m_LocalPosition.y
