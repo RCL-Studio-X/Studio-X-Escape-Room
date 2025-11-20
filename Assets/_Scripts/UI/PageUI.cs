@@ -9,8 +9,8 @@ public class PageUI : MonoBehaviour
     //public Image fowardTab;
     public Image leftTab;
     public Image rightTab;
-    private float leftPosX=-54.36999f;
-    private float rightPosX=547;
+    public float leftPosX=54.36999f;
+    public float rightPosX=547;
     private Vector3 leftTabPos;
     private Vector3 rightTabPos;
 
@@ -24,8 +24,8 @@ public class PageUI : MonoBehaviour
     void Update()
     {
         // Only change X, keep current Y and Z
-        leftTab.transform.localPosition = new Vector3(leftPosX, leftTab.transform.localPosition.y, leftTab.transform.localPosition.z);
-        rightTab.transform.localPosition = new Vector3(rightPosX, rightTab.transform.localPosition.y, rightTab.transform.localPosition.z);
+        leftTab.transform.position = new Vector3(leftPosX, leftTab.transform.localPosition.y, leftTab.transform.localPosition.z);
+        rightTab.transform.position = new Vector3(rightPosX, rightTab.transform.localPosition.y, rightTab.transform.localPosition.z);
 
     }
 
