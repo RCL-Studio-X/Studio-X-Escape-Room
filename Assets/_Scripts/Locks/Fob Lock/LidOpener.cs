@@ -7,6 +7,8 @@ public class LidOpener : MonoBehaviour
     [Tooltip("Duration in seconds for the lid to fully open.")]
     public float openDuration = 1f;
 
+    public float endZ = -110f;
+
     Coroutine _openRoutine;
 
     public void Open()
@@ -21,7 +23,7 @@ public class LidOpener : MonoBehaviour
         var endRotation = Quaternion.Euler(
             startRotation.eulerAngles.x,
             startRotation.eulerAngles.y,
-            -110f
+            endZ
         );
 
         var elapsed = 0f;
