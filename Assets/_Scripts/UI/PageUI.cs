@@ -9,8 +9,8 @@ public class PageUI : MonoBehaviour
     //public Image fowardTab;
     public Image leftTab;
     public Image rightTab;
-    private float leftPosX=-244;
-    private float rightPosX=246;
+    private float leftPosX=-54.36999f;
+    private float rightPosX=547;
     private Vector3 leftTabPos;
     private Vector3 rightTabPos;
 
