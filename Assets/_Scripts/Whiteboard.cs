@@ -17,6 +17,8 @@ public class Whiteboard : MonoBehaviour
     void Awake()
     {
         _renderer = GetComponent<Renderer>();
+        fillColor.a = 0.0f;
+        
     }
 
     void Start()
@@ -31,6 +33,7 @@ public class Whiteboard : MonoBehaviour
     {
         if (!_useColor)
         {
+            _renderer.material.shader = Shader.Find("Unlit/Transparent");
             _renderer.material.mainTexture = texture;
             return;
         }
@@ -46,6 +49,8 @@ public class Whiteboard : MonoBehaviour
         texture.SetPixels(fillPixels);
         texture.Apply();
 
+        
+        _renderer.material.shader = Shader.Find("Unlit/Transparent");
         _renderer.material.mainTexture = texture;
     }
 }
