@@ -19,8 +19,8 @@ public class PageUI : MonoBehaviour
     void Update()
     {
         // Only change X, keep current Y and Z
-        leftTab.transform.position = new Vector3(leftPosX, leftTab.transform.localPosition.y, 0);
-        rightTab.transform.position = new Vector3(rightPosX, rightTab.transform.localPosition.y, 0);
+        leftTab.transform.position = new Vector3(leftPosX, leftTab.transform.position.y, 0);
+        rightTab.transform.position = new Vector3(rightPosX, rightTab.transform.position.y, 0);
 
     }
 
