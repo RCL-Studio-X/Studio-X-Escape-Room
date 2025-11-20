@@ -7,8 +7,8 @@ public class PageUI : MonoBehaviour
 {
     public Image leftTab;
     public Image rightTab;
-    public float leftPosX=54;
-    public float rightPosX=457;
+    private float leftPosX=54;
+    private float rightPosX=457;
     private Vector3 leftTabPos;
     private Vector3 rightTabPos;
 
