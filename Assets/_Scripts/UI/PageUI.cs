@@ -7,8 +7,8 @@ public class PageUI : MonoBehaviour
 {
     public Image leftTab;
     public Image rightTab;
-    private float leftPosX=-0.332f;
-    private float rightPosX=0.346f;
+    private float leftPosX=-243;
+    private float rightPosX=246;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
