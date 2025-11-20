@@ -5,27 +5,24 @@ using System;
 
 public class PageUI : MonoBehaviour
 {
-    //public Image backTab;
-    //public Image fowardTab;
     public Image leftTab;
     public Image rightTab;
-    public float leftPosX=54.36999f;
-    public float rightPosX=547;
+    public float leftPosX=54;
+    public float rightPosX=457;
     private Vector3 leftTabPos;
     private Vector3 rightTabPos;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
-    {
-        
+    {        
         
     }
     // Update is called once per frame
     void Update()
     {
         // Only change X, keep current Y and Z
-        leftTab.transform.position = new Vector3(leftPosX, leftTab.transform.localPosition.y, leftTab.transform.localPosition.z);
-        rightTab.transform.position = new Vector3(rightPosX, rightTab.transform.localPosition.y, rightTab.transform.localPosition.z);
+        leftTab.transform.position = new Vector3(leftPosX, leftTab.transform.localPosition.y, 0);
+        rightTab.transform.position = new Vector3(rightPosX, rightTab.transform.localPosition.y, 0);
 
     }
 
