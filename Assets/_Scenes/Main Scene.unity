@@ -621,6 +621,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &810734310 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2883179890270510345, guid: dac55ad0db5c14475aff80fa81657574, type: 3}
+  m_PrefabInstance: {fileID: 1421862037}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &980823371
 GameObject:
   m_ObjectHideFlags: 0
@@ -909,6 +914,11 @@ MonoBehaviour:
   selected: 0
   lockGameObject: {fileID: 1806570453}
   script: {fileID: 0}
+--- !u!1 &999635152 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2761811133013572185, guid: a15a185014e87be48bd0a2ce0cc4248d, type: 3}
+  m_PrefabInstance: {fileID: 1986310272}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1336791099
 GameObject:
   m_ObjectHideFlags: 0
@@ -1091,6 +1101,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Safe Lock
       objectReference: {fileID: 0}
+    - target: {fileID: 1269489208943051277, guid: dac55ad0db5c14475aff80fa81657574, type: 3}
+      propertyPath: lockInterface
+      value: 
+      objectReference: {fileID: 810734310}
     - target: {fileID: 4338304336590321664, guid: dac55ad0db5c14475aff80fa81657574, type: 3}
       propertyPath: m_LocalPosition.x
       value: 2.293
@@ -1821,6 +1835,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -90
       objectReference: {fileID: 0}
+    - target: {fileID: 2770588984821590760, guid: a15a185014e87be48bd0a2ce0cc4248d, type: 3}
+      propertyPath: lockInterface
+      value: 
+      objectReference: {fileID: 999635152}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

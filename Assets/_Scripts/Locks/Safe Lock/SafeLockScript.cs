@@ -45,6 +45,7 @@ public class SafeLockScript : MonoBehaviour
     [Header("User Interface")]
     [Tooltip("UI object that hides after the lock succeeds.")]
     public GameObject userInterface;
+    public GameObject lockInterface;
 
     [Header("Events")]
     [Tooltip("Event invoked when the lock becomes unlocked.")]
@@ -133,12 +134,14 @@ public class SafeLockScript : MonoBehaviour
     {
         ClearSequence();
         userInterface.SetActive(false);
+        lockInterface.SetActive(true);
     }
 
     private void EnterUI()
     {
         ClearSequence();
         userInterface.SetActive(true);
+        lockInterface.SetActive(false);
     }
 
     private void ChangeIndicatorToColor(int index, string color)
@@ -200,6 +203,7 @@ public class SafeLockScript : MonoBehaviour
 
         if (userInterface is { })
             userInterface.SetActive(false);
+            lockInterface.SetActive(false);
     }
 
     private IEnumerator FlashIndicators(string baseColor, string flashColor, float totalTime, float interval)
