@@ -25,6 +25,7 @@ public class PushLockScript : MonoBehaviour
     public Button enterButton;
     [Tooltip("Button used to exit the UI Canvas")]
     public Button exitButton;
+    public Button openButton;
 
     [Header("Indicators")]
     [Tooltip("Indicator lights that show the current input.")]
@@ -45,6 +46,8 @@ public class PushLockScript : MonoBehaviour
     [Header("User Interface")]
     [Tooltip("UI object that hides after the lock succeeds.")]
     public GameObject userInterface;
+    public GameObject lockInterface;
+
     
     [Header("Events")]
     [Tooltip("Event invoked when the lock becomes unlocked.")]
@@ -75,6 +78,7 @@ public class PushLockScript : MonoBehaviour
         clearButton.onClick.AddListener(ClearSequence);
         enterButton.onClick.AddListener(EnterDirectionalSequence);
         exitButton.onClick.AddListener(ExitUI);
+        openButton.onClick.AddListener(EnterUI);
     }
 
     private void AddSequence(char dir)
@@ -128,6 +132,14 @@ public class PushLockScript : MonoBehaviour
     {
         ClearSequence();
         userInterface.SetActive(false);
+        lockInterface.SetActive(true);
+    }
+
+    private void EnterUI()
+    {
+        ClearSequence();
+        userInterface.SetActive(true);
+        lockInterface.SetActive(false);
     }
 
     private void ChangeIndicatorToColor(int index, string color)
@@ -187,6 +199,7 @@ public class PushLockScript : MonoBehaviour
 
         if (userInterface is { })
             userInterface.SetActive(false);
+            lockInterface.SetActive(false);
     }
 
     private IEnumerator FlashIndicators(string baseColor, string flashColor, float totalTime, float interval)

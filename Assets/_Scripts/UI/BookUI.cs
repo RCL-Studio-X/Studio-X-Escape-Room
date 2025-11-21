@@ -5,11 +5,11 @@ using UnityEngine.UI;
 
 public class BookUI : MonoBehaviour
 {
-    public List<TextMeshProUGUI> pageList; // All page content elements
+    public List<Image> pageList; // All page content elements
     public Button nextButton;              // Button to go to the next page
     public Button prevButton;              // Button to go to the previous page
     public Canvas bookCanvas;
-    public Button openButton;
+    public Button openButton;    
     
     private int currentPageIndex = 0;      
 
@@ -30,7 +30,7 @@ public class BookUI : MonoBehaviour
     }
     
     // Helper function to update page visibility and button interactability
-    private void UpdatePageDisplay()
+    public void UpdatePageDisplay()
     {
         // Deactivate all pages first
         foreach (var page in pageList)
@@ -44,6 +44,7 @@ public class BookUI : MonoBehaviour
         // Update button states
         prevButton.interactable = (currentPageIndex > 0);
         nextButton.interactable = (currentPageIndex < pageList.Count - 1);
+
     }
 
     public void nextPage()

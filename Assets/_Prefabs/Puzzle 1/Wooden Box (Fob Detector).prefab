@@ -293,7 +293,7 @@ MonoBehaviour:
   m_InteractionManager: {fileID: 0}
   m_Colliders: []
   m_InteractionLayers:
-    m_Bits: 1
+    m_Bits: 3
   m_DistanceCalculationMode: 1
   m_SelectMode: 0
   m_FocusMode: 1
@@ -430,7 +430,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &843099576710398393
 Transform:
   m_ObjectHideFlags: 0
@@ -537,7 +537,7 @@ MonoBehaviour:
   m_InteractionManager: {fileID: 0}
   m_Colliders: []
   m_InteractionLayers:
-    m_Bits: 1
+    m_Bits: 3
   m_DistanceCalculationMode: 1
   m_SelectMode: 0
   m_FocusMode: 1
@@ -736,7 +736,7 @@ MonoBehaviour:
   m_InteractionManager: {fileID: 0}
   m_Colliders: []
   m_InteractionLayers:
-    m_Bits: 1
+    m_Bits: 3
   m_DistanceCalculationMode: 1
   m_SelectMode: 0
   m_FocusMode: 1
@@ -1106,6 +1106,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+      - m_Target: {fileID: 928577926049084096}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
 --- !u!82 &3715486192417958538
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1434,6 +1446,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   openDuration: 3
+  endZ: -110
 --- !u!1 &7771293869422101749
 GameObject:
   m_ObjectHideFlags: 0
@@ -1443,6 +1456,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2037545985370328005}
+  - component: {fileID: 9141411360780252097}
   m_Layer: 0
   m_Name: Wooden Box (Fob Detector)
   m_TagString: Untagged
@@ -1469,6 +1483,28 @@ Transform:
   - {fileID: 843099576710398393}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!64 &9141411360780252097
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7771293869422101749}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 0}
 --- !u!1001 &843564942964727079
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1536,6 +1572,10 @@ PrefabInstance:
     - target: {fileID: 2799086548761349655, guid: d0f152351fe9a9d47a0a0989ccba6104, type: 3}
       propertyPath: m_Name
       value: Employee Card 06 - Jackie Davis
+      objectReference: {fileID: 0}
+    - target: {fileID: 3642118732427848384, guid: d0f152351fe9a9d47a0a0989ccba6104, type: 3}
+      propertyPath: m_InteractionLayers.m_Bits
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8610139514343129350, guid: d0f152351fe9a9d47a0a0989ccba6104, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
@@ -1619,6 +1659,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Employee Card 02 - Tilly Anderson
       objectReference: {fileID: 0}
+    - target: {fileID: 3642118732427848384, guid: d0f152351fe9a9d47a0a0989ccba6104, type: 3}
+      propertyPath: m_InteractionLayers.m_Bits
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 8610139514343129350, guid: d0f152351fe9a9d47a0a0989ccba6104, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
@@ -1700,6 +1744,10 @@ PrefabInstance:
     - target: {fileID: 2799086548761349655, guid: d0f152351fe9a9d47a0a0989ccba6104, type: 3}
       propertyPath: m_Name
       value: Employee Card 03 - Robert Williams
+      objectReference: {fileID: 0}
+    - target: {fileID: 3642118732427848384, guid: d0f152351fe9a9d47a0a0989ccba6104, type: 3}
+      propertyPath: m_InteractionLayers.m_Bits
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8610139514343129350, guid: d0f152351fe9a9d47a0a0989ccba6104, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
@@ -1803,6 +1851,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Employee Card 11 - Benjamin Martinez
       objectReference: {fileID: 0}
+    - target: {fileID: 3642118732427848384, guid: d0f152351fe9a9d47a0a0989ccba6104, type: 3}
+      propertyPath: m_InteractionLayers.m_Bits
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 8610139514343129350, guid: d0f152351fe9a9d47a0a0989ccba6104, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
@@ -1885,6 +1937,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Employee Card 09 - Charles Miller
       objectReference: {fileID: 0}
+    - target: {fileID: 3642118732427848384, guid: d0f152351fe9a9d47a0a0989ccba6104, type: 3}
+      propertyPath: m_InteractionLayers.m_Bits
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 8610139514343129350, guid: d0f152351fe9a9d47a0a0989ccba6104, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
@@ -1966,6 +2022,10 @@ PrefabInstance:
     - target: {fileID: 2799086548761349655, guid: d0f152351fe9a9d47a0a0989ccba6104, type: 3}
       propertyPath: m_Name
       value: Employee Card 04 - Ken Thompson
+      objectReference: {fileID: 0}
+    - target: {fileID: 3642118732427848384, guid: d0f152351fe9a9d47a0a0989ccba6104, type: 3}
+      propertyPath: m_InteractionLayers.m_Bits
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8610139514343129350, guid: d0f152351fe9a9d47a0a0989ccba6104, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
@@ -2069,6 +2129,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Employee Card 07 - Henry Garcia
       objectReference: {fileID: 0}
+    - target: {fileID: 3642118732427848384, guid: d0f152351fe9a9d47a0a0989ccba6104, type: 3}
+      propertyPath: m_InteractionLayers.m_Bits
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 8610139514343129350, guid: d0f152351fe9a9d47a0a0989ccba6104, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
@@ -2170,6 +2234,10 @@ PrefabInstance:
     - target: {fileID: 2799086548761349655, guid: d0f152351fe9a9d47a0a0989ccba6104, type: 3}
       propertyPath: m_Name
       value: Employee Card 05 - James Jones
+      objectReference: {fileID: 0}
+    - target: {fileID: 3642118732427848384, guid: d0f152351fe9a9d47a0a0989ccba6104, type: 3}
+      propertyPath: m_InteractionLayers.m_Bits
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8610139514343129350, guid: d0f152351fe9a9d47a0a0989ccba6104, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
@@ -2273,6 +2341,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Employee Card 10 - Bob Taylor
       objectReference: {fileID: 0}
+    - target: {fileID: 3642118732427848384, guid: d0f152351fe9a9d47a0a0989ccba6104, type: 3}
+      propertyPath: m_InteractionLayers.m_Bits
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 8610139514343129350, guid: d0f152351fe9a9d47a0a0989ccba6104, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
@@ -2355,6 +2427,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Employee Card 08 - Gladys Jackson
       objectReference: {fileID: 0}
+    - target: {fileID: 3642118732427848384, guid: d0f152351fe9a9d47a0a0989ccba6104, type: 3}
+      propertyPath: m_InteractionLayers.m_Bits
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 8610139514343129350, guid: d0f152351fe9a9d47a0a0989ccba6104, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
@@ -2432,6 +2508,10 @@ PrefabInstance:
     - target: {fileID: 2799086548761349655, guid: d0f152351fe9a9d47a0a0989ccba6104, type: 3}
       propertyPath: m_Name
       value: Employee Card 01 - Victoria Smith
+      objectReference: {fileID: 0}
+    - target: {fileID: 3642118732427848384, guid: d0f152351fe9a9d47a0a0989ccba6104, type: 3}
+      propertyPath: m_InteractionLayers.m_Bits
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
