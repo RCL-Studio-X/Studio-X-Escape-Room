@@ -45,6 +45,7 @@ public class SafeLockScript : MonoBehaviour
     [Header("User Interface")]
     [Tooltip("UI object that hides after the lock succeeds.")]
     public GameObject userInterface;
+    public GameObject lockInterface;
 
     [Header("Events")]
     [Tooltip("Event invoked when the lock becomes unlocked.")]
@@ -53,6 +54,7 @@ public class SafeLockScript : MonoBehaviour
     public List<char> curSequence;
 
     private int _targetLength;
+    public Button openButton;
     // private SkinnedMeshRenderer _skinnedMeshRenderer; Commenting out skinMeshrendered stuff for now
 
     private void Awake()
@@ -78,6 +80,7 @@ public class SafeLockScript : MonoBehaviour
         clearButton.onClick.AddListener(ClearSequence);
         enterButton.onClick.AddListener(EnterDirectionalSequence);
         exitButton.onClick.AddListener(ExitUI);
+        openButton.onClick.AddListener(EnterUI);
     }
 
     private void AddSequence(char dir)
@@ -131,6 +134,14 @@ public class SafeLockScript : MonoBehaviour
     {
         ClearSequence();
         userInterface.SetActive(false);
+        lockInterface.SetActive(true);
+    }
+
+    private void EnterUI()
+    {
+        ClearSequence();
+        userInterface.SetActive(true);
+        lockInterface.SetActive(false);
     }
 
     private void ChangeIndicatorToColor(int index, string color)
@@ -192,6 +203,7 @@ public class SafeLockScript : MonoBehaviour
 
         if (userInterface is { })
             userInterface.SetActive(false);
+            lockInterface.SetActive(false);
     }
 
     private IEnumerator FlashIndicators(string baseColor, string flashColor, float totalTime, float interval)
