@@ -53,6 +53,7 @@ public class SafeLockScript : MonoBehaviour
     public List<char> curSequence;
 
     private int _targetLength;
+    public Button openButton;
     // private SkinnedMeshRenderer _skinnedMeshRenderer; Commenting out skinMeshrendered stuff for now
 
     private void Awake()
@@ -78,6 +79,7 @@ public class SafeLockScript : MonoBehaviour
         clearButton.onClick.AddListener(ClearSequence);
         enterButton.onClick.AddListener(EnterDirectionalSequence);
         exitButton.onClick.AddListener(ExitUI);
+        openButton.onClick.AddListener(EnterUI);
     }
 
     private void AddSequence(char dir)
@@ -131,6 +133,12 @@ public class SafeLockScript : MonoBehaviour
     {
         ClearSequence();
         userInterface.SetActive(false);
+    }
+
+    private void EnterUI()
+    {
+        ClearSequence();
+        userInterface.SetActive(true);
     }
 
     private void ChangeIndicatorToColor(int index, string color)
