@@ -16,7 +16,7 @@ This project was created by Studio X student employees.
 
 Simply download the most recent APK file from the [Releases](https://github.com/RCL-Studio-X/Studio-X-Escape-Room/releases) page and load it onto your Meta Quest headset using a tool like [adb](https://developer.android.com/tools/adb) or [SideQuest](https://sidequestvr.com/).
 
-Currently, only Meta Quest devices are supported. We are planning on expanding our releases to other devices once the project is out of beta. If you so desire, you can open the project in the Unity Editor and building the application yourself for your particular device.
+Currently, only Meta Quest devices are supported. We are planning on expanding our releases to other devices once the project is out of beta. If you so desire, you can open the project in the Unity Editor and build the application yourself for your particular device.
 
 ## Credits
 
