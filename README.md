@@ -27,7 +27,7 @@ Coding Team:
 - Fenway Powers (Lead) (Staff)
 - Daniel Lin
 - Ray Watkins
-- Boshi Levine
+- Ouriya Boshi Levine
 - Sherkeem Duprey
 - Jelena Hristov
 - Rain Xia
