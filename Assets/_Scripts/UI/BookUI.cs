@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class BookUI : MonoBehaviour
 {
-    public List<Image> pageList; // All page content elements
+    public List<GameObject> pageList; // All page content elements
     public Button nextButton;              // Button to go to the next page
     public Button prevButton;              // Button to go to the previous page
     public Canvas bookCanvas;
