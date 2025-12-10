@@ -9,7 +9,8 @@ public class BookUI : MonoBehaviour
     public Button nextButton;              // Button to go to the next page
     public Button prevButton;              // Button to go to the previous page
     public Canvas bookCanvas;
-    public Button openButton;    
+    public Button openButton;  
+    public Button closeButton;  
     
     private int currentPageIndex = 0;      
 
@@ -70,12 +71,14 @@ public class BookUI : MonoBehaviour
     public void openBook()
     {
         bookCanvas.gameObject.SetActive(true);
-        openButton.interactable = false;
+        openButton.gameObject.SetActive(false);
+        closeButton.gameObject.SetActive(true);
     }
 
     public void closeBook()
     {
         bookCanvas.gameObject.SetActive(false);
-        openButton.interactable = true;
+        openButton.gameObject.SetActive(true);
+        closeButton.gameObject.SetActive(false);
     }
 }
