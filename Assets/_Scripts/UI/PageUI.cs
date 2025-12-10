@@ -8,8 +8,8 @@ public class PageUI : MonoBehaviour
     public Image rightTab;
 
     // Define the target X positions (Local Coordinates)
-    private float leftPosX = -251f;
-    private float rightPosX = 253f;
+    private float leftPosX = -254f;
+    private float rightPosX = 258f;
     
     // Variables to store the initial LOCAL Y positions
     private float initialLeftLocalY;
