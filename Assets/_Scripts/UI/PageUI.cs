@@ -1,54 +1,97 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PageUI : MonoBehaviour
+namespace StudioX.EscapeRoom.UI
 {
-    // Assign these in the Unity Inspector
-    public Image leftTab;
-    public Image rightTab;
-
-    // Define the target X positions (Local Coordinates)
-    private float leftPosX = -254f;
-    private float rightPosX = 258f;
-    
-    // Variables to store the initial LOCAL Y positions
-    private float initialLeftLocalY;
-    private float initialRightLocalY;
-    
-    // Variables to hold the final target Vector3 positions
-    private Vector3 leftTabPos;
-    private Vector3 rightTabPos;
-
-    void Start()
+    /// <summary>
+    /// Forces left and right page tab UI elements to fixed local X positions
+    /// while preserving their initial local Y alignment.
+    /// </summary>
+    public class PageUI : MonoBehaviour
     {
-        // 1. Store the CURRENT LOCAL Y positions of the tabs.
-        // This makes sure the tabs stay vertically aligned where you placed them.
-        if (leftTab != null)
+        #region Public Variable Declarations
+
+        [Header("Page Tabs")]
+        [Tooltip("Image representing the left page tab.")]
+        public Image leftTab;
+
+        [Tooltip("Image representing the right page tab.")]
+        public Image rightTab;
+
+        #endregion
+
+        #region Private Variable Declarations
+
+        /// <summary>
+        /// Fixed local X position for the left tab.
+        /// </summary>
+        private const float LEFT_TAB_POS_X = -254f;
+
+        /// <summary>
+        /// Fixed local X position for the right tab.
+        /// </summary>
+        private const float RIGHT_TAB_POS_X = 258f;
+
+        /// <summary>
+        /// Initial local Y position of the left tab.
+        /// </summary>
+        private float _initialLeftLocalY;
+
+        /// <summary>
+        /// Initial local Y position of the right tab.
+        /// </summary>
+        private float _initialRightLocalY;
+
+        /// <summary>
+        /// Cached target local position for the left tab.
+        /// </summary>
+        private Vector3 _leftTabPosition;
+
+        /// <summary>
+        /// Cached target local position for the right tab.
+        /// </summary>
+        private Vector3 _rightTabPosition;
+
+        #endregion
+
+        #region Unity Lifecycle Methods
+
+        /// <summary>
+        /// Caches the initial local Y positions of both tabs and
+        /// pre-calculates their target local positions.
+        /// </summary>
+        private void Start()
         {
-            initialLeftLocalY = leftTab.transform.localPosition.y;
-        }
-        if (rightTab != null)
-        {
-            initialRightLocalY = rightTab.transform.localPosition.y;
+            if (leftTab != null)
+            {
+                _initialLeftLocalY = leftTab.transform.localPosition.y;
+            }
+
+            if (rightTab != null)
+            {
+                _initialRightLocalY = rightTab.transform.localPosition.y;
+            }
+
+            _leftTabPosition = new Vector3(LEFT_TAB_POS_X, _initialLeftLocalY, 0f);
+            _rightTabPosition = new Vector3(RIGHT_TAB_POS_X, _initialRightLocalY, 0f);
         }
 
-        // 2. Pre-calculate the target Vector3 positions.
-        leftTabPos = new Vector3(leftPosX, initialLeftLocalY, 0f);
-        rightTabPos = new Vector3(rightPosX, initialRightLocalY, 0f);
-    }
+        /// <summary>
+        /// Forces the tabs to remain at their target local positions every frame.
+        /// </summary>
+        private void Update()
+        {
+            if (leftTab != null)
+            {
+                leftTab.transform.localPosition = _leftTabPosition;
+            }
 
-    // Update is called once per frame
-    void Update()
-    {
-        // Set the local positions every frame using the pre-calculated vectors.
-        // This ensures they are constantly forced to the target (leftPosX, initialLocalY)
-        if (leftTab != null)
-        {
-            leftTab.transform.localPosition = leftTabPos;
+            if (rightTab != null)
+            {
+                rightTab.transform.localPosition = _rightTabPosition;
+            }
         }
-        if (rightTab != null)
-        {
-            rightTab.transform.localPosition = rightTabPos;
-        }
+
+        #endregion
     }
 }
