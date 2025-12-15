@@ -1,84 +1,132 @@
 using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using StudioX.EscapeRoom.UI;
 
-public class BookUI : MonoBehaviour
+namespace StudioX.EscapeRoom.UI
 {
-    public List<GameObject> pageList; // All page content elements
-    public Button nextButton;              // Button to go to the next page
-    public Button prevButton;              // Button to go to the previous page
-    public Canvas bookCanvas;
-    public Button openButton;  
-    public Button closeButton;  
-    
-    private int currentPageIndex = 0;      
-
-    void Start()
+    /// <summary>
+    /// Manages the UI behavior for an interactive book, including page navigation
+    /// and opening/closing the book canvas.
+    /// </summary>
+    public class BookUI : MonoBehaviour
     {
-        // Check pageList has pages
-        if (pageList == null || pageList.Count == 0)
+        #region Public Variable Declarations
+
+        [Header("Page Settings")]
+        [Tooltip("All page content GameObjects that make up the book.")]
+        public List<GameObject> pageList;
+
+        [Header("Navigation Buttons")]
+        [Tooltip("Button used to navigate to the next page.")]
+        public Button nextButton;
+
+        [Tooltip("Button used to navigate to the previous page.")]
+        public Button prevButton;
+
+        [Header("Book Controls")]
+        [Tooltip("Canvas that contains the book UI.")]
+        public Canvas bookCanvas;
+
+        [Tooltip("Button used to open the book.")]
+        public Button openButton;
+
+        [Tooltip("Button used to close the book.")]
+        public Button closeButton;
+
+        #endregion
+
+        #region Private Variable Declarations
+
+        /// <summary>
+        /// Tracks the currently active page index.
+        /// </summary>
+        private int _currentPageIndex = 0;
+
+        #endregion
+
+        #region Unity Lifecycle Methods
+
+        /// <summary>
+        /// Initializes the book UI state and validates page data.
+        /// </summary>
+        private void Start()
         {
-            Debug.LogError("Page list is empty or null in BookUI.");
-            return;
-        }
+            if (pageList == null || pageList.Count == 0)
+            {
+                Debug.LogError("Page list is empty or null in BookUI.");
+                return;
+            }
 
-        // Set up initial state (Page 0 active, buttons disabled/enabled)
-        UpdatePageDisplay();
-        
-        // Prev button should be disabled at the start (on page 0)
-        prevButton.interactable = false;
-    }
-    
-    // Helper function to update page visibility and button interactability
-    public void UpdatePageDisplay()
-    {
-        // Deactivate all pages first
-        foreach (var page in pageList)
-        {
-            page.gameObject.SetActive(false);
-        }
-        
-        // Activate the current page
-        pageList[currentPageIndex].gameObject.SetActive(true);
-
-        // Update button states
-        prevButton.interactable = (currentPageIndex > 0);
-        nextButton.interactable = (currentPageIndex < pageList.Count - 1);
-
-    }
-
-    public void nextPage()
-    {
-        // Check if there is a next page available
-        if (currentPageIndex < pageList.Count - 1)
-        {
-            currentPageIndex++;
             UpdatePageDisplay();
+            prevButton.interactable = false;
         }
-    }
 
-    public void prevPage()
-    {
-        // Check if there is a previous page available
-        if (currentPageIndex > 0)
+        #endregion
+
+        #region Public Method Definitions
+
+        /// <summary>
+        /// Updates page visibility and navigation button interactability
+        /// based on the current page index.
+        /// </summary>
+        public void UpdatePageDisplay()
         {
-            currentPageIndex--;
-            UpdatePageDisplay();
+            foreach (GameObject page in pageList)
+            {
+                page.SetActive(false);
+            }
+
+            pageList[_currentPageIndex].SetActive(true);
+
+            prevButton.interactable = _currentPageIndex > 0;
+            nextButton.interactable = _currentPageIndex < pageList.Count - 1;
         }
-    }
 
-    public void openBook()
-    {
-        bookCanvas.gameObject.SetActive(true);
-        openButton.gameObject.SetActive(false);
-        closeButton.gameObject.SetActive(true);
-    }
+        /// <summary>
+        /// Advances the book to the next page if available.
+        /// </summary>
+        public void NextPage()
+        {
+            if (_currentPageIndex < pageList.Count - 1)
+            {
+                _currentPageIndex++;
+                UpdatePageDisplay();
+            }
+        }
 
-    public void closeBook()
-    {
-        bookCanvas.gameObject.SetActive(false);
-        openButton.gameObject.SetActive(true);
-        closeButton.gameObject.SetActive(false);
+        /// <summary>
+        /// Returns the book to the previous page if available.
+        /// </summary>
+        public void PreviousPage()
+        {
+            if (_currentPageIndex > 0)
+            {
+                _currentPageIndex--;
+                UpdatePageDisplay();
+            }
+        }
+
+        /// <summary>
+        /// Opens the book and enables its UI canvas.
+        /// </summary>
+        public void OpenBook()
+        {
+            bookCanvas.gameObject.SetActive(true);
+            openButton.gameObject.SetActive(false);
+            closeButton.gameObject.SetActive(true);
+        }
+
+        /// <summary>
+        /// Closes the book and disables its UI canvas.
+        /// </summary>
+        public void CloseBook()
+        {
+            bookCanvas.gameObject.SetActive(false);
+            openButton.gameObject.SetActive(true);
+            closeButton.gameObject.SetActive(false);
+        }
+
+        #endregion
     }
 }
