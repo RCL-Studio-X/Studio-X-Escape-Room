@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace StudioX.EscapeRoom.UI
+namespace StudioXRCL.EscapeRoom.UI
 {
     /// <summary>
     /// Updates UI elements to reflect the current XR control settings

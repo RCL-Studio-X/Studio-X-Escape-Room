@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using StudioX.EscapeRoom.UI;
 
-namespace StudioX.EscapeRoom.UI
+namespace StudioXRCL.EscapeRoom.UI
 {
     /// <summary>
     /// Manages the UI behavior for an interactive book, including page navigation
