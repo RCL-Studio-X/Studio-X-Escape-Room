@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace StudioX.EscapeRoom.Audio
+namespace StudioXRCL.EscapeRoom.Audio
 {
     /// <summary>
     /// Plays a one-shot sound clip with configurable volume and random pitch variation.
