@@ -1,52 +1,77 @@
 using UnityEngine;
 
-/// <summary>
-/// Attaches to the visible parent object (VisualChalk) and uses the Rigidbody's
-/// velocity to predict the target's position in LateUpdate, which eliminates visual lag.
-/// </summary>
-public class FollowPhysics : MonoBehaviour
+namespace StudioXRCL.EscapeRoom.Utilities
 {
-    [Tooltip("The Rigidbody component on the Invisible Physics Chalk.")]
-    public Rigidbody physicsTargetRigidbody;
-
-    // A small multiplier to tweak the prediction amount if needed (usually 1.0 is correct).
-    [Tooltip("Tweak the prediction amount. 1.0 is usually correct.")]
-    public float predictionFactor = 1.0f;
-
-    private Transform targetTransform;
-
-    void Start()
+    /// <summary>
+    /// Attaches to a visual object and follows a physics-driven target by predicting
+    /// its position using Rigidbody velocity. This reduces visible lag between
+    /// FixedUpdate physics movement and rendered frames.
+    /// </summary>
+    public class FollowPhysics : MonoBehaviour
     {
-        // Safety check and getting the Transform once for efficiency
-        if (physicsTargetRigidbody == null)
+        #region Public Variable Declarations
+
+        [Header("Physics Target")]
+        [Tooltip("The Rigidbody component of the invisible physics-driven object.")]
+        public Rigidbody physicsTargetRigidbody;
+
+        [Header("Prediction Settings")]
+        [Tooltip("Multiplier used to tweak the position prediction amount. 1.0 is usually correct.")]
+        public float predictionFactor = 1.0f;
+
+        #endregion
+
+        #region Private Variable Declarations
+
+        /// <summary>
+        /// Cached transform of the physics target for efficiency.
+        /// </summary>
+        private Transform _targetTransform;
+
+        #endregion
+
+        #region Unity Lifecycle Methods
+
+        /// <summary>
+        /// Caches required references and validates setup.
+        /// </summary>
+        private void Start()
         {
-            Debug.LogError("FollowPhysics: Rigidbody is not assigned! Drag the Invisible Physics Chalk's Rigidbody into the slot.");
-            return;
-        }
-        targetTransform = physicsTargetRigidbody.transform;
-    }
+            if (physicsTargetRigidbody == null)
+            {
+                Debug.LogError(
+                    $"{nameof(FollowPhysics)}: Rigidbody is not assigned. " +
+                    "Please assign the physics target Rigidbody in the inspector."
+                );
+                enabled = false;
+                return;
+            }
 
-    [System.Obsolete]
-    void LateUpdate()
-    {
-        if (physicsTargetRigidbody == null || targetTransform == null)
+            _targetTransform = physicsTargetRigidbody.transform;
+        }
+
+        /// <summary>
+        /// Updates the visual object's transform after physics simulation,
+        /// predicting the target position based on velocity.
+        /// </summary>
+        private void LateUpdate()
         {
-            return; // Skip if setup failed
+            if (!_targetTransform)
+                return;
+
+            // Time elapsed since last FixedUpdate
+            float timeSincePhysics = Time.time - Time.fixedTime;
+
+            // Predict position based on current velocity
+            Vector3 velocity = physicsTargetRigidbody.linearVelocity;
+            Vector3 predictedPosition =
+                _targetTransform.position +
+                (velocity * timeSincePhysics * predictionFactor);
+
+            transform.position = predictedPosition;
+            transform.rotation = _targetTransform.rotation;
         }
 
-        // 1. Calculate the time that has passed since the last physics update (FixedUpdate) and the current moment (LateUpdate).
-        float timeSincePhysics = Time.time - Time.fixedTime;
-
-        // 2. Get the current velocity of the physics object.
-        Vector3 velocity = physicsTargetRigidbody.velocity;
-
-        // 3. Calculate the predicted position: Current position + (Velocity * Time Since Update * Prediction Factor)
-        Vector3 predictedPosition = targetTransform.position + (velocity * timeSincePhysics * predictionFactor);
-
-        // 4. Apply the predicted position to the visual object.
-        this.transform.position = predictedPosition;
-
-        // 5. Rotation can usually just follow directly, as angular velocity changes are less noticeable.
-        this.transform.rotation = targetTransform.rotation;
+        #endregion
     }
 }
