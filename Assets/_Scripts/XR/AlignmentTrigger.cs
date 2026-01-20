@@ -2,76 +2,116 @@ using System;
 using UnityEngine;
 using UnityEngine.Events;
 
-/// <summary>
-/// Allows triggering actions through the <see cref="OnEnterAligned"/> / <see cref="OnExitAligned"/> events
-/// when the list of required vector alignments is met.
-/// For example, it can be used to trigger an event when the player's view aligns with an object.
-/// </summary>
-public class AlignmentTrigger : MonoBehaviour
+namespace StudioXRCL.EscapeRoom.XR
 {
-    [SerializeField] private Camera _playerCamera;
-
-    public enum Mode
+    /// <summary>
+    /// Invokes events when a set of required vector alignments are met or no longer met.
+    /// Common use cases include detecting when the player's view aligns with an object
+    /// or when an object aligns with a world-space direction.
+    /// </summary>
+    public class AlignmentTrigger : MonoBehaviour
     {
-        View,
-        World
-    }
+        #region Nested Types
 
-    [Serializable]
-    public class AxisMatch
-    {
-        public Mode externalAxisMode;
-        public Vector3 localAxis;
-        public Vector3 externalAxis;
-
-        [Range(0.0f, 1.0f)] public float tolerance = 0.3f;
-    }
-
-    [SerializeField] private AxisMatch[] requiredMatch;
-    [SerializeField] private UnityEvent onEnterAligned;
-    [SerializeField] private UnityEvent onExitAligned;
-
-    private bool _wasAligned;
-
-    private void Update()
-    {
-        bool allMatch = true;
-
-        for (int i = 0; i < requiredMatch.Length && allMatch; i++)
+        /// <summary>
+        /// Defines how the external axis should be interpreted.
+        /// </summary>
+        public enum Mode
         {
-            AxisMatch match = requiredMatch[i];
-            Vector3 worldLocal = transform.TransformVector(match.localAxis);
-            Vector3 worldExternal = match.externalAxisMode == Mode.View
-                ? _playerCamera.transform.TransformVector(match.externalAxis)
-                : match.externalAxis;
-
-            float dot = Vector3.Dot(worldLocal.normalized, worldExternal.normalized);
-
-            //Debug.Log($"Match {i}: dot={dot:F3} (needs > {match.tolerance:F3})");
-
-            allMatch &= dot > match.tolerance;
+            View,
+            World
         }
 
-        if (allMatch)
+        /// <summary>
+        /// Defines a single axis alignment requirement.
+        /// </summary>
+        [Serializable]
+        public class AxisMatch
         {
-            //Debug.Log($"All match is TRUE. _wasAligned={_wasAligned}");
-            if (!_wasAligned)
+            [Tooltip("Determines whether the external axis is evaluated in view space or world space.")]
+            public Mode externalAxisMode;
+
+            [Tooltip("Local-space axis on this object that must align.")]
+            public Vector3 localAxis;
+
+            [Tooltip("External axis to compare against.")]
+            public Vector3 externalAxis;
+
+            [Tooltip("Minimum dot product required for this axis to be considered aligned.")]
+            [Range(0.0f, 1.0f)]
+            public float tolerance = 0.3f;
+        }
+
+        #endregion
+
+        #region Public Variable Declarations
+
+        [Header("Alignment Settings")]
+        [Tooltip("Camera used when evaluating view-space alignment.")]
+        [SerializeField] private Camera playerCamera;
+
+        [Tooltip("All axis alignment conditions that must be satisfied.")]
+        [SerializeField] private AxisMatch[] requiredMatches;
+
+        [Header("Events")]
+        [Tooltip("Invoked when all alignment conditions become satisfied.")]
+        [SerializeField] private UnityEvent onEnterAligned;
+
+        [Tooltip("Invoked when alignment conditions are no longer satisfied.")]
+        [SerializeField] private UnityEvent onExitAligned;
+
+        #endregion
+
+        #region Private Variable Declarations
+
+        /// <summary>
+        /// Tracks whether the object was aligned during the previous frame.
+        /// </summary>
+        private bool _wasAligned;
+
+        #endregion
+
+        #region Unity Lifecycle Methods
+
+        /// <summary>
+        /// Evaluates alignment conditions every frame and invokes events
+        /// when alignment state changes.
+        /// </summary>
+        private void Update()
+        {
+            bool allMatch = true;
+
+            for (int i = 0; i < requiredMatches.Length && allMatch; i++)
             {
-                onEnterAligned.Invoke();
-                //Debug.Log("Entered aligned");
-                _wasAligned = true;
+                AxisMatch match = requiredMatches[i];
+
+                Vector3 worldLocalAxis = transform.TransformVector(match.localAxis);
+                Vector3 worldExternalAxis = match.externalAxisMode == Mode.View
+                    ? playerCamera.transform.TransformVector(match.externalAxis)
+                    : match.externalAxis;
+
+                float dot = Vector3.Dot(worldLocalAxis.normalized, worldExternalAxis.normalized);
+                allMatch &= dot > match.tolerance;
+            }
+
+            if (allMatch)
+            {
+                if (!_wasAligned)
+                {
+                    onEnterAligned?.Invoke();
+                    _wasAligned = true;
+                }
+            }
+            else
+            {
+                if (_wasAligned)
+                {
+                    onExitAligned?.Invoke();
+                    _wasAligned = false;
+                }
             }
         }
-        else
-        {
-            //Debug.Log($"All match is FALSE. _wasAligned={_wasAligned}");
-            if (_wasAligned)
-            {
-                onExitAligned.Invoke();
-                //Debug.Log("Exited aligned");
-                _wasAligned = false;
-            }
-        }
 
+        #endregion
     }
 }
