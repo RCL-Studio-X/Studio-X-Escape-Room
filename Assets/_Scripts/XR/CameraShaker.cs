@@ -1,6 +1,6 @@
 using System.Collections;
 using UnityEngine;
-using UnityEngine.XR; // Required for Haptics
+using UnityEngine.XR;
 
 public class CameraShaker : MonoBehaviour
 {
