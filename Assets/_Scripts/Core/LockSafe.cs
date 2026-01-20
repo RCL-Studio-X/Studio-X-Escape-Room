@@ -10,7 +10,7 @@ namespace StudioXRCL.EscapeRoom.Core
     /// Handles a safe lock puzzle where users input a numeric combination
     /// via UI buttons to unlock the safe and trigger related events.
     /// </summary>
-    public class SafeLock : MonoBehaviour
+    public class LockSafe : MonoBehaviour
     {
         #region Public Variable Declarations
 
