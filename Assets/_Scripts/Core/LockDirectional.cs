@@ -4,32 +4,27 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.Events;
 
-public class PushLockScript : MonoBehaviour
+public class LockDirectional : MonoBehaviour
 {
     [Header("Buttons")]
     [Tooltip("Button pressed for Up input.")]
-    public Button oneButton;
+    public Button upButton;
     [Tooltip("Button pressed for Down input.")]
-    public Button twoButton;
+    public Button downButton;
     [Tooltip("Button pressed for Left input.")]
-    public Button threeButton;
+    public Button leftButton;
     [Tooltip("Button pressed for Right input.")]
-    public Button fourButton;
+    public Button rightButton;
     [Tooltip("Button used to clear the current sequence.")]
-    public Button fiveButton;
-    public Button sixButton;
-    public Button sevenButton;
-    public Button eightButton;
     public Button clearButton;
     [Tooltip("Button used to submit the entered sequence.")]
     public Button enterButton;
     [Tooltip("Button used to exit the UI Canvas")]
     public Button exitButton;
-    public Button openButton;
 
     [Header("Indicators")]
     [Tooltip("Indicator lights that show the current input.")]
-    public directionalLockIndicator[] directionalLockIndicators;
+    public LockIndicator[] directionalLockIndicators;
 
     [Header("Audio")]
     [Tooltip("Audio source played when successfully unlocked.")]
@@ -48,33 +43,29 @@ public class PushLockScript : MonoBehaviour
     public GameObject userInterface;
     public GameObject lockInterface;
 
-    
     [Header("Events")]
     [Tooltip("Event invoked when the lock becomes unlocked.")]
     public UnityEvent onUnlocked;
+    
     public List<char> curSequence;
 
     private int _targetLength;
-    // private SkinnedMeshRenderer _skinnedMeshRenderer; Commenting out skinMeshrendered stuff for now
+    private SkinnedMeshRenderer _skinnedMeshRenderer;
+    public Button openButton;
 
     private void Awake()
     {
-        // _skinnedMeshRenderer = GetComponent<SkinnedMeshRenderer>(); Commenting out skinMeshrendered stuff for now
+        _skinnedMeshRenderer = GetComponent<SkinnedMeshRenderer>();
         curSequence = new List<char>();
         _targetLength = targetSequence.Length;
     }
 
     private void Start()
     {
-        // Added the buttons and the new sequences
-        oneButton.onClick.AddListener(() => AddSequence('1'));
-        twoButton.onClick.AddListener(() => AddSequence('2'));
-        threeButton.onClick.AddListener(() => AddSequence('3'));
-        fourButton.onClick.AddListener(() => AddSequence('4'));
-        fiveButton.onClick.AddListener(() => AddSequence('5'));
-        sixButton.onClick.AddListener(() => AddSequence('6'));
-        sevenButton.onClick.AddListener(() => AddSequence('7'));
-        eightButton.onClick.AddListener(() => AddSequence('8'));
+        upButton.onClick.AddListener(() => AddSequence('u'));
+        downButton.onClick.AddListener(() => AddSequence('d'));
+        leftButton.onClick.AddListener(() => AddSequence('l'));
+        rightButton.onClick.AddListener(() => AddSequence('r'));
         clearButton.onClick.AddListener(ClearSequence);
         enterButton.onClick.AddListener(EnterDirectionalSequence);
         exitButton.onClick.AddListener(ExitUI);
@@ -108,7 +99,8 @@ public class PushLockScript : MonoBehaviour
 
             locked = false;
             onUnlocked?.Invoke();
-            // StartCoroutine(UnlockBlendshape()); Commenting out skinMeshrendered stuff for now
+            
+            StartCoroutine(UnlockBlendshape());
             ChangeAllIndicatorsColor("green");
             
             SetButtonsInteractable(false);
@@ -160,15 +152,10 @@ public class PushLockScript : MonoBehaviour
     {
         if (directionButtons)
         {
-            // updated to match buttons now
-            oneButton.interactable = state;
-            twoButton.interactable = state;
-            threeButton.interactable = state;
-            fourButton.interactable = state;
-            fiveButton.interactable = state;
-            sixButton.interactable = state;
-            sevenButton.interactable = state;
-            eightButton.interactable = state;
+            upButton.interactable = state;
+            downButton.interactable = state;
+            leftButton.interactable = state;
+            rightButton.interactable = state;
         }
 
         if (textButtons)
@@ -179,9 +166,7 @@ public class PushLockScript : MonoBehaviour
         }
     }
 
-    /* Since there is no skinnedMeshrender I'm just going to comment out all of the animations for now
-    
-        private IEnumerator UnlockBlendshape()
+    private IEnumerator UnlockBlendshape()
     {
         for (float s = 0f; s < 100f; s++)
         {
@@ -191,7 +176,6 @@ public class PushLockScript : MonoBehaviour
             yield return null;
         }
     }
-    */
 
     private IEnumerator HideUIAfterDelay(float delay)
     {
