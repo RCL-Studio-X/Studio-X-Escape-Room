@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using StudioX.EscapeRoom.UI;
 
 namespace StudioXRCL.EscapeRoom.UI
 {
