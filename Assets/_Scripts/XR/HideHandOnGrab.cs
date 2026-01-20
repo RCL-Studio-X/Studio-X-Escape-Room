@@ -13,7 +13,7 @@ namespace StudioXRCL.EscapeRoom.XR
 
         [Header("Interactor Settings")]
         [Tooltip("XR Direct Interactor used to detect grab and release events.")]
-        public XRDirectInteractor interactor;
+        public UnityEngine.XR.Interaction.Toolkit.Interactors.XRDirectInteractor interactor;
 
         [Header("Hand Visual")]
         [Tooltip("Hand model GameObject to hide or show.")]
