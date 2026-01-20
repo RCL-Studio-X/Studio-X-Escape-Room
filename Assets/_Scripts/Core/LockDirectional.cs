@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using StudioXRCL.EscapeRoom.UI;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
@@ -41,7 +42,7 @@ namespace StudioXRCL.EscapeRoom.Core
 
         [Header("Indicators")]
         [Tooltip("Indicator lights that show the current input.")]
-        public LockIndicator[] directionalLockIndicators;
+        public LockIndicator[] lockIndicators;
 
         [Header("Audio")]
         [Tooltip("Audio source played when successfully unlocked.")]
@@ -194,10 +195,10 @@ namespace StudioXRCL.EscapeRoom.Core
         /// <param name="color">Color name to apply.</param>
         private void ChangeIndicatorToColor(int index, string color)
         {
-            if (directionalLockIndicators[index] == null)
+            if (lockIndicators[index] == null)
                 return;
 
-            directionalLockIndicators[index].ChangeIndicatorImage(color);
+            lockIndicators[index].ChangeIndicatorImage(color);
         }
 
         /// <summary>
