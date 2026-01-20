@@ -1,31 +1,54 @@
 using UnityEngine;
 using UnityEngine.Events;
 
-public class AlphaChain : MonoBehaviour
+namespace StudioXRCL.EscapeRoom.Core
 {
-    [Header("Condition Flags")]
-    [Tooltip("Three booleans representing condition states. All start false and are set via SetConditionTrue.")]
-    public bool[] conditions = new bool[3];
-
-    [Header("Events")]
-    [Tooltip("Invoked once all conditions have been set to true.")]
-    public UnityEvent onAllConditionsTrue;
-
-    public void SetConditionTrue(int index)
+    /// <summary>
+    /// Manages a chain of boolean conditions and invokes an event once all conditions are set to true.
+    /// </summary>
+    public class AlphaChain : MonoBehaviour
     {
-        // Validate index
-        if ((uint)index >= (uint)conditions.Length)
-            return;
+        #region Public Variable Declarations
 
-        conditions[index] = true;
+        [Header("Condition Flags")]
 
-        // Check if all conditions are true
-        for (var i = 0; i < conditions.Length; i++)
+        [Tooltip("Boolean condition states. Each condition starts false and can be set true via SetConditionTrue.")]
+        public bool[] conditions = new bool[3];
+
+        [Header("Events")]
+
+        [Tooltip("Invoked once all conditions have been set to true.")]
+        public UnityEvent onAllConditionsTrue;
+
+        #endregion
+
+        #region Public Method Definitions
+
+        /// <summary>
+        /// Sets a condition at the specified index to true and checks if all conditions are satisfied.
+        /// If all conditions are true, the completion event is invoked.
+        /// </summary>
+        /// <param name="index">Index of the condition to set to true.</param>
+        public void SetConditionTrue(int index)
         {
-            if (!conditions[i])
+            if ((uint)index >= (uint)conditions.Length)
+            {
                 return;
+            }
+
+            conditions[index] = true;
+
+            for (int i = 0; i < conditions.Length; i++)
+            {
+                if (!conditions[i])
+                {
+                    return;
+                }
+            }
+
+            onAllConditionsTrue?.Invoke();
         }
 
-        onAllConditionsTrue?.Invoke();
+        #endregion
     }
 }
