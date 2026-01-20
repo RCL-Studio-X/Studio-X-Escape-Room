@@ -1,25 +1,47 @@
 using UnityEngine;
 using UnityEngine.Events;
 
-public class TriggerTargetWatcher : MonoBehaviour
+namespace StudioXRCL.EscapeRoom.Utilities
 {
-    [Header("Trigger Settings")]
-    [Tooltip("The specific GameObject that must enter this trigger to invoke the event.")]
-    public GameObject targetGameObject;
-
-    [Header("Events")]
-    [Tooltip("Invoked when the target GameObject enters this trigger.")]
-    public UnityEvent onTriggerEntered;
-
-    private void OnTriggerEnter(Collider other)
+    /// <summary>
+    /// Watches for a specific target GameObject entering this trigger
+    /// and invokes an event when it does.
+    /// </summary>
+    public class TriggerTargetWatcher : MonoBehaviour
     {
-        Debug.Log(other.gameObject.name + " entered the exit collider.");
-        // Ensure the target is assigned
-        if (!targetGameObject)
-            return;
+        #region Public Variable Declarations
 
-        // Invoke the event only when the correct object enters the trigger
-        if (other.gameObject == targetGameObject)
-            onTriggerEntered?.Invoke();
+        [Header("Trigger Settings")]
+        [Tooltip("The specific GameObject that must enter this trigger to invoke the event.")]
+        public GameObject targetGameObject;
+
+        [Header("Events")]
+        [Tooltip("Invoked when the target GameObject enters this trigger.")]
+        public UnityEvent onTriggerEntered;
+
+        #endregion
+
+        #region Unity Lifecycle Methods
+
+        /// <summary>
+        /// Called when another collider enters this trigger.
+        /// </summary>
+        /// <param name="other">The collider that entered the trigger.</param>
+        private void OnTriggerEnter(Collider other)
+        {
+            Debug.Log($"{other.gameObject.name} entered the trigger.");
+
+            // Ensure the target is assigned
+            if (targetGameObject == null)
+                return;
+
+            // Invoke the event only when the correct object enters the trigger
+            if (other.gameObject == targetGameObject)
+            {
+                onTriggerEntered?.Invoke();
+            }
+        }
+
+        #endregion
     }
 }
