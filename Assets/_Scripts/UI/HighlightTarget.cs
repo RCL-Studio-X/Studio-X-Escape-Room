@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace StudioX.EscapeRoom.Utilities
+namespace StudioXRCL.EscapeRoom.Utilities
 {
     /// <summary>
     /// Handles switching a target object's visual layer between its original layer
