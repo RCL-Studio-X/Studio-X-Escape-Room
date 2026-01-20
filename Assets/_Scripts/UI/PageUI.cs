@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace StudioX.EscapeRoom.UI
+namespace StudioXRCL.EscapeRoom.UI
 {
     /// <summary>
     /// Forces left and right page tab UI elements to fixed local X positions
