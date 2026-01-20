@@ -1,223 +1,294 @@
-using UnityEngine;
-using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.UI;
 
-public class LockPush : MonoBehaviour
+namespace StudioXRCL.EscapeRoom.Core
 {
-    [Header("Buttons")]
-    [Tooltip("Button pressed for Up input.")]
-    public Button oneButton;
-    [Tooltip("Button pressed for Down input.")]
-    public Button twoButton;
-    [Tooltip("Button pressed for Left input.")]
-    public Button threeButton;
-    [Tooltip("Button pressed for Right input.")]
-    public Button fourButton;
-    [Tooltip("Button used to clear the current sequence.")]
-    public Button fiveButton;
-    public Button sixButton;
-    public Button sevenButton;
-    public Button eightButton;
-    public Button clearButton;
-    [Tooltip("Button used to submit the entered sequence.")]
-    public Button enterButton;
-    [Tooltip("Button used to exit the UI Canvas")]
-    public Button exitButton;
-    public Button openButton;
-
-    [Header("Indicators")]
-    [Tooltip("Indicator lights that show the current input.")]
-    public directionalLockIndicator[] directionalLockIndicators;
-
-    [Header("Audio")]
-    [Tooltip("Audio source played when successfully unlocked.")]
-    public AudioSource audioSource;
-
-    [Header("State")]
-    [Tooltip("When true, the lock is currently locked.")]
-    public bool locked = true;
-
-    [Header("Target Sequence")]
-    [Tooltip("Directional sequence required to unlock.")]
-    public string targetSequence;
-
-    [Header("User Interface")]
-    [Tooltip("UI object that hides after the lock succeeds.")]
-    public GameObject userInterface;
-    public GameObject lockInterface;
-
-    
-    [Header("Events")]
-    [Tooltip("Event invoked when the lock becomes unlocked.")]
-    public UnityEvent onUnlocked;
-    public List<char> curSequence;
-
-    private int _targetLength;
-    // private SkinnedMeshRenderer _skinnedMeshRenderer; Commenting out skinMeshrendered stuff for now
-
-    private void Awake()
+    /// <summary>
+    /// Handles a push-button lock puzzle where users must enter a numeric sequence
+    /// using UI buttons to unlock the lock and trigger related events.
+    /// </summary>
+    public class LockPush : MonoBehaviour
     {
-        // _skinnedMeshRenderer = GetComponent<SkinnedMeshRenderer>(); Commenting out skinMeshrendered stuff for now
-        curSequence = new List<char>();
-        _targetLength = targetSequence.Length;
-    }
+        #region Public Variable Declarations
 
-    private void Start()
-    {
-        // Added the buttons and the new sequences
-        oneButton.onClick.AddListener(() => AddSequence('1'));
-        twoButton.onClick.AddListener(() => AddSequence('2'));
-        threeButton.onClick.AddListener(() => AddSequence('3'));
-        fourButton.onClick.AddListener(() => AddSequence('4'));
-        fiveButton.onClick.AddListener(() => AddSequence('5'));
-        sixButton.onClick.AddListener(() => AddSequence('6'));
-        sevenButton.onClick.AddListener(() => AddSequence('7'));
-        eightButton.onClick.AddListener(() => AddSequence('8'));
-        clearButton.onClick.AddListener(ClearSequence);
-        enterButton.onClick.AddListener(EnterDirectionalSequence);
-        exitButton.onClick.AddListener(ExitUI);
-        openButton.onClick.AddListener(EnterUI);
-    }
+        [Header("Buttons")]
+        [Tooltip("Button used for input '1'.")]
+        public Button oneButton;
 
-    private void AddSequence(char dir)
-    {
-        if (curSequence.Count >= _targetLength)
-            return;
+        [Tooltip("Button used for input '2'.")]
+        public Button twoButton;
 
-        curSequence.Add(dir);
-        
-        if (curSequence.Count == _targetLength)
-            SetButtonsInteractable(false, textButtons:false);
-        
-        ChangeIndicatorToColor(curSequence.Count - 1, "blue");
-    }
+        [Tooltip("Button used for input '3'.")]
+        public Button threeButton;
 
-    private void EnterDirectionalSequence()
-    {
-        if (curSequence.Count != _targetLength)
-            return;
+        [Tooltip("Button used for input '4'.")]
+        public Button fourButton;
 
-        var sequenceString = string.Join("", curSequence);
+        [Tooltip("Button used for input '5'.")]
+        public Button fiveButton;
 
-        if (sequenceString == targetSequence)
+        [Tooltip("Button used for input '6'.")]
+        public Button sixButton;
+
+        [Tooltip("Button used for input '7'.")]
+        public Button sevenButton;
+
+        [Tooltip("Button used for input '8'.")]
+        public Button eightButton;
+
+        [Tooltip("Button used to clear the current sequence.")]
+        public Button clearButton;
+
+        [Tooltip("Button used to submit the entered sequence.")]
+        public Button enterButton;
+
+        [Tooltip("Button used to exit the UI canvas.")]
+        public Button exitButton;
+
+        [Tooltip("Button used to open the lock UI.")]
+        public Button openButton;
+
+        [Header("Indicators")]
+        [Tooltip("Indicator lights that show the current input.")]
+        public LockIndicator[] directionalLockIndicators;
+
+        [Header("Audio")]
+        [Tooltip("Audio source played when successfully unlocked.")]
+        public AudioSource audioSource;
+
+        [Header("State")]
+        [Tooltip("When true, the lock is currently locked.")]
+        public bool locked = true;
+
+        [Header("Target Sequence")]
+        [Tooltip("Numeric sequence required to unlock.")]
+        public string targetSequence;
+
+        [Header("User Interface")]
+        [Tooltip("UI object that hides after the lock succeeds.")]
+        public GameObject userInterface;
+
+        [Tooltip("UI object shown when the lock is inactive.")]
+        public GameObject lockInterface;
+
+        [Header("Events")]
+        [Tooltip("Event invoked when the lock becomes unlocked.")]
+        public UnityEvent onUnlocked;
+
+        [Tooltip("Current sequence entered by the user.")]
+        public List<char> curSequence = new List<char>();
+
+        #endregion
+
+        #region Private Variable Declarations
+
+        /// <summary> Length of the target numeric sequence. </summary>
+        private int _targetLength;
+
+        #endregion
+
+        #region Unity Lifecycle Methods
+
+        /// <summary>
+        /// Initializes internal state and sequence length.
+        /// </summary>
+        private void Awake()
         {
-            if (audioSource is { })
-                audioSource.Play();
+            _targetLength = targetSequence.Length;
+        }
 
-            locked = false;
-            onUnlocked?.Invoke();
-            // StartCoroutine(UnlockBlendshape()); Commenting out skinMeshrendered stuff for now
-            ChangeAllIndicatorsColor("green");
-            
+        /// <summary>
+        /// Registers button click listeners.
+        /// </summary>
+        private void Start()
+        {
+            oneButton.onClick.AddListener(() => AddSequence('1'));
+            twoButton.onClick.AddListener(() => AddSequence('2'));
+            threeButton.onClick.AddListener(() => AddSequence('3'));
+            fourButton.onClick.AddListener(() => AddSequence('4'));
+            fiveButton.onClick.AddListener(() => AddSequence('5'));
+            sixButton.onClick.AddListener(() => AddSequence('6'));
+            sevenButton.onClick.AddListener(() => AddSequence('7'));
+            eightButton.onClick.AddListener(() => AddSequence('8'));
+
+            clearButton.onClick.AddListener(ClearSequence);
+            enterButton.onClick.AddListener(EnterDirectionalSequence);
+            exitButton.onClick.AddListener(ExitUI);
+            openButton.onClick.AddListener(EnterUI);
+        }
+
+        #endregion
+
+        #region Private Method Definitions
+
+        /// <summary>
+        /// Adds a numeric input to the current sequence.
+        /// </summary>
+        /// <param name="dir">The numeric character to add.</param>
+        private void AddSequence(char dir)
+        {
+            if (curSequence.Count >= _targetLength)
+                return;
+
+            curSequence.Add(dir);
+
+            if (curSequence.Count == _targetLength)
+                SetButtonsInteractable(false, textButtons: false);
+
+            ChangeIndicatorToColor(curSequence.Count - 1, "blue");
+        }
+
+        /// <summary>
+        /// Validates the entered numeric sequence.
+        /// </summary>
+        private void EnterDirectionalSequence()
+        {
+            if (curSequence.Count != _targetLength)
+                return;
+
+            string sequenceString = string.Join("", curSequence);
+
+            if (sequenceString == targetSequence)
+            {
+                audioSource?.Play();
+                locked = false;
+                onUnlocked?.Invoke();
+
+                ChangeAllIndicatorsColor("green");
+                SetButtonsInteractable(false);
+                StartCoroutine(HideUIAfterDelay(1.5f));
+                return;
+            }
+
+            StartCoroutine(FlashIndicators("white", "red", 1.2f, 0.15f));
             SetButtonsInteractable(false);
-            StartCoroutine(HideUIAfterDelay(1.5f));  
-            return;
         }
-        
 
-        StartCoroutine(FlashIndicators("white", "red", 1.2f, 0.15f));
-        SetButtonsInteractable(false);
-    }
-
-    private void ClearSequence()
-    {
-        ChangeAllIndicatorsColor("white");
-        curSequence.Clear();
-        SetButtonsInteractable(true);
-    }
-
-    private void ExitUI()
-    {
-        ClearSequence();
-        userInterface.SetActive(false);
-        lockInterface.SetActive(true);
-    }
-
-    private void EnterUI()
-    {
-        ClearSequence();
-        userInterface.SetActive(true);
-        lockInterface.SetActive(false);
-    }
-
-    private void ChangeIndicatorToColor(int index, string color)
-    {
-        if (directionalLockIndicators[index] is not { } indicator)
-            return;
-
-        indicator.ChangeIndicatorImage(color);
-    }
-
-    private void ChangeAllIndicatorsColor(string color)
-    {
-        for (int i = 0; i < curSequence.Count; i++)
-            ChangeIndicatorToColor(i, color);
-    }
-
-    private void SetButtonsInteractable(bool state, bool directionButtons = true, bool textButtons = true)
-    {
-        if (directionButtons)
+        /// <summary>
+        /// Clears the current sequence and resets indicators.
+        /// </summary>
+        private void ClearSequence()
         {
-            // updated to match buttons now
-            oneButton.interactable = state;
-            twoButton.interactable = state;
-            threeButton.interactable = state;
-            fourButton.interactable = state;
-            fiveButton.interactable = state;
-            sixButton.interactable = state;
-            sevenButton.interactable = state;
-            eightButton.interactable = state;
+            ChangeAllIndicatorsColor("white");
+            curSequence.Clear();
+            SetButtonsInteractable(true);
         }
 
-        if (textButtons)
+        /// <summary>
+        /// Exits the lock UI and returns to the lock interface.
+        /// </summary>
+        private void ExitUI()
         {
-            clearButton.interactable = state;
-            enterButton.interactable = state;
-            exitButton.interactable = state;
-        }
-    }
-
-    /* Since there is no skinnedMeshrender I'm just going to comment out all of the animations for now
-    
-        private IEnumerator UnlockBlendshape()
-    {
-        for (float s = 0f; s < 100f; s++)
-        {
-            if (_skinnedMeshRenderer)
-                _skinnedMeshRenderer.SetBlendShapeWeight(0, s);
-
-            yield return null;
-        }
-    }
-    */
-
-    private IEnumerator HideUIAfterDelay(float delay)
-    {
-        yield return new WaitForSeconds(delay);
-
-        if (userInterface is { })
+            ClearSequence();
             userInterface.SetActive(false);
-            lockInterface.SetActive(false);
-    }
-
-    private IEnumerator FlashIndicators(string baseColor, string flashColor, float totalTime, float interval)
-    {
-        float elapsed = 0f;
-        bool flashing = false;
-
-        while (elapsed < totalTime)
-        {
-            flashing = !flashing;
-            ChangeAllIndicatorsColor(flashing ? flashColor : baseColor);
-
-            yield return new WaitForSeconds(interval);
-            elapsed += interval;
+            lockInterface.SetActive(true);
         }
 
-        ChangeAllIndicatorsColor(baseColor);
-        SetButtonsInteractable(true);
-        ClearSequence();
+        /// <summary>
+        /// Enters the lock UI.
+        /// </summary>
+        private void EnterUI()
+        {
+            ClearSequence();
+            userInterface.SetActive(true);
+            lockInterface.SetActive(false);
+        }
+
+        /// <summary>
+        /// Changes a specific indicator's color.
+        /// </summary>
+        /// <param name="index">Index of the indicator.</param>
+        /// <param name="color">Color name to apply.</param>
+        private void ChangeIndicatorToColor(int index, string color)
+        {
+            if (directionalLockIndicators[index] == null)
+                return;
+
+            directionalLockIndicators[index].ChangeIndicatorImage(color);
+        }
+
+        /// <summary>
+        /// Changes all active indicators to a given color.
+        /// </summary>
+        /// <param name="color">Color name to apply.</param>
+        private void ChangeAllIndicatorsColor(string color)
+        {
+            for (int i = 0; i < curSequence.Count; i++)
+                ChangeIndicatorToColor(i, color);
+        }
+
+        /// <summary>
+        /// Enables or disables button interactivity.
+        /// </summary>
+        /// <param name="state">Desired interactable state.</param>
+        /// <param name="directionButtons">Whether numeric buttons are affected.</param>
+        /// <param name="textButtons">Whether control buttons are affected.</param>
+        private void SetButtonsInteractable(bool state, bool directionButtons = true, bool textButtons = true)
+        {
+            if (directionButtons)
+            {
+                oneButton.interactable = state;
+                twoButton.interactable = state;
+                threeButton.interactable = state;
+                fourButton.interactable = state;
+                fiveButton.interactable = state;
+                sixButton.interactable = state;
+                sevenButton.interactable = state;
+                eightButton.interactable = state;
+            }
+
+            if (textButtons)
+            {
+                clearButton.interactable = state;
+                enterButton.interactable = state;
+                exitButton.interactable = state;
+            }
+        }
+
+        /// <summary>
+        /// Hides the UI after a delay.
+        /// </summary>
+        /// <param name="delay">Delay in seconds.</param>
+        private IEnumerator HideUIAfterDelay(float delay)
+        {
+            yield return new WaitForSeconds(delay);
+
+            if (userInterface != null)
+                userInterface.SetActive(false);
+
+            if (lockInterface != null)
+                lockInterface.SetActive(false);
+        }
+
+        /// <summary>
+        /// Flashes indicators between two colors to indicate failure.
+        /// </summary>
+        /// <param name="baseColor">Base color.</param>
+        /// <param name="flashColor">Flash color.</param>
+        /// <param name="totalTime">Total flashing duration.</param>
+        /// <param name="interval">Flash interval.</param>
+        private IEnumerator FlashIndicators(string baseColor, string flashColor, float totalTime, float interval)
+        {
+            float elapsed = 0f;
+            bool flashing = false;
+
+            while (elapsed < totalTime)
+            {
+                flashing = !flashing;
+                ChangeAllIndicatorsColor(flashing ? flashColor : baseColor);
+
+                yield return new WaitForSeconds(interval);
+                elapsed += interval;
+            }
+
+            ChangeAllIndicatorsColor(baseColor);
+            SetButtonsInteractable(true);
+            ClearSequence();
+        }
+
+        #endregion
     }
 }
