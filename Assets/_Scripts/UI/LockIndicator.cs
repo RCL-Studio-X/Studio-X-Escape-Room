@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 [RequireComponent(typeof(Image))]
-public class directionalLockIndicator : MonoBehaviour
+public class LockIndicator : MonoBehaviour
 {
     public Sprite whiteIndicatorSprite;
     public Sprite blueIndicatorSprite;
