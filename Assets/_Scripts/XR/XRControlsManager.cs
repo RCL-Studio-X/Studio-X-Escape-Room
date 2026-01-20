@@ -3,7 +3,7 @@ using UnityEngine.UI;
 using UnityEngine.XR.Interaction.Toolkit.Interactors;
 using UnityEngine.XR.Interaction.Toolkit.Locomotion.Turning;
 using UnityEngine.XR.Interaction.Toolkit.Samples.StarterAssets;
-using StudioX.EscapeRoom.UI;
+using StudioXRCL.EscapeRoom.UI;
 
 public class XRControlsManager : MonoBehaviour
 {
