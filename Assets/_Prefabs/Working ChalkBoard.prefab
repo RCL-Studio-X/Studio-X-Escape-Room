@@ -20,7 +20,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &6233795296584009505
 RectTransform:
   m_ObjectHideFlags: 0
@@ -183,9 +183,9 @@ RectTransform:
   - {fileID: 738185549507728985}
   m_Father: {fileID: 6233795296584009505}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 66.85, y: -16.6}
   m_SizeDelta: {x: 132.7, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5683687859724217525
@@ -270,7 +270,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 4104255998622743339}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: Whiteboard, Assembly-CSharp
         m_MethodName: resetDrawing
         m_Mode: 1
@@ -306,9 +306,9 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4803172144432567782}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.52938557, y: 0.317, z: -0.131}
-  m_LocalScale: {x: 0.35, y: 0.35, z: 0.35}
+  m_LocalScale: {x: 0.31535003, y: 0.31535, z: 0.31535003}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 6233795296584009505}
@@ -511,6 +511,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Chalkboard_hackjob
       objectReference: {fileID: 0}
+    - target: {fileID: 2229032678205019293, guid: 256cf0d47a6a24d40865de14e0d097a9, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 65ab2ac83c7ff9b479ef545da3b0c86f, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -521,9 +525,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: -7468613244100037075, guid: 256cf0d47a6a24d40865de14e0d097a9, type: 3}
       insertIndex: -1
       addedObject: {fileID: 8677354020606178679}
-    - targetCorrespondingSourceObject: {fileID: -7468613244100037075, guid: 256cf0d47a6a24d40865de14e0d097a9, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 4104255998622743339}
   m_SourcePrefab: {fileID: 100100000, guid: 256cf0d47a6a24d40865de14e0d097a9, type: 3}
 --- !u!1 &3085482810611309222 stripped
 GameObject:
@@ -579,21 +580,6 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 5885535946452522713, guid: 256cf0d47a6a24d40865de14e0d097a9, type: 3}
---- !u!114 &4104255998622743339
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3233963526540970083}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3fcee8162696d5947b7908a0bbb6687b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  texture: {fileID: 0}
-  fillColor: {r: 0.23832296, g: 0.8301887, b: 0.19971518, a: 0}
-  textureSize: {x: 2048, y: 2048}
 --- !u!4 &3688947406811273637 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 256cf0d47a6a24d40865de14e0d097a9, type: 3}
