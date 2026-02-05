@@ -5833,16 +5833,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c190f8360ee59c34793aa699fe579000, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _playerCamera: {fileID: 6177084908148273693}
-  requiredMatch:
-  - externalAxisMode: 0
-    localAxis: {x: -1, y: 0, z: 0}
-    externalAxis: {x: 0, y: 0, z: 1}
-    tolerance: 0.8
-  - externalAxisMode: 0
-    localAxis: {x: 0, y: -1, z: 0}
-    externalAxis: {x: 0, y: 1, z: 0}
-    tolerance: 0.8
+  playerCamera: {fileID: 0}
+  requiredMatches: []
   onEnterAligned:
     m_PersistentCalls:
       m_Calls:
