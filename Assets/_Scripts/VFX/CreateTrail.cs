@@ -71,25 +71,5 @@ namespace StudioXRCL.EscapeRoom.VFX
             tr.time = Mathf.Infinity;
         }
 
-        void OnCollisionEnter(Collision other)
-        {
-            if (other.gameObject.CompareTag("Chalkboard"))
-            {
-                StartTrail();
-            }
-
-            Debug.Log("Collision Entered with " + other.gameObject.name);
-        }
-
-        void OnCollisionExit(Collision other)
-        {
-            if (other.gameObject.CompareTag("Chalkboard"))
-            {
-                EndTrail();
-            }
-
-            Debug.Log("Collision Exited with " + other.gameObject.name);
-        }
-
     }
 }
