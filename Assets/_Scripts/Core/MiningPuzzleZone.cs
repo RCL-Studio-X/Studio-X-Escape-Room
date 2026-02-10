@@ -1,86 +1,124 @@
 using UnityEngine;
 using System.Collections.Generic;
 
-public class MiningPuzzleZone : MonoBehaviour
+namespace StudioXRCL.EscapeRoom.Core
 {
-    [Header("Puzzle State")]
-    public bool isSolved = false;
-
-    // List to track the actual scripts on the objects inside the zone
-    private List<MineralData> mineralsInZone = new List<MineralData>();
-
-    // The exact combination needed to win
-    private List<MineralType> requiredSolution = new List<MineralType>
+    /// <summary>
+    /// Manages the mining puzzle area, detecting which minerals are placed inside and validating the solution.
+    /// </summary>
+    public class MiningPuzzleZone : MonoBehaviour
     {
-        MineralType.Gold,
-        MineralType.Amethyst,
-        MineralType.Emerald,
-        MineralType.Sapphire
-    };
+        #region Public Variables
 
-    private void OnTriggerEnter(Collider other)
-    {
-        // Check if the object entering has the MineralData component
-        MineralData mineral = other.GetComponent<MineralData>();
+        [Header("Puzzle State")]
+        [Tooltip("Indicates whether the puzzle has been successfully solved.")]
+        public bool isSolved = false;
 
-        if (mineral != null)
+        #endregion
+
+        #region Private Variables
+
+        /// <summary>
+        /// List to track the actual scripts on the objects inside the zone.
+        /// </summary>
+        private List<MineralData> _mineralsInZone = new List<MineralData>();
+
+        /// <summary>
+        /// The exact combination of minerals needed to win.
+        /// </summary>
+        private List<MineralType> _requiredSolution = new List<MineralType>
         {
-            // Add it to our list and re-check the puzzle
-            mineralsInZone.Add(mineral);
-            CheckPuzzle();
-        }
-    }
+            MineralType.Gold,
+            MineralType.Amethyst,
+            MineralType.Emerald,
+            MineralType.Sapphire
+        };
 
-    private void OnTriggerExit(Collider other)
-    {
-        MineralData mineral = other.GetComponent<MineralData>();
+        #endregion
 
-        if (mineral != null)
+        #region Private Methods
+
+        /// <summary>
+        /// Called when an object enters the trigger collider. Adds valid minerals to the tracking list.
+        /// </summary>
+        /// <param name="other">The collider that entered the trigger.</param>
+        private void OnTriggerEnter(Collider other)
         {
-            // Remove it from our list and re-check
-            mineralsInZone.Remove(mineral);
-            CheckPuzzle();
-        }
-    }
+            // Check if the object entering has the MineralData component
+            MineralData mineral = other.GetComponent<MineralData>();
 
-    private void CheckPuzzle()
-    {
-        // 1. If the count isn't exactly 4, it can't be right.
-        if (mineralsInZone.Count != 4)
-        {
-            SetSolvedState(false);
-            return;
-        }
-
-        // 2. Create a temporary list of the types currently in the zone
-        List<MineralType> currentTypes = new List<MineralType>();
-        foreach (var m in mineralsInZone)
-        {
-            currentTypes.Add(m.type);
-        }
-
-        // 3. Check if every required mineral is present in the current types
-        bool allMatch = true;
-        foreach (MineralType required in requiredSolution)
-        {
-            if (!currentTypes.Contains(required))
+            if (mineral != null)
             {
-                allMatch = false;
-                break;
+                // Add it to our list and re-check the puzzle
+                _mineralsInZone.Add(mineral);
+                CheckPuzzle();
             }
         }
 
-        SetSolvedState(allMatch);
-    }
-
-    private void SetSolvedState(bool state)
-    {
-        isSolved = state;
-
-        if (isSolved)
+        /// <summary>
+        /// Called when an object exits the trigger collider. Removes the mineral from the tracking list.
+        /// </summary>
+        /// <param name="other">The collider that exited the trigger.</param>
+        private void OnTriggerExit(Collider other)
         {
-            Debug.Log("Puzzle Solved!");
-            // Optional: Add visual feedback here 
+            MineralData mineral = other.GetComponent<MineralData>();
+
+            if (mineral != null)
+            {
+                // Remove it from our list and re-check
+                _mineralsInZone.Remove(mineral);
+                CheckPuzzle();
+            }
         }
+
+        /// <summary>
+        /// Checks if the current list of minerals exactly matches the required solution.
+        /// </summary>
+        private void CheckPuzzle()
+        {
+            // 1. If the count isn't exactly 4, it can't be right.
+            if (_mineralsInZone.Count != 4)
+            {
+                SetSolvedState(false);
+                return;
+            }
+
+            // 2. Create a temporary list of the types currently in the zone
+            List<MineralType> currentTypes = new List<MineralType>();
+            foreach (var m in _mineralsInZone)
+            {
+                currentTypes.Add(m.type);
+            }
+
+            // 3. Check if every required mineral is present in the current types
+            bool allMatch = true;
+            foreach (MineralType required in _requiredSolution)
+            {
+                if (!currentTypes.Contains(required))
+                {
+                    allMatch = false;
+                    break;
+                }
+            }
+
+            SetSolvedState(allMatch);
+        }
+
+        /// <summary>
+        /// Updates the puzzle's solved state.
+        /// </summary>
+        /// <param name="state">True if the puzzle is solved, otherwise false.</param>
+        private void SetSolvedState(bool state)
+        {
+            isSolved = state;
+
+            if (isSolved)
+            {
+                Debug.Log("Puzzle Solved!");
+                // Optional: Add visual feedback here 
+            }
+        }
+
+        #endregion
     }
 }
