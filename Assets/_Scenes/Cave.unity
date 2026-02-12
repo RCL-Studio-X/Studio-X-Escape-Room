@@ -1310,6 +1310,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 346102078b3015043ab25136dc521c39, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 48f6beebf062d9240b8ae4e07bf0b80f, type: 2}
     - target: {fileID: 919132149155446097, guid: 346102078b3015043ab25136dc521c39, type: 3}
       propertyPath: m_Name
       value: circletable(textured)
@@ -9571,6 +9575,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 517472962}
     m_Modifications:
+    - target: {fileID: 7861283152266138193, guid: 1b87bf0823c13c24f955e30efadc57bb, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: ffa1e7dad946a42499ce8aa1c6f297b7, type: 2}
     - target: {fileID: 8509585651630977924, guid: 1b87bf0823c13c24f955e30efadc57bb, type: 3}
       propertyPath: m_Name
       value: shelf(textured)
