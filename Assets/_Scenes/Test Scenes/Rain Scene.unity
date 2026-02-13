@@ -911,7 +911,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1144947504}
   - component: {fileID: 1144947505}
-  - component: {fileID: 1144947506}
   m_Layer: 0
   m_Name: droplletmanger
   m_TagString: Untagged
@@ -947,21 +946,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dropletPrefab: {fileID: 3455074730641423879, guid: 3ca8eb03e5dd8bf4b9ca4edc9c82cb7b, type: 3}
---- !u!114 &1144947506
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1144947503}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2de927cfaff743346a16f6a2c628f83d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  audioSource: {fileID: 0}
-  clip: {fileID: 0}
-  pitch: 1
+  spawnPoint: {fileID: 0}
 --- !u!1 &1336791099
 GameObject:
   m_ObjectHideFlags: 0
@@ -974,7 +959,6 @@ GameObject:
   - component: {fileID: 1336791103}
   - component: {fileID: 1336791102}
   - component: {fileID: 1336791101}
-  - component: {fileID: 1336791104}
   m_Layer: 0
   m_Name: Plane
   m_TagString: Untagged
@@ -1072,21 +1056,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1336791099}
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &1336791104
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1336791099}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2de927cfaff743346a16f6a2c628f83d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  audioSource: {fileID: 0}
-  clip: {fileID: 0}
-  pitch: 1
 --- !u!4 &1465802658 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1730895793030098174, guid: 799ac8ce4d7758e4ab17b9b77b905485, type: 3}
@@ -1967,6 +1936,68 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1001 &2012602826358276561
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2646204005968979133, guid: 3ca8eb03e5dd8bf4b9ca4edc9c82cb7b, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2646204005968979133, guid: 3ca8eb03e5dd8bf4b9ca4edc9c82cb7b, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2646204005968979133, guid: 3ca8eb03e5dd8bf4b9ca4edc9c82cb7b, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2646204005968979133, guid: 3ca8eb03e5dd8bf4b9ca4edc9c82cb7b, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2646204005968979133, guid: 3ca8eb03e5dd8bf4b9ca4edc9c82cb7b, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2646204005968979133, guid: 3ca8eb03e5dd8bf4b9ca4edc9c82cb7b, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2646204005968979133, guid: 3ca8eb03e5dd8bf4b9ca4edc9c82cb7b, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2646204005968979133, guid: 3ca8eb03e5dd8bf4b9ca4edc9c82cb7b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2646204005968979133, guid: 3ca8eb03e5dd8bf4b9ca4edc9c82cb7b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2646204005968979133, guid: 3ca8eb03e5dd8bf4b9ca4edc9c82cb7b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3455074730641423879, guid: 3ca8eb03e5dd8bf4b9ca4edc9c82cb7b, type: 3}
+      propertyPath: m_Name
+      value: waterdroplet_aadi
+      objectReference: {fileID: 0}
+    - target: {fileID: 4364857308986638779, guid: 3ca8eb03e5dd8bf4b9ca4edc9c82cb7b, type: 3}
+      propertyPath: dropletPrefab
+      value: 
+      objectReference: {fileID: 3455074730641423879, guid: 3ca8eb03e5dd8bf4b9ca4edc9c82cb7b, type: 3}
+    m_RemovedComponents:
+    - {fileID: 4364857308986638779, guid: 3ca8eb03e5dd8bf4b9ca4edc9c82cb7b, type: 3}
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 3ca8eb03e5dd8bf4b9ca4edc9c82cb7b, type: 3}
 --- !u!1001 &2083750872406046702
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2610,4 +2641,5 @@ SceneRoots:
   - {fileID: 8771918}
   - {fileID: 2083750872406046702}
   - {fileID: 2045544084}
+  - {fileID: 2012602826358276561}
   - {fileID: 1144947504}
