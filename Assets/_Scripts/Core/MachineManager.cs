@@ -3,6 +3,7 @@ using UnityEngine.XR.Interaction.Toolkit;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.XR.Interaction.Toolkit.Interactors;
+using System.Collections;
 
 public class MachineManager : MonoBehaviour
 {
@@ -13,6 +14,7 @@ public class MachineManager : MonoBehaviour
     public Transform outputPos; // Where wrong cards get spit out
     public GameObject hiddenMessage;
     public GameObject resultIndicator;
+    private Color defaultIndicatorColor;
 
     [Header("Interaction")]
     public XRSocketInteractor socket;
@@ -66,6 +68,7 @@ public class MachineManager : MonoBehaviour
     void Start()
     {
         UpdateTeamDisplay();
+        defaultIndicatorColor = resultIndicator.GetComponent<Renderer>().material.color;
         
     }
 
@@ -197,10 +200,12 @@ public class MachineManager : MonoBehaviour
                 if (team1cards == 3 && team1TotalAttempts == 3)
                 {
                     team1Completed = true;
+                    StartCoroutine(FlashIndicator(Color.green));
                 }
                 else
                 {
                     ResetCurrentTeam(); 
+                    StartCoroutine(FlashIndicator(Color.red));
                 }
             }
 
@@ -209,10 +214,13 @@ public class MachineManager : MonoBehaviour
                 if (team2cards == 2 && team2TotalAttempts == 2)
                 {
                     team2Completed = true;
+                    StartCoroutine(FlashIndicator(Color.green));
                 }
                 else
                 {
                     ResetCurrentTeam(); 
+                    StartCoroutine(FlashIndicator(Color.red));
+
                 }
             }
 
@@ -221,10 +229,13 @@ public class MachineManager : MonoBehaviour
                 if (team3cards == 3 && team3TotalAttempts == 3)
                 {
                     team3Completed = true;
+                    StartCoroutine(FlashIndicator(Color.green));
                 }
                 else
                 {
                     ResetCurrentTeam(); 
+                    StartCoroutine(FlashIndicator(Color.red));
+
                 }
             }
 
@@ -233,10 +244,12 @@ public class MachineManager : MonoBehaviour
                 if (team4cards == 4 && team4TotalAttempts == 4)
                 {
                     team4Completed = true;
+                    StartCoroutine(FlashIndicator(Color.green));
                 }
                 else
                 {
                     ResetCurrentTeam(); 
+                    StartCoroutine(FlashIndicator(Color.red));
                 }
             }
 
@@ -245,10 +258,12 @@ public class MachineManager : MonoBehaviour
                 if (team5cards == 2 && team5TotalAttempts == 2)
                 {
                     team5Completed = true;
+                    StartCoroutine(FlashIndicator(Color.green));
                 }
                 else
                 {
                     ResetCurrentTeam(); 
+                    StartCoroutine(FlashIndicator(Color.red));
                 }
             }
 
@@ -327,6 +342,21 @@ public class MachineManager : MonoBehaviour
             team5cards = 0;
             team5TotalAttempts = 0;
         }
+    }
+
+
+    private IEnumerator FlashIndicator(Color tempColor)
+    {
+        Renderer renderer = resultIndicator.GetComponent<Renderer>();
+        
+        // Change to the new color (Green or Red)
+        renderer.material.color = tempColor;
+
+        // Wait for exactly 2 seconds
+        yield return new WaitForSeconds(2f);
+
+        // Change it back to the absolute default color
+        renderer.material.color = defaultIndicatorColor;
     }
 }
 
