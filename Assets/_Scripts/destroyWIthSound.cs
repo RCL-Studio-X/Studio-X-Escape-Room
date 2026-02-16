@@ -17,22 +17,16 @@ public class destroyWithSOund : MonoBehaviour
         float duration = 0f;
 
         // Play 3D sound
-        if (audioSource != null && clip != null)
-        {
-            audioSource.spatialBlend = 1f; // 3D
-            audioSource.pitch = pitch;
-            audioSource.PlayOneShot(clip);
 
-            duration = clip.length / Mathf.Max(0.01f, pitch);
-        }
+        audioSource.spatialBlend = 1f; // 3D
+        audioSource.pitch = pitch;
+        audioSource.PlayOneShot(clip);
+
+        duration = clip.length / Mathf.Max(0.01f, pitch);
 
 
-        StartCoroutine(DestroyAfter(duration));
-    }
 
-    IEnumerator DestroyAfter(float t)
-    {
-        yield return new WaitForSeconds(t + 0.05f);
         Destroy(gameObject);
     }
+
 }
