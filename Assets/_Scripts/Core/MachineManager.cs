@@ -355,7 +355,7 @@ public class MachineManager : MonoBehaviour
             foreach(GameObject card in team1Entered)
             {
                 card.SetActive(true);
-                card.transform.position = outputPos.position + new Vector3(Random.Range(-0.01f, 0.01f), 0, Random.Range(-0.01f, 0.01f)); // Spit them out
+                card.transform.position = outputPos.position;
             }
             // 2. Clear the memory of this team
             team1Entered.Clear();
@@ -370,7 +370,7 @@ public class MachineManager : MonoBehaviour
             foreach(GameObject card in team2Entered)
             {
                 card.SetActive(true);
-                card.transform.position = outputPos.position + new Vector3(Random.Range(-0.01f, 0.01f), 0, Random.Range(-0.01f, 0.01f)); // Spit them out
+                card.transform.position = outputPos.position;
             }
             team2Entered.Clear();
             team2cards = 0;
@@ -383,7 +383,7 @@ public class MachineManager : MonoBehaviour
             foreach(GameObject card in team3Entered)
             {
                 card.SetActive(true);
-                card.transform.position = outputPos.position + new Vector3(Random.Range(-0.01f, 0.01f), 0, Random.Range(-0.01f, 0.01f)); // Spit them out
+                card.transform.position = outputPos.position; 
             }
             team3Entered.Clear();
             team3cards = 0;
@@ -396,7 +396,7 @@ public class MachineManager : MonoBehaviour
             foreach(GameObject card in team4Entered)
             {
                 card.SetActive(true);
-                card.transform.position = outputPos.position + new Vector3(Random.Range(-0.01f, 0.01f), 0, Random.Range(-0.01f, 0.01f)); // Spit them out
+                card.transform.position = outputPos.position;
             }
             team4Entered.Clear();
             team4cards = 0;
@@ -409,7 +409,7 @@ public class MachineManager : MonoBehaviour
             foreach(GameObject card in team5Entered)
             {
                 card.SetActive(true);
-                card.transform.position = outputPos.position + new Vector3(Random.Range(-0.01f, 0.01f), 0, Random.Range(-0.01f, 0.01f)); // Spit them out
+                card.transform.position = outputPos.position;
             }
             team5Entered.Clear();
             team5cards = 0;
