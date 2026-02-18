@@ -12,9 +12,11 @@ public class MachineManager : MonoBehaviour
     public Button nextButton;
     public Button prevButton;
     public Transform outputPos; // Where wrong cards get spit out
-    public GameObject hiddenMessage;
-    public GameObject resultIndicator;
-    private Color defaultIndicatorColor;
+    public GameObject resultIndicatorWrong;
+    public GameObject resultIndicatorRight;
+
+    private Color defaultIndicatorColorRight;
+    private Color defaultIndicatorColorWrong;
 
     [Header("Interaction")]
     public XRSocketInteractor socket;
@@ -28,6 +30,8 @@ public class MachineManager : MonoBehaviour
     private int team1cards = 0;
     private int team1TotalAttempts = 0;
     private List<GameObject> team1Entered = new List<GameObject>(); 
+    public GameObject hiddenMessage1;
+
 
     [Header("Team 2 Data")]
     public GameObject Beatrice2;
@@ -36,6 +40,8 @@ public class MachineManager : MonoBehaviour
     private int team2cards = 0;
     private int team2TotalAttempts = 0;
     private List<GameObject> team2Entered = new List<GameObject>(); 
+    public GameObject hiddenMessage2;
+
 
     [Header("Team 3 Data")]
     public GameObject Victoria3;
@@ -45,6 +51,8 @@ public class MachineManager : MonoBehaviour
     private int team3cards = 0;
     private int team3TotalAttempts = 0;
     private List<GameObject> team3Entered = new List<GameObject>(); 
+    public GameObject hiddenMessage3;
+
 
     [Header("Team 4 Data")]
     public GameObject Ken4;
@@ -55,6 +63,8 @@ public class MachineManager : MonoBehaviour
     private int team4cards = 0;
     private int team4TotalAttempts = 0;
     private List<GameObject> team4Entered = new List<GameObject>(); 
+    public GameObject hiddenMessage4;
+
 
     [Header("Team 5 Data")]
     public GameObject Charles5;
@@ -63,12 +73,15 @@ public class MachineManager : MonoBehaviour
     private int team5cards = 0;
     private int team5TotalAttempts = 0;
     private List<GameObject> team5Entered = new List<GameObject>(); 
+    public GameObject hiddenMessage5;
+
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         UpdateTeamDisplay();
-        defaultIndicatorColor = resultIndicator.GetComponent<Renderer>().material.color;
+        defaultIndicatorColorRight = resultIndicatorRight.GetComponent<Renderer>().material.color;
+        defaultIndicatorColorWrong = resultIndicatorWrong.GetComponent<Renderer>().material.color;
         
     }
 
@@ -112,6 +125,13 @@ public class MachineManager : MonoBehaviour
 
                 if (currentTeamIndex == 0)
                 {
+                    if (team1Completed)
+                    {
+                        cardInSocket.SetActive(false); 
+                        cardInSocket.transform.position = outputPos.position; 
+                        cardInSocket.SetActive(true); 
+                        return; 
+                    }
                     // 1. Just Count Attempts
                     team1TotalAttempts++;
                     team1Entered.Add(cardInSocket);
@@ -128,6 +148,13 @@ public class MachineManager : MonoBehaviour
 
                 if (currentTeamIndex == 1)
                 {
+                    if (team2Completed)
+                    {
+                        cardInSocket.SetActive(false); 
+                        cardInSocket.transform.position = outputPos.position; 
+                        cardInSocket.SetActive(true); 
+                        return; 
+                    }
                     // 1. Just Count Attempts
                     team2TotalAttempts++;
                     team2Entered.Add(cardInSocket);
@@ -144,6 +171,13 @@ public class MachineManager : MonoBehaviour
 
                 if (currentTeamIndex == 2)
                 {
+                    if (team3Completed)
+                    {
+                        cardInSocket.SetActive(false); 
+                        cardInSocket.transform.position = outputPos.position; 
+                        cardInSocket.SetActive(true); 
+                        return; 
+                    }
                     // 1. Just Count Attempts
                     team3TotalAttempts++;
                     team3Entered.Add(cardInSocket);
@@ -160,6 +194,13 @@ public class MachineManager : MonoBehaviour
 
                 if (currentTeamIndex == 3)
                 {
+                    if (team4Completed)
+                    {
+                        cardInSocket.SetActive(false); 
+                        cardInSocket.transform.position = outputPos.position; 
+                        cardInSocket.SetActive(true); 
+                        return; 
+                    }
                     // 1. Just Count Attempts
                     team4TotalAttempts++;
                     team4Entered.Add(cardInSocket);
@@ -176,6 +217,13 @@ public class MachineManager : MonoBehaviour
 
                 if (currentTeamIndex == 4)
                 {
+                    if (team5Completed)
+                    {
+                        cardInSocket.SetActive(false); 
+                        cardInSocket.transform.position = outputPos.position; 
+                        cardInSocket.SetActive(true); 
+                        return; 
+                    }
                     // 1. Just Count Attempts
                     team5TotalAttempts++;
                     team5Entered.Add(cardInSocket);
@@ -197,79 +245,104 @@ public class MachineManager : MonoBehaviour
             // Check Team 1 Logic
             if (currentTeamIndex == 0)
             {
-                if (team1cards == 3 && team1TotalAttempts == 3)
+                if (team1Completed)
+                {
+                    StartCoroutine(FlashIndicatorCorrect()); // Remind them it's done
+                    return; // Stop checking
+                }
+                else if (team1cards == 3 && team1TotalAttempts == 3)
                 {
                     team1Completed = true;
-                    StartCoroutine(FlashIndicator(Color.green));
+                    StartCoroutine(FlashIndicatorCorrect());
+                    hiddenMessage1.SetActive(true);
                 }
                 else
                 {
                     ResetCurrentTeam(); 
-                    StartCoroutine(FlashIndicator(Color.red));
+                    StartCoroutine(FlashIndicatorWrong());
                 }
             }
 
             if (currentTeamIndex == 1)
             {
-                if (team2cards == 2 && team2TotalAttempts == 2)
+                if (team2Completed)
+                {
+                    StartCoroutine(FlashIndicatorCorrect()); // Remind them it's done
+                    return; // Stop checking
+                }
+                else if (team2cards == 2 && team2TotalAttempts == 2)
                 {
                     team2Completed = true;
-                    StartCoroutine(FlashIndicator(Color.green));
+                    StartCoroutine(FlashIndicatorCorrect());
+                    hiddenMessage2.SetActive(true);
                 }
                 else
                 {
                     ResetCurrentTeam(); 
-                    StartCoroutine(FlashIndicator(Color.red));
+                    StartCoroutine(FlashIndicatorWrong());
 
                 }
             }
 
             if (currentTeamIndex == 2)
             {
-                if (team3cards == 3 && team3TotalAttempts == 3)
+                if (team3Completed)
+                {
+                    StartCoroutine(FlashIndicatorCorrect()); // Remind them it's done
+                    return; // Stop checking
+                }
+                else if (team3cards == 3 && team3TotalAttempts == 3)
                 {
                     team3Completed = true;
-                    StartCoroutine(FlashIndicator(Color.green));
+                    StartCoroutine(FlashIndicatorCorrect());
+                    hiddenMessage3.SetActive(true);
                 }
                 else
                 {
                     ResetCurrentTeam(); 
-                    StartCoroutine(FlashIndicator(Color.red));
+                    StartCoroutine(FlashIndicatorWrong());
 
                 }
             }
 
             if (currentTeamIndex == 3)
             {
-                if (team4cards == 4 && team4TotalAttempts == 4)
+                if (team4Completed)
+                {
+                    StartCoroutine(FlashIndicatorCorrect()); // Remind them it's done
+                    return; // Stop checking
+                }
+                else if (team4cards == 4 && team4TotalAttempts == 4)
                 {
                     team4Completed = true;
-                    StartCoroutine(FlashIndicator(Color.green));
+                    StartCoroutine(FlashIndicatorCorrect());
+                    hiddenMessage4.SetActive(true);
                 }
                 else
                 {
                     ResetCurrentTeam(); 
-                    StartCoroutine(FlashIndicator(Color.red));
+                    StartCoroutine(FlashIndicatorWrong());
                 }
             }
 
             if (currentTeamIndex == 4)
             {
-                if (team5cards == 2 && team5TotalAttempts == 2)
+                if (team5Completed)
+                {
+                    StartCoroutine(FlashIndicatorCorrect()); // Remind them it's done
+                    return; // Stop checking
+                }
+                else if (team5cards == 2 && team5TotalAttempts == 2)
                 {
                     team5Completed = true;
-                    StartCoroutine(FlashIndicator(Color.green));
+                    StartCoroutine(FlashIndicatorCorrect());
+                    hiddenMessage5.SetActive(true);
                 }
                 else
                 {
                     ResetCurrentTeam(); 
-                    StartCoroutine(FlashIndicator(Color.red));
+                    StartCoroutine(FlashIndicatorWrong());
                 }
-            }
-
-            if (team1Completed && team2Completed && team3Completed &&team4Completed && team5Completed)
-            {
-                hiddenMessage.SetActive(true);
             }
         }
 
@@ -345,18 +418,32 @@ public class MachineManager : MonoBehaviour
     }
 
 
-    private IEnumerator FlashIndicator(Color tempColor)
+    private IEnumerator FlashIndicatorCorrect()
     {
-        Renderer renderer = resultIndicator.GetComponent<Renderer>();
+        Renderer renderer = resultIndicatorRight.GetComponent<Renderer>();
         
-        // Change to the new color (Green or Red)
-        renderer.material.color = tempColor;
+        // Change to the new color (Green)
+        renderer.material.color = Color.green;
 
         // Wait for exactly 2 seconds
         yield return new WaitForSeconds(2f);
 
         // Change it back to the absolute default color
-        renderer.material.color = defaultIndicatorColor;
+        renderer.material.color = defaultIndicatorColorRight;
+    }
+
+      private IEnumerator FlashIndicatorWrong()
+    {
+        Renderer renderer = resultIndicatorWrong.GetComponent<Renderer>();
+        
+        // Change to the new color (Red)
+        renderer.material.color = Color.red;
+
+        // Wait for exactly 2 seconds
+        yield return new WaitForSeconds(2f);
+
+        // Change it back to the absolute default color
+        renderer.material.color = defaultIndicatorColorWrong;
     }
 }
 
