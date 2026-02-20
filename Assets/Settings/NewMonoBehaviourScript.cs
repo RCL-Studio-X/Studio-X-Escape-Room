@@ -7,7 +7,7 @@ public class HighlighTarget : MonoBehaviour
    
     void Awake()
     {
-        originalLayer = gameObject.layer
+        originalLayer = gameObject.layer;
     }
 
 
