@@ -1,7 +1,6 @@
 using UnityEngine;
-using System.Collections;
 
-public class destroyWithSOund : MonoBehaviour
+public class DestroyWithSound : MonoBehaviour
 {
     public AudioSource audioSource;
     public AudioClip clip;
@@ -14,19 +13,34 @@ public class destroyWithSOund : MonoBehaviour
         if (triggered) return;
         triggered = true;
 
-        float duration = 0f;
+        //Hide visuals
+        foreach (var r in GetComponentsInChildren<Renderer>())
+            r.enabled = false;
 
-        // Play 3D sound
 
-        audioSource.spatialBlend = 1f; // 3D
+        //Disable physics(may don't need?)
+        foreach (var c in GetComponentsInChildren<Collider>())
+            c.enabled = false;
+
+        var rb = GetComponent<Rigidbody>();
+        if (rb != null)
+        {
+            rb.linearVelocity = Vector3.zero;   // for newer Unity versions
+            rb.angularVelocity = Vector3.zero;
+            rb.isKinematic = true;
+        }
+
+        //Play sound
+        audioSource.spatialBlend = 1f;
         audioSource.pitch = pitch;
         audioSource.PlayOneShot(clip);
 
-        duration = clip.length / Mathf.Max(0.01f, pitch);
-
-
-
-        Destroy(gameObject);
+        float duration = clip.length / Mathf.Max(0.01f, Mathf.Abs(pitch));
+        Destroy(gameObject, duration);
     }
 
+    public void SetPitch(float newPitch)
+    {
+        pitch = newPitch;
+    }
 }

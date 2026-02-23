@@ -152,7 +152,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   audioSource: {fileID: -1015155729732868799}
   clip: {fileID: 8300000, guid: 228bdb47f2537994db16935ed35767e4, type: 3}
-  pitch: 1
+  pitch: 1.5
 --- !u!82 &-1015155729732868799
 AudioSource:
   m_ObjectHideFlags: 0
@@ -165,7 +165,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 8300000, guid: 228bdb47f2537994db16935ed35767e4, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
