@@ -1,46 +1,117 @@
 using UnityEngine;
 
-public class DestroyWithSound : MonoBehaviour
+namespace StudioXRCL.EscapeRoom.Audio
 {
-    public AudioSource audioSource;
-    public AudioClip clip;
-    public float pitch = 1.0f;
-
-    private bool triggered = false;
-
-    void OnCollisionEnter(Collision collision)
+    /// <summary>
+    /// Hides the droplet visuals and disables its physics on first collision,
+    /// then plays an impact sound (with a configurable pitch) before destroying the droplet.
+    /// </summary>
+    public class DestroyWithSound : MonoBehaviour
     {
-        if (triggered) return;
-        triggered = true;
+        #region Public Variable Declarations
 
-        //Hide visuals
-        foreach (var r in GetComponentsInChildren<Renderer>())
-            r.enabled = false;
+        [Header("Audio")]
+        [Tooltip("AudioSource used to play the impact sound. Typically on this GameObject.")]
+        public AudioSource audioSource;
 
+        [Tooltip("Audio clip to play when the droplet collides.")]
+        public AudioClip clip;
 
-        //Disable physics(may don't need?)
-        foreach (var c in GetComponentsInChildren<Collider>())
-            c.enabled = false;
+        [Header("Pitch")]
+        [Tooltip("Pitch to use when playing the clip. Set this externally (e.g., by a GameManager) before collision.")]
+        public float currentPitch = 1.0f;
 
-        var rb = GetComponent<Rigidbody>();
-        if (rb != null)
+        #endregion
+
+        #region Private Variable Declarations
+
+        /// <summary>
+        /// Ensures the collision behavior only runs once.
+        /// </summary>
+        private bool _triggered = false;
+
+        #endregion
+
+        #region Private Method Definitions
+
+        /// <summary>
+        /// Called by Unity when this object first collides with another collider.
+        /// Hides visuals, disables physics, plays the impact sound, then destroys the object after the sound completes.
+        /// </summary>
+        /// <param name="collision">Collision data provided by Unity.</param>
+        private void OnCollisionEnter(Collision collision)
         {
-            rb.linearVelocity = Vector3.zero;   // for newer Unity versions
-            rb.angularVelocity = Vector3.zero;
-            rb.isKinematic = true;
+            if (_triggered)
+                return;
+
+            _triggered = true;
+
+            HideVisuals();
+            DisablePhysics();
+            PlayImpactSoundAndDestroy();
         }
 
-        //Play sound
-        audioSource.spatialBlend = 1f;
-        audioSource.pitch = pitch;
-        audioSource.PlayOneShot(clip);
+        /// <summary>
+        /// Disables all Renderers on this object and its children so it is no longer visible.
+        /// </summary>
+        private void HideVisuals()
+        {
+            foreach (Renderer rendererComponent in GetComponentsInChildren<Renderer>())
+                rendererComponent.enabled = false;
+        }
 
-        float duration = clip.length / Mathf.Max(0.01f, Mathf.Abs(pitch));
-        Destroy(gameObject, duration);
-    }
+        /// <summary>
+        /// Disables all Colliders on this object and its children, and stops Rigidbody motion if present.
+        /// </summary>
+        private void DisablePhysics()
+        {
+            foreach (Collider colliderComponent in GetComponentsInChildren<Collider>())
+                colliderComponent.enabled = false;
 
-    public void SetPitch(float newPitch)
-    {
-        pitch = newPitch;
+            Rigidbody rigidbodyComponent = GetComponent<Rigidbody>();
+            if (rigidbodyComponent == null)
+                return;
+
+            // Use velocity for compatibility across Unity versions (linearVelocity is not available in all versions).
+            rigidbodyComponent.linearVelocity = Vector3.zero;
+            rigidbodyComponent.angularVelocity = Vector3.zero;
+            rigidbodyComponent.isKinematic = true;
+        }
+
+        /// <summary>
+        /// Plays the configured impact sound using the configured pitch and destroys the GameObject
+        /// after the sound finishes.
+        /// </summary>
+        private void PlayImpactSoundAndDestroy()
+        {
+            if (audioSource == null || clip == null)
+            {
+                Destroy(gameObject);
+                return;
+            }
+
+            audioSource.spatialBlend = 1f;
+            audioSource.pitch = currentPitch;
+            audioSource.PlayOneShot(clip);
+
+            float duration = clip.length / Mathf.Max(0.01f, Mathf.Abs(currentPitch));
+            Destroy(gameObject, duration);
+        }
+
+        #endregion
+
+        #region Public Method Definitions
+
+        /// <summary>
+        /// Sets the pitch used when playing the impact sound.
+        /// Call this right after instantiating the droplet (before it collides).
+        /// </summary>
+        /// <param name="pitch">Desired pitch value.</param>
+        public void SetPitch(float pitch)
+        {
+            currentPitch = pitch;
+        }
+  
+        #endregion
     }
 }
