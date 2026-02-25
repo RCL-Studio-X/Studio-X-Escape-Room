@@ -88,7 +88,8 @@ public class MachineManagerNoUI : MonoBehaviour
             {
                 currentTeamIndex++;
             }
-            teamSelected.transform.Rotate(45f, 0f, 0f);
+            float targetXAngle = -90f + (currentTeamIndex * 45f);
+            teamSelected.transform.localEulerAngles = new Vector3(targetXAngle, 90f, -90f);
         }
 
         public void PreviousTeam()
@@ -100,7 +101,8 @@ public class MachineManagerNoUI : MonoBehaviour
             {
                 currentTeamIndex--;
             }
-                teamSelected.transform.Rotate(-45f, 0f, 0f);
+                float targetXAngle = -90f + (currentTeamIndex * -45f);
+                teamSelected.transform.localEulerAngles = new Vector3(targetXAngle, 90f, -90f);
 
         }
 

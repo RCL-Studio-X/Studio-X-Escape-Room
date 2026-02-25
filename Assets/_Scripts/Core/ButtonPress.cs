@@ -42,11 +42,12 @@ public class ButtonPress : MonoBehaviour
 
     private IEnumerator triggerExit()
     {
+        yield return new WaitForSeconds(1);
+
         transform.localPosition = startLocalPosition;
             
             // 2. Fire the release event
             onRelease.Invoke();
-        yield return new WaitForSeconds(1);
         isPressed=false;
     }
 }
