@@ -101,7 +101,7 @@ public class MachineManagerNoUI : MonoBehaviour
             {
                 currentTeamIndex--;
             }
-                float targetXAngle = -90f + (currentTeamIndex * -45f);
+                float targetXAngle = -90f + (currentTeamIndex * 45f);
                 teamSelected.transform.localEulerAngles = new Vector3(targetXAngle, 90f, -90f);
 
         }
