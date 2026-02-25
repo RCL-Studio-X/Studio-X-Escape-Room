@@ -88,7 +88,7 @@ public class MachineManagerNoUI : MonoBehaviour
             {
                 currentTeamIndex++;
             }
-            teamSelected.transform.Rotate(45f, 0f, 0f, Space.Self);
+            teamSelected.transform.Rotate(45f, 0f, 0f);
         }
 
         public void PreviousTeam()
@@ -100,7 +100,7 @@ public class MachineManagerNoUI : MonoBehaviour
             {
                 currentTeamIndex--;
             }
-                teamSelected.transform.Rotate(-45f, 0f, 0f, Space.Self);
+                teamSelected.transform.Rotate(-45f, 0f, 0f);
 
         }
 
