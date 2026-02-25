@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -35,12 +36,17 @@ public class ButtonPress : MonoBehaviour
         // Only release if the object that pushed it is the one leaving
         if (other.gameObject == presser)
         {
-            // 1. Visually return the button to the exact original height
-            transform.localPosition = startLocalPosition;
+            StartCoroutine(triggerExit());
+        }
+    }
+
+    private IEnumerator triggerExit()
+    {
+        transform.localPosition = startLocalPosition;
             
             // 2. Fire the release event
             onRelease.Invoke();
-            isPressed = false;
-        }
+        yield return new WaitForSeconds(1);
+        isPressed=false;
     }
 }
