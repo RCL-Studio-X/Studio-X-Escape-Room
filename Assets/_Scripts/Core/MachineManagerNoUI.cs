@@ -81,14 +81,14 @@ public class MachineManagerNoUI : MonoBehaviour
     
     public void NextTeam()
         {
-            if (currentTeamIndex==4) // if at the last team then loop index back to the first team
+            if (currentTeamIndex==7) // if at the last team then loop index back to the first team
             {
                 currentTeamIndex=0;
             } else
             {
                 currentTeamIndex++;
             }
-                teamSelected.transform.rotation *= Quaternion.Euler(-90f, 0f, 0f);
+                teamSelected.transform.rotation *= Quaternion.Euler(45f, 0f, 0f);
 
         }
 
@@ -96,12 +96,12 @@ public class MachineManagerNoUI : MonoBehaviour
         {
             if (currentTeamIndex == 0) //if at first team loop it back to 5th team
             {
-                currentTeamIndex=4;
+                currentTeamIndex=7;
             } else
             {
                 currentTeamIndex--;
             }
-                teamSelected.transform.rotation *= Quaternion.Euler(90f, 0f, 0f);
+                teamSelected.transform.rotation *= Quaternion.Euler(45f, 0f, 0f);
 
         }
 
