@@ -88,7 +88,7 @@ public class MachineManagerNoUI : MonoBehaviour
             {
                 currentTeamIndex++;
             }
-                teamSelected.transform.rotation *= Quaternion.Euler(45f, 0f, 0f);
+                teamSelected.transform.rotation *= Quaternion.Euler(45f, 90f, -90f);
 
         }
 
@@ -101,7 +101,7 @@ public class MachineManagerNoUI : MonoBehaviour
             {
                 currentTeamIndex--;
             }
-                teamSelected.transform.rotation *= Quaternion.Euler(45f, 0f, 0f);
+                teamSelected.transform.rotation *= Quaternion.Euler(45f, 90f, -90f);
 
         }
 
