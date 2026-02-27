@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace StudioXRCL.EscapeRoom.Audio
+namespace StudioXRCL.EscapeRoom.Core
 {
     /// <summary>
     /// Hides the droplet visuals and disables its physics on first collision,
