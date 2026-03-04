@@ -25,16 +25,18 @@ Project Lead:
 
 Coding Team:
 - Fenway Powers (Lead) (Staff)
-- Daniel Lin
+- Daniel Lin (Fall 2025)
 - Ray Watkins
 - Ouriya Boshi Levine
 - Sherkeem Duprey
 - Jelena Hristov
 - Rain Xia
+- Tianyu Zhang (Spring 2026)
 
 Modeling Team:
 - Aadi Rajbhandary (Lead)
 - Caroline Li
 - Caleb Kohn-Blank
-- Tianyu Zhang
+- Tianyu Zhang (Fall 2025)
 - Hyeji Kim
+- Daniel Lin (Spring 2026)

@@ -440,7 +440,7 @@ Transform:
   m_GameObject: {fileID: 639064300}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.26, y: 0.64, z: -0.03}
+  m_LocalPosition: {x: 0.718, y: 2.461, z: 0.579}
   m_LocalScale: {x: 0.37244, y: 0.54994494, z: 0.37244}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -901,9 +901,57 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14d9ae43f9aa55c49b5ffbb08023833d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  selected: 0
-  lockGameObject: {fileID: 1806570453}
-  script: {fileID: 0}
+--- !u!1 &1144947503
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1144947504}
+  - component: {fileID: 1144947505}
+  m_Layer: 0
+  m_Name: droplletmanger
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1144947504
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1144947503}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -2.19, y: 0.57, z: -1.07}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1144947505
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1144947503}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cec929a579793744ab4746b29f6e1215, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dropletPrefab: {fileID: 3455074730641423879, guid: 3ca8eb03e5dd8bf4b9ca4edc9c82cb7b, type: 3}
+  numberSequence: 090000000800000007000000
+  spawnInterval: 1
+  dashMultiplier: 3
+  spawnPos: {x: -2, y: 1, z: -1}
+  dotPitch: 1.2
+  dashPitch: 0.8
 --- !u!1 &1336791099
 GameObject:
   m_ObjectHideFlags: 0
@@ -1529,11 +1577,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4409aaf0b0f47347bd19681ba2dabfd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  locked: 1
-  audioSource: {fileID: 0}
-  onUnlocked:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!82 &1806570463
 AudioSource:
   m_ObjectHideFlags: 0
@@ -2541,3 +2584,4 @@ SceneRoots:
   - {fileID: 8771918}
   - {fileID: 2083750872406046702}
   - {fileID: 2045544084}
+  - {fileID: 1144947504}
