@@ -2,53 +2,104 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class ButtonPress : MonoBehaviour
+namespace StudioXRCL.EscapeRoom.Core
 {
-    public UnityEvent onPress;
-    public UnityEvent onRelease;
-    GameObject presser;
-    public float pressDepth = 0.02f; // Adjusted to 2cm for realistic VR scale
-    bool isPressed = false;
-    Vector3 startLocalPosition; // Using localPosition is safer for angled panels
-
-    void Start()
+    /// <summary>
+    /// Handles physical button press interactions using trigger collisions.
+    /// Moves the button visually when pressed and invokes press/release events.
+    /// </summary>
+    public class ButtonPress : MonoBehaviour
     {
-        // Save the exact starting coordinate
-        startLocalPosition = transform.localPosition;
-    }
+        #region Public Variable Declarations
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (!isPressed)
+        [Header("Button Events")]
+
+        [Tooltip("Event invoked when the button is pressed.")]
+        public UnityEvent onPress;
+
+        [Tooltip("Event invoked when the button is released.")]
+        public UnityEvent onRelease;
+
+        [Header("Button Settings")]
+
+        [Tooltip("How far the button moves downward when pressed (in meters).")]
+        public float pressDepth = 0.02f;
+
+        #endregion
+
+        #region Private Variable Declarations
+
+        /// <summary> Reference to the object currently pressing the button. </summary>
+        private GameObject _presser;
+
+        /// <summary> Whether the button is currently pressed. </summary>
+        private bool _isPressed = false;
+
+        /// <summary> The starting local position of the button. </summary>
+        private Vector3 _startLocalPosition;
+
+        #endregion
+
+        #region Private Method Definitions
+
+        /// <summary>
+        /// Unity Start method. Caches the initial local position of the button.
+        /// </summary>
+        private void Start()
         {
-            // 1. Visually move the button down
-            transform.localPosition = new Vector3(startLocalPosition.x, startLocalPosition.y - pressDepth, startLocalPosition.z);
-            
-            // 2. Track the hand/finger and fire the event
-            presser = other.gameObject;
-            onPress.Invoke();
-            isPressed = true;    
+            _startLocalPosition = transform.localPosition;
         }
-    }
 
-    private void OnTriggerExit(Collider other)
-    {
-        // Only release if the object that pushed it is the one leaving
-        if (other.gameObject == presser)
+        /// <summary>
+        /// Called when another collider enters this trigger.
+        /// </summary>
+        /// <param name="other">The collider entering the trigger.</param>
+        private void OnTriggerEnter(Collider other)
         {
-            StartCoroutine(triggerExit());
+            if (_isPressed)
+            {
+                return;
+            }
+
+            transform.localPosition = new Vector3(
+                _startLocalPosition.x,
+                _startLocalPosition.y - pressDepth,
+                _startLocalPosition.z);
+
+            _presser = other.gameObject;
+            onPress?.Invoke();
+            _isPressed = true;
         }
-    }
 
-    private IEnumerator triggerExit()
-    {
-          transform.localPosition = startLocalPosition;
-            
-            // 2. Fire the release event
-            onRelease.Invoke();
-        yield return new WaitForSeconds(.5f);
+        /// <summary>
+        /// Called when another collider exits this trigger.
+        /// </summary>
+        /// <param name="other">The collider exiting the trigger.</param>
+        private void OnTriggerExit(Collider other)
+        {
+            if (other.gameObject != _presser)
+            {
+                return;
+            }
 
-       
-        isPressed=false;
+            StartCoroutine(TriggerExit());
+        }
+
+        /// <summary>
+        /// Handles delayed release behavior, restoring position and invoking release event.
+        /// </summary>
+        /// <returns>IEnumerator for coroutine execution.</returns>
+        private IEnumerator TriggerExit()
+        {
+            transform.localPosition = _startLocalPosition;
+
+            onRelease?.Invoke();
+
+            yield return new WaitForSeconds(0.5f);
+
+            _isPressed = false;
+        }
+
+        #endregion
     }
 }
