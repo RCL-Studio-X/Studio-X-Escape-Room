@@ -183,22 +183,10 @@ namespace StudioXRCL.EscapeRoom.Core
             }
         }
 
-        #endregion
-
-        #region Private Method definitions
-
-        /// <summary>
-        /// Initializes default components on startup.
-        /// </summary>
-        private void Start()
-        {
-            _defaultIndicatorColor = resultIndicator.GetComponent<Renderer>().material.color;
-        }
-
         /// <summary>
         /// Resets the current team's progress and ejects their entered cards.
         /// </summary>
-        private void ResetCurrentTeam()
+        public void ResetCurrentTeam()
         {
             // Safety check for blank sides
             if (_currentTeamIndex >= teams.Length) return;
@@ -216,6 +204,18 @@ namespace StudioXRCL.EscapeRoom.Core
             currentTeam.currentCards = 0;
             currentTeam.totalAttempts = 0;
             Debug.Log("Team Reset");
+        }
+
+        #endregion
+
+        #region Private Method definitions
+
+        /// <summary>
+        /// Initializes default components on startup.
+        /// </summary>
+        private void Start()
+        {
+            _defaultIndicatorColor = resultIndicator.GetComponent<Renderer>().material.color;
         }
 
         /// <summary>
