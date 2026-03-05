@@ -99,7 +99,7 @@ public class LetterLock : MonoBehaviour
 
         public void letter1NextClicked()
         {
-            if (letter1Index==9) // if at the last letter then loop index back to the first team
+            if (letter1Index==letterList.Length-1) // if at the last letter then loop index back to the first team
             {
                 letter1Index=0;
             } else
@@ -113,7 +113,7 @@ public class LetterLock : MonoBehaviour
         {
               if (letter1Index==0) // if at the first letter then loop index back to the last letter
             {
-                letter1Index=9;
+                letter1Index= letterList.Length - 1;
             } else
             {
                 letter1Index--;
@@ -123,7 +123,7 @@ public class LetterLock : MonoBehaviour
 
         public void letter2NextClicked()
         {
-            if (letter2Index==9) // if at the last letter then loop index back to the first team
+            if (letter2Index==letterList.Length - 1) // if at the last letter then loop index back to the first team
             {
                 letter2Index=0;
             } else
@@ -147,7 +147,7 @@ public class LetterLock : MonoBehaviour
 
         public void letter3NextClicked()
         {
-            if (letter3Index==9) // if at the last letter then loop index back to the first team
+            if (letter3Index==letterList.Length - 1) // if at the last letter then loop index back to the first team
             {
                 letter3Index=0;
             } else
@@ -161,7 +161,7 @@ public class LetterLock : MonoBehaviour
         {
               if (letter3Index==0) // if at the first letter then loop index back to the last letter
             {
-                letter3Index=9;
+                letter3Index=letterList.Length - 1;
             } else
             {
                 letter3Index--;
@@ -171,7 +171,7 @@ public class LetterLock : MonoBehaviour
 
         public void letter4NextClicked()
         {
-            if (letter4Index==9) // if at the last letter then loop index back to the first team
+            if (letter4Index==letterList.Length - 1) // if at the last letter then loop index back to the first team
             {
                 letter4Index=0;
             } else
@@ -185,7 +185,7 @@ public class LetterLock : MonoBehaviour
         {
               if (letter4Index==0) // if at the first letter then loop index back to the last letter
             {
-                letter4Index=9;
+                letter4Index=letterList.Length - 1;
             } else
             {
                 letter4Index--;
@@ -195,7 +195,7 @@ public class LetterLock : MonoBehaviour
 
         public void letter5NextClicked()
         {
-            if (letter5Index==9) // if at the last letter then loop index back to the first team
+            if (letter5Index==letterList.Length - 1) // if at the last letter then loop index back to the first team
             {
                 letter5Index=0;
             } else
@@ -209,7 +209,7 @@ public class LetterLock : MonoBehaviour
         {
               if (letter5Index==0) // if at the first letter then loop index back to the last letter
             {
-                letter5Index=9;
+                letter5Index=letterList.Length - 1;
             } else
             {
                 letter5Index--;
@@ -224,7 +224,7 @@ public class LetterLock : MonoBehaviour
         /// </summary>
         public void ClearSequence()
         {
-            ChangeAllIndicatorsColor("white");
+            //ChangeAllIndicatorsColor("white");
             letter1Index=0;
             letter1.SetText(letterList[letter1Index]);
 
@@ -319,16 +319,17 @@ public class LetterLock : MonoBehaviour
 
         public void onEnter()
         {
-            if (letter1Index==1 && letter2Index==1 && letter3Index==1 && letter4Index==1 && letter5Index==1)
+            if (letter1Index==1 && letter2Index==1 && letter3Index==1 && letter4Index==1 && letter5Index==1)//lock code (set to b,b,b,b,b)
             {
                 onUnlocked.Invoke();
-                StartCoroutine(FlashIndicators("white", "green", 2f, .5f)); 
-                StartCoroutine(HideUIAfterDelay(2.5f));
+                audioSource.Play();
+                StartCoroutine(FlashIndicators("white", "green", 2, .3f)); 
+                StartCoroutine(HideUIAfterDelay(2));
                 locked = false;
             } else
             {
-                StartCoroutine(FlashIndicators("white", "red", 2, .5f));
-                ClearSequence();
+            ClearSequence();
+            StartCoroutine(FlashIndicators("white", "red", 1.5f, .3f));
 
             }
         }
