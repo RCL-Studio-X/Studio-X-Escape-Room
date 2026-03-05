@@ -8,44 +8,51 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
-public class LetterLock : MonoBehaviour
+
+namespace StudioXRCL.EscapeRoom.Core
 {
+    /// <summary>
+    /// Controls the logic and user interface for a 5-letter combination lock.
+    /// </summary>
+    public class LetterLock : MonoBehaviour
+    {
+        #region Public Variable declarations
 
         [Header("Buttons")]
-        [Tooltip("Button used for input 1.")]
+        [Tooltip("Button used for input 1 next letter.")]
         public Button nextButton1;
+        [Tooltip("Button used for input 1 previous letter.")]
         public Button prevButton1;
+        [Tooltip("Text display for input 1.")]
         public TextMeshProUGUI letter1;
-        private int letter1Index=0;
 
-
-        [Tooltip("Button used for input 2.")]
+        [Tooltip("Button used for input 2 next letter.")]
         public Button nextButton2;
+        [Tooltip("Button used for input 2 previous letter.")]
         public Button prevButton2;
+        [Tooltip("Text display for input 2.")]
         public TextMeshProUGUI letter2;
-        private int letter2Index=0;
 
-
-        [Tooltip("Button used for input 3.")]
+        [Tooltip("Button used for input 3 next letter.")]
         public Button nextButton3;
+        [Tooltip("Button used for input 3 previous letter.")]
         public Button prevButton3;
+        [Tooltip("Text display for input 3.")]
         public TextMeshProUGUI letter3;
-        private int letter3Index=0;
 
-
-        [Tooltip("Button used for input 4.")]
+        [Tooltip("Button used for input 4 next letter.")]
         public Button nextButton4;
+        [Tooltip("Button used for input 4 previous letter.")]
         public Button prevButton4;
+        [Tooltip("Text display for input 4.")]
         public TextMeshProUGUI letter4;
-        private int letter4Index=0;
 
-
-        [Tooltip("Button used for input 5.")]
+        [Tooltip("Button used for input 5 next letter.")]
         public Button nextButton5;
+        [Tooltip("Button used for input 5 previous letter.")]
         public Button prevButton5;
+        [Tooltip("Text display for input 5.")]
         public TextMeshProUGUI letter5;
-        private int letter5Index=0;
-
 
         [Tooltip("Button used to clear the current sequence.")]
         public Button clearButton;
@@ -71,7 +78,6 @@ public class LetterLock : MonoBehaviour
         [Tooltip("When true, the lock is currently locked.")]
         public bool locked = true;
 
-
         [Header("User Interface")]
         [Tooltip("UI object that hides after the lock succeeds.")]
         public GameObject userInterface;
@@ -83,162 +89,211 @@ public class LetterLock : MonoBehaviour
         [Tooltip("Event invoked when the lock becomes unlocked.")]
         public UnityEvent onUnlocked;
 
-        [Tooltip(" Array of letters user can enter.")]
-        private string[] letterList = { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J" };
+        #endregion
 
+        #region Private Variable declarations
+
+        /// <summary> Current index for letter 1. </summary>
+        private int _letter1Index = 0;
+
+        /// <summary> Current index for letter 2. </summary>
+        private int _letter2Index = 0;
+
+        /// <summary> Current index for letter 3. </summary>
+        private int _letter3Index = 0;
+
+        /// <summary> Current index for letter 4. </summary>
+        private int _letter4Index = 0;
+
+        /// <summary> Current index for letter 5. </summary>
+        private int _letter5Index = 0;
+
+        /// <summary> Array of letters user can enter. </summary>
+        private string[] _letterList = { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J" };
+
+        #endregion
+
+        #region Public Method definitions
 
         /// <summary>
-        /// Registers button click listeners.
+        /// Cycles to the next letter for input 1.
         /// </summary>
-        private void Start()
+        public void Letter1NextClicked()
         {
-            clearButton.onClick.AddListener(ClearSequence);
-            exitButton.onClick.AddListener(ExitUI);
-            openButton.onClick.AddListener(EnterUI);
-        }
-
-        public void letter1NextClicked()
-        {
-            if (letter1Index==letterList.Length-1) // if at the last letter then loop index back to the first team
+            if (_letter1Index == _letterList.Length - 1)
             {
-                letter1Index=0;
-            } else
-            {
-                letter1Index++;
+                _letter1Index = 0;
             }
-            letter1.SetText(letterList[letter1Index]);
-        }
-
-        public void letter1PrevClicked()
-        {
-              if (letter1Index==0) // if at the first letter then loop index back to the last letter
+            else
             {
-                letter1Index= letterList.Length - 1;
-            } else
-            {
-                letter1Index--;
+                _letter1Index++;
             }
-            letter1.SetText(letterList[letter1Index]);
+            letter1.SetText(_letterList[_letter1Index]);
         }
-
-        public void letter2NextClicked()
-        {
-            if (letter2Index==letterList.Length - 1) // if at the last letter then loop index back to the first team
-            {
-                letter2Index=0;
-            } else
-            {
-                letter2Index++;
-            }
-            letter2.SetText(letterList[letter2Index]);
-        }
-
-        public void letter2PrevClicked()
-        {
-              if (letter2Index==0) // if at the first letter then loop index back to the last letter
-            {
-                letter2Index=9;
-            } else
-            {
-                letter2Index--;
-            }
-            letter2.SetText(letterList[letter2Index]);
-        }
-
-        public void letter3NextClicked()
-        {
-            if (letter3Index==letterList.Length - 1) // if at the last letter then loop index back to the first team
-            {
-                letter3Index=0;
-            } else
-            {
-                letter3Index++;
-            }
-            letter3.SetText(letterList[letter3Index]);
-        }
-
-        public void letter3PrevClicked()
-        {
-              if (letter3Index==0) // if at the first letter then loop index back to the last letter
-            {
-                letter3Index=letterList.Length - 1;
-            } else
-            {
-                letter3Index--;
-            }
-            letter3.SetText(letterList[letter3Index]);
-        }
-
-        public void letter4NextClicked()
-        {
-            if (letter4Index==letterList.Length - 1) // if at the last letter then loop index back to the first team
-            {
-                letter4Index=0;
-            } else
-            {
-                letter4Index++;
-            }
-            letter4.SetText(letterList[letter4Index]);
-        }
-
-        public void letter4PrevClicked()
-        {
-              if (letter4Index==0) // if at the first letter then loop index back to the last letter
-            {
-                letter4Index=letterList.Length - 1;
-            } else
-            {
-                letter4Index--;
-            }
-            letter4.SetText(letterList[letter4Index]);
-        }
-
-        public void letter5NextClicked()
-        {
-            if (letter5Index==letterList.Length - 1) // if at the last letter then loop index back to the first team
-            {
-                letter5Index=0;
-            } else
-            {
-                letter5Index++;
-            }
-            letter5.SetText(letterList[letter5Index]);
-        }
-
-        public void letter5PrevClicked()
-        {
-              if (letter5Index==0) // if at the first letter then loop index back to the last letter
-            {
-                letter5Index=letterList.Length - 1;
-            } else
-            {
-                letter5Index--;
-            }
-            letter5.SetText(letterList[letter5Index]);
-        }
-
-
 
         /// <summary>
-        /// Clears the current sequence and resets indicators.
+        /// Cycles to the previous letter for input 1.
+        /// </summary>
+        public void Letter1PrevClicked()
+        {
+            if (_letter1Index == 0)
+            {
+                _letter1Index = _letterList.Length - 1;
+            }
+            else
+            {
+                _letter1Index--;
+            }
+            letter1.SetText(_letterList[_letter1Index]);
+        }
+
+        /// <summary>
+        /// Cycles to the next letter for input 2.
+        /// </summary>
+        public void Letter2NextClicked()
+        {
+            if (_letter2Index == _letterList.Length - 1)
+            {
+                _letter2Index = 0;
+            }
+            else
+            {
+                _letter2Index++;
+            }
+            letter2.SetText(_letterList[_letter2Index]);
+        }
+
+        /// <summary>
+        /// Cycles to the previous letter for input 2.
+        /// </summary>
+        public void Letter2PrevClicked()
+        {
+            if (_letter2Index == 0)
+            {
+                _letter2Index = _letterList.Length - 1;
+            }
+            else
+            {
+                _letter2Index--;
+            }
+            letter2.SetText(_letterList[_letter2Index]);
+        }
+
+        /// <summary>
+        /// Cycles to the next letter for input 3.
+        /// </summary>
+        public void Letter3NextClicked()
+        {
+            if (_letter3Index == _letterList.Length - 1)
+            {
+                _letter3Index = 0;
+            }
+            else
+            {
+                _letter3Index++;
+            }
+            letter3.SetText(_letterList[_letter3Index]);
+        }
+
+        /// <summary>
+        /// Cycles to the previous letter for input 3.
+        /// </summary>
+        public void Letter3PrevClicked()
+        {
+            if (_letter3Index == 0)
+            {
+                _letter3Index = _letterList.Length - 1;
+            }
+            else
+            {
+                _letter3Index--;
+            }
+            letter3.SetText(_letterList[_letter3Index]);
+        }
+
+        /// <summary>
+        /// Cycles to the next letter for input 4.
+        /// </summary>
+        public void Letter4NextClicked()
+        {
+            if (_letter4Index == _letterList.Length - 1)
+            {
+                _letter4Index = 0;
+            }
+            else
+            {
+                _letter4Index++;
+            }
+            letter4.SetText(_letterList[_letter4Index]);
+        }
+
+        /// <summary>
+        /// Cycles to the previous letter for input 4.
+        /// </summary>
+        public void Letter4PrevClicked()
+        {
+            if (_letter4Index == 0)
+            {
+                _letter4Index = _letterList.Length - 1;
+            }
+            else
+            {
+                _letter4Index--;
+            }
+            letter4.SetText(_letterList[_letter4Index]);
+        }
+
+        /// <summary>
+        /// Cycles to the next letter for input 5.
+        /// </summary>
+        public void Letter5NextClicked()
+        {
+            if (_letter5Index == _letterList.Length - 1)
+            {
+                _letter5Index = 0;
+            }
+            else
+            {
+                _letter5Index++;
+            }
+            letter5.SetText(_letterList[_letter5Index]);
+        }
+
+        /// <summary>
+        /// Cycles to the previous letter for input 5.
+        /// </summary>
+        public void Letter5PrevClicked()
+        {
+            if (_letter5Index == 0)
+            {
+                _letter5Index = _letterList.Length - 1;
+            }
+            else
+            {
+                _letter5Index--;
+            }
+            letter5.SetText(_letterList[_letter5Index]);
+        }
+
+        /// <summary>
+        /// Clears the current sequence and resets the displayed letters.
         /// </summary>
         public void ClearSequence()
         {
-            //ChangeAllIndicatorsColor("white");
-            letter1Index=0;
-            letter1.SetText(letterList[letter1Index]);
+            _letter1Index = 0;
+            letter1.SetText(_letterList[_letter1Index]);
 
-            letter2Index=0;
-            letter2.SetText(letterList[letter2Index]);
+            _letter2Index = 0;
+            letter2.SetText(_letterList[_letter2Index]);
 
-            letter3Index=0;
-            letter3.SetText(letterList[letter3Index]);
+            _letter3Index = 0;
+            letter3.SetText(_letterList[_letter3Index]);
 
-            letter4Index=0;
-            letter4.SetText(letterList[letter4Index]);
+            _letter4Index = 0;
+            letter4.SetText(_letterList[_letter4Index]);
 
-            letter5Index=0;
-            letter5.SetText(letterList[letter5Index]);
+            _letter5Index = 0;
+            letter5.SetText(_letterList[_letter5Index]);
         }
 
         /// <summary>
@@ -262,9 +317,44 @@ public class LetterLock : MonoBehaviour
         }
 
         /// <summary>
+        /// Submits the entered sequence and unlocks if the combination is correct.
+        /// </summary>
+        public void OnEnter()
+        {
+            // Lock code is set to B, B, B, B, B (index 1 for all)
+            if (_letter1Index == 1 && _letter2Index == 1 && _letter3Index == 1 && _letter4Index == 1 && _letter5Index == 1)
+            {
+                onUnlocked.Invoke();
+                audioSource.Play();
+                StartCoroutine(FlashIndicators("white", "green", 2f, .3f));
+                StartCoroutine(HideUIAfterDelay(2f));
+                locked = false;
+            }
+            else
+            {
+                ClearSequence();
+                StartCoroutine(FlashIndicators("white", "red", 1.5f, .3f));
+            }
+        }
+
+        #endregion
+
+        #region Private Method definitions
+
+        /// <summary>
+        /// Registers button click listeners on initialization.
+        /// </summary>
+        private void Start()
+        {
+            clearButton.onClick.AddListener(ClearSequence);
+            exitButton.onClick.AddListener(ExitUI);
+            openButton.onClick.AddListener(EnterUI);
+        }
+
+        /// <summary>
         /// Changes a specific indicator's color.
         /// </summary>
-        /// <param name="index">Index of the indicator.</param>
+        /// <param name="index">Index of the indicator in the array.</param>
         /// <param name="color">Color name to apply.</param>
         private void ChangeIndicatorToColor(int index, string color)
         {
@@ -285,9 +375,10 @@ public class LetterLock : MonoBehaviour
         }
 
         /// <summary>
-        /// Hides the UI after a delay.
+        /// Hides the UI after a specific delay.
         /// </summary>
-        /// <param name="delay">Delay in seconds.</param>
+        /// <param name="delay">Delay in seconds before hiding the UI.</param>
+        /// <returns>An IEnumerator to be used in a Coroutine.</returns>
         private IEnumerator HideUIAfterDelay(float delay)
         {
             yield return new WaitForSeconds(delay);
@@ -299,6 +390,14 @@ public class LetterLock : MonoBehaviour
                 lockInterface.SetActive(false);
         }
 
+        /// <summary>
+        /// Flashes the indicator lights between a base color and a flash color.
+        /// </summary>
+        /// <param name="baseColor">The default color to revert to.</param>
+        /// <param name="flashColor">The secondary color to flash to.</param>
+        /// <param name="totalTime">The total duration of the flashing effect.</param>
+        /// <param name="interval">The speed at which the colors toggle.</param>
+        /// <returns>An IEnumerator to be used in a Coroutine.</returns>
         private IEnumerator FlashIndicators(string baseColor, string flashColor, float totalTime, float interval)
         {
             float elapsed = 0f;
@@ -317,21 +416,6 @@ public class LetterLock : MonoBehaviour
             ClearSequence();
         }
 
-        public void onEnter()
-        {
-            if (letter1Index==1 && letter2Index==1 && letter3Index==1 && letter4Index==1 && letter5Index==1)//lock code (set to b,b,b,b,b)
-            {
-                onUnlocked.Invoke();
-                audioSource.Play();
-                StartCoroutine(FlashIndicators("white", "green", 2, .3f)); 
-                StartCoroutine(HideUIAfterDelay(2));
-                locked = false;
-            } else
-            {
-            ClearSequence();
-            StartCoroutine(FlashIndicators("white", "red", 1.5f, .3f));
-
-            }
-        }
-
+        #endregion
     }
+}
