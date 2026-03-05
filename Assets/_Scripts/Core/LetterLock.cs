@@ -221,7 +221,7 @@ public class LetterLock : MonoBehaviour
         /// <summary>
         /// Clears the current sequence and resets indicators.
         /// </summary>
-        private void ClearSequence()
+        public void ClearSequence()
         {
             ChangeAllIndicatorsColor("white");
             letter1Index=0;
@@ -243,7 +243,7 @@ public class LetterLock : MonoBehaviour
         /// <summary>
         /// Exits the safe UI and returns to the lock interface.
         /// </summary>
-        private void ExitUI()
+        public void ExitUI()
         {
             ClearSequence();
             userInterface.SetActive(false);
@@ -253,7 +253,7 @@ public class LetterLock : MonoBehaviour
         /// <summary>
         /// Enters the safe UI.
         /// </summary>
-        private void EnterUI()
+        public void EnterUI()
         {
             ClearSequence();
             userInterface.SetActive(true);
@@ -322,10 +322,12 @@ public class LetterLock : MonoBehaviour
             {
                 onUnlocked.Invoke();
                 FlashIndicators("white", "green", 2, .5f);
+                userInterface.SetActive(false);
+            locked = false;
             } else
             {
                 FlashIndicators("white", "red", 2, .5f);
-
+                ClearSequence();
 
             }
         }
