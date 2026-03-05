@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using StudioXRCL.EscapeRoom.UI;
 using TMPro;
 using UnityEngine;
@@ -321,12 +322,12 @@ public class LetterLock : MonoBehaviour
             if (letter1Index==1 && letter2Index==1 && letter3Index==1 && letter4Index==1 && letter5Index==1)
             {
                 onUnlocked.Invoke();
-                FlashIndicators("white", "green", 2, .5f);
-                userInterface.SetActive(false);
-            locked = false;
+                StartCoroutine(FlashIndicators("white", "green", 2f, .5f)); 
+                StartCoroutine(HideUIAfterDelay(2.5f));
+                locked = false;
             } else
             {
-                FlashIndicators("white", "red", 2, .5f);
+                StartCoroutine(FlashIndicators("white", "red", 2, .5f));
                 ClearSequence();
 
             }
