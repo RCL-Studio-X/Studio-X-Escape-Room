@@ -192,18 +192,21 @@ namespace StudioXRCL.EscapeRoom.Core
             if (_currentTeamIndex >= teams.Length) return;
 
             TeamTracker currentTeam = teams[_currentTeamIndex];
-
-            foreach (GameObject card in currentTeam.enteredCards)
+            if (!currentTeam.isCompleted)
             {
-                card.SetActive(true);
-                card.transform.position = outputPos.position;
-            }
 
-            // Clear the memory 
-            currentTeam.enteredCards.Clear();
-            currentTeam.currentCards = 0;
-            currentTeam.totalAttempts = 0;
-            Debug.Log("Team Reset");
+                foreach (GameObject card in currentTeam.enteredCards)
+                {
+                    card.SetActive(true);
+                    card.transform.position = outputPos.position;
+                }
+
+                // Clear the memory 
+                currentTeam.enteredCards.Clear();
+                currentTeam.currentCards = 0;
+                currentTeam.totalAttempts = 0;
+                Debug.Log("Team Reset");
+            }
         }
 
         #endregion
