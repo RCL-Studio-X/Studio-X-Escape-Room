@@ -1,8 +1,4 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.InteropServices;
 using StudioXRCL.EscapeRoom.UI;
 using TMPro;
 using UnityEngine;
@@ -12,48 +8,34 @@ using UnityEngine.UI;
 namespace StudioXRCL.EscapeRoom.Core
 {
     /// <summary>
-    /// Controls the logic and user interface for a 5-letter combination lock.
+    /// Controls the logic and user interface for a multi-dial letter lock.
     /// </summary>
     public class LetterLock : MonoBehaviour
     {
+        /// <summary>
+        /// Represents an individual dial on the lock.
+        /// </summary>
+        [System.Serializable]
+        public class LockDial
+        {
+            [Tooltip("The TextMeshPro text for this specific dial.")]
+            public TextMeshProUGUI letterDisplay;
+
+            [Tooltip("The correct array index to unlock this dial (e.g., 1 for 'B').")]
+            public int correctIndex;
+
+            [HideInInspector]
+            [Tooltip("The current array index selected on this dial.")]
+            public int currentIndex = 0;
+        }
+
         #region Public Variable declarations
 
-        [Header("Buttons")]
-        [Tooltip("Button used for input 1 next letter.")]
-        public Button nextButton1;
-        [Tooltip("Button used for input 1 previous letter.")]
-        public Button prevButton1;
-        [Tooltip("Text display for input 1.")]
-        public TextMeshProUGUI letter1;
+        [Header("Dials")]
+        [Tooltip("Add your dials here.")]
+        public LockDial[] dials;
 
-        [Tooltip("Button used for input 2 next letter.")]
-        public Button nextButton2;
-        [Tooltip("Button used for input 2 previous letter.")]
-        public Button prevButton2;
-        [Tooltip("Text display for input 2.")]
-        public TextMeshProUGUI letter2;
-
-        [Tooltip("Button used for input 3 next letter.")]
-        public Button nextButton3;
-        [Tooltip("Button used for input 3 previous letter.")]
-        public Button prevButton3;
-        [Tooltip("Text display for input 3.")]
-        public TextMeshProUGUI letter3;
-
-        [Tooltip("Button used for input 4 next letter.")]
-        public Button nextButton4;
-        [Tooltip("Button used for input 4 previous letter.")]
-        public Button prevButton4;
-        [Tooltip("Text display for input 4.")]
-        public TextMeshProUGUI letter4;
-
-        [Tooltip("Button used for input 5 next letter.")]
-        public Button nextButton5;
-        [Tooltip("Button used for input 5 previous letter.")]
-        public Button prevButton5;
-        [Tooltip("Text display for input 5.")]
-        public TextMeshProUGUI letter5;
-
+        [Header("UI Buttons")]
         [Tooltip("Button used to clear the current sequence.")]
         public Button clearButton;
 
@@ -66,26 +48,23 @@ namespace StudioXRCL.EscapeRoom.Core
         [Tooltip("Button used to open the lock UI.")]
         public Button openButton;
 
-        [Header("Indicators")]
-        [Tooltip("Indicator lights that show the current input.")]
+        [Header("Indicators & Audio")]
+        [Tooltip("Indicator lights that show the current input status.")]
         public LockIndicator[] lockIndicators;
 
-        [Header("Audio")]
         [Tooltip("Audio source played when successfully unlocked.")]
         public AudioSource audioSource;
 
-        [Header("State")]
         [Tooltip("When true, the lock is currently locked.")]
         public bool locked = true;
 
-        [Header("User Interface")]
+        [Header("User Interface & Events")]
         [Tooltip("UI object that hides after the lock succeeds.")]
         public GameObject userInterface;
 
         [Tooltip("UI object shown when the lock is inactive.")]
         public GameObject lockInterface;
 
-        [Header("Events")]
         [Tooltip("Event invoked when the lock becomes unlocked.")]
         public UnityEvent onUnlocked;
 
@@ -93,22 +72,7 @@ namespace StudioXRCL.EscapeRoom.Core
 
         #region Private Variable declarations
 
-        /// <summary> Current index for letter 1. </summary>
-        private int _letter1Index = 0;
-
-        /// <summary> Current index for letter 2. </summary>
-        private int _letter2Index = 0;
-
-        /// <summary> Current index for letter 3. </summary>
-        private int _letter3Index = 0;
-
-        /// <summary> Current index for letter 4. </summary>
-        private int _letter4Index = 0;
-
-        /// <summary> Current index for letter 5. </summary>
-        private int _letter5Index = 0;
-
-        /// <summary> Array of letters user can enter. </summary>
+        /// <summary> Array of letters the user can cycle through. </summary>
         private string[] _letterList = { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J" };
 
         #endregion
@@ -116,190 +80,66 @@ namespace StudioXRCL.EscapeRoom.Core
         #region Public Method definitions
 
         /// <summary>
-        /// Cycles to the next letter for input 1.
+        /// Cycles to the next letter for a specific dial.
         /// </summary>
-        public void Letter1NextClicked()
+        /// <param name="dialIndex">The index of the dial to update.</param>
+        public void NextLetter(int dialIndex)
         {
-            if (_letter1Index == _letterList.Length - 1)
+            LockDial dial = dials[dialIndex]; // Grab the specific dial
+
+            if (dial.currentIndex == _letterList.Length - 1)
             {
-                _letter1Index = 0;
+                dial.currentIndex = 0;
             }
             else
             {
-                _letter1Index++;
+                dial.currentIndex++;
             }
-            letter1.SetText(_letterList[_letter1Index]);
+            dial.letterDisplay.SetText(_letterList[dial.currentIndex]);
         }
 
         /// <summary>
-        /// Cycles to the previous letter for input 1.
+        /// Cycles to the previous letter for a specific dial.
         /// </summary>
-        public void Letter1PrevClicked()
+        /// <param name="dialIndex">The index of the dial to update.</param>
+        public void PrevLetter(int dialIndex)
         {
-            if (_letter1Index == 0)
+            LockDial dial = dials[dialIndex];
+
+            if (dial.currentIndex == 0)
             {
-                _letter1Index = _letterList.Length - 1;
+                dial.currentIndex = _letterList.Length - 1;
             }
             else
             {
-                _letter1Index--;
+                dial.currentIndex--;
             }
-            letter1.SetText(_letterList[_letter1Index]);
+            dial.letterDisplay.SetText(_letterList[dial.currentIndex]);
         }
 
-        /// <summary>
-        /// Cycles to the next letter for input 2.
-        /// </summary>
-        public void Letter2NextClicked()
-        {
-            if (_letter2Index == _letterList.Length - 1)
-            {
-                _letter2Index = 0;
-            }
-            else
-            {
-                _letter2Index++;
-            }
-            letter2.SetText(_letterList[_letter2Index]);
-        }
+        
+        #endregion
+
+        #region Private Method definitions
 
         /// <summary>
-        /// Cycles to the previous letter for input 2.
+        /// Clears the current sequence and resets all dials.
         /// </summary>
-        public void Letter2PrevClicked()
+        private void ClearSequence()
         {
-            if (_letter2Index == 0)
+            // One simple loop resets every single dial
+            foreach (LockDial dial in dials)
             {
-                _letter2Index = _letterList.Length - 1;
+                dial.currentIndex = 0;
+                dial.letterDisplay.SetText(_letterList[0]);
             }
-            else
-            {
-                _letter2Index--;
-            }
-            letter2.SetText(_letterList[_letter2Index]);
-        }
-
-        /// <summary>
-        /// Cycles to the next letter for input 3.
-        /// </summary>
-        public void Letter3NextClicked()
-        {
-            if (_letter3Index == _letterList.Length - 1)
-            {
-                _letter3Index = 0;
-            }
-            else
-            {
-                _letter3Index++;
-            }
-            letter3.SetText(_letterList[_letter3Index]);
-        }
-
-        /// <summary>
-        /// Cycles to the previous letter for input 3.
-        /// </summary>
-        public void Letter3PrevClicked()
-        {
-            if (_letter3Index == 0)
-            {
-                _letter3Index = _letterList.Length - 1;
-            }
-            else
-            {
-                _letter3Index--;
-            }
-            letter3.SetText(_letterList[_letter3Index]);
-        }
-
-        /// <summary>
-        /// Cycles to the next letter for input 4.
-        /// </summary>
-        public void Letter4NextClicked()
-        {
-            if (_letter4Index == _letterList.Length - 1)
-            {
-                _letter4Index = 0;
-            }
-            else
-            {
-                _letter4Index++;
-            }
-            letter4.SetText(_letterList[_letter4Index]);
-        }
-
-        /// <summary>
-        /// Cycles to the previous letter for input 4.
-        /// </summary>
-        public void Letter4PrevClicked()
-        {
-            if (_letter4Index == 0)
-            {
-                _letter4Index = _letterList.Length - 1;
-            }
-            else
-            {
-                _letter4Index--;
-            }
-            letter4.SetText(_letterList[_letter4Index]);
-        }
-
-        /// <summary>
-        /// Cycles to the next letter for input 5.
-        /// </summary>
-        public void Letter5NextClicked()
-        {
-            if (_letter5Index == _letterList.Length - 1)
-            {
-                _letter5Index = 0;
-            }
-            else
-            {
-                _letter5Index++;
-            }
-            letter5.SetText(_letterList[_letter5Index]);
-        }
-
-        /// <summary>
-        /// Cycles to the previous letter for input 5.
-        /// </summary>
-        public void Letter5PrevClicked()
-        {
-            if (_letter5Index == 0)
-            {
-                _letter5Index = _letterList.Length - 1;
-            }
-            else
-            {
-                _letter5Index--;
-            }
-            letter5.SetText(_letterList[_letter5Index]);
-        }
-
-        /// <summary>
-        /// Clears the current sequence and resets the displayed letters.
-        /// </summary>
-        public void ClearSequence()
-        {
-            _letter1Index = 0;
-            letter1.SetText(_letterList[_letter1Index]);
-
-            _letter2Index = 0;
-            letter2.SetText(_letterList[_letter2Index]);
-
-            _letter3Index = 0;
-            letter3.SetText(_letterList[_letter3Index]);
-
-            _letter4Index = 0;
-            letter4.SetText(_letterList[_letter4Index]);
-
-            _letter5Index = 0;
-            letter5.SetText(_letterList[_letter5Index]);
+            ChangeAllIndicatorsColor("white");
         }
 
         /// <summary>
         /// Exits the safe UI and returns to the lock interface.
         /// </summary>
-        public void ExitUI()
+        private void ExitUI()
         {
             ClearSequence();
             userInterface.SetActive(false);
@@ -309,7 +149,7 @@ namespace StudioXRCL.EscapeRoom.Core
         /// <summary>
         /// Enters the safe UI.
         /// </summary>
-        public void EnterUI()
+        private void EnterUI()
         {
             ClearSequence();
             userInterface.SetActive(true);
@@ -317,12 +157,23 @@ namespace StudioXRCL.EscapeRoom.Core
         }
 
         /// <summary>
-        /// Submits the entered sequence and unlocks if the combination is correct.
+        /// Submits the entered sequence across all dials and unlocks if correct.
         /// </summary>
-        public void OnEnter()
+        private void OnEnter()
         {
-            // Lock code is set to B, B, B, B, B (index 1 for all)
-            if (_letter1Index == 1 && _letter2Index == 1 && _letter3Index == 1 && _letter4Index == 1 && _letter5Index == 1)
+            bool isCorrect = true;
+
+            // Loop through all dials. If even ONE is wrong, fail the whole lock.
+            foreach (LockDial dial in dials)
+            {
+                if (dial.currentIndex != dial.correctIndex)
+                {
+                    isCorrect = false;
+                    break; // Stop checking, we already know it's wrong
+                }
+            }
+
+            if (isCorrect)
             {
                 onUnlocked.Invoke();
                 audioSource.Play();
@@ -337,9 +188,6 @@ namespace StudioXRCL.EscapeRoom.Core
             }
         }
 
-        #endregion
-
-        #region Private Method definitions
 
         /// <summary>
         /// Registers button click listeners on initialization.
@@ -349,6 +197,7 @@ namespace StudioXRCL.EscapeRoom.Core
             clearButton.onClick.AddListener(ClearSequence);
             exitButton.onClick.AddListener(ExitUI);
             openButton.onClick.AddListener(EnterUI);
+            enterButton.onClick.AddListener(OnEnter);
         }
 
         /// <summary>
@@ -358,10 +207,8 @@ namespace StudioXRCL.EscapeRoom.Core
         /// <param name="color">Color name to apply.</param>
         private void ChangeIndicatorToColor(int index, string color)
         {
-            if (lockIndicators[index] == null)
-                return;
-
-            lockIndicators[index].ChangeIndicatorImage(color);
+            if (lockIndicators[index] != null)
+                lockIndicators[index].ChangeIndicatorImage(color);
         }
 
         /// <summary>
@@ -382,12 +229,8 @@ namespace StudioXRCL.EscapeRoom.Core
         private IEnumerator HideUIAfterDelay(float delay)
         {
             yield return new WaitForSeconds(delay);
-
-            if (userInterface != null)
-                userInterface.SetActive(false);
-
-            if (lockInterface != null)
-                lockInterface.SetActive(false);
+            if (userInterface != null) userInterface.SetActive(false);
+            if (lockInterface != null) lockInterface.SetActive(false);
         }
 
         /// <summary>
@@ -407,13 +250,11 @@ namespace StudioXRCL.EscapeRoom.Core
             {
                 flashing = !flashing;
                 ChangeAllIndicatorsColor(flashing ? flashColor : baseColor);
-
                 yield return new WaitForSeconds(interval);
                 elapsed += interval;
             }
 
             ChangeAllIndicatorsColor(baseColor);
-            ClearSequence();
         }
 
         #endregion
