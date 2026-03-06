@@ -100,9 +100,9 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 7745755143739983673}
   m_LocalEulerAnglesHint: {x: 180, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 696.5, y: -23.9}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 80, y: 40}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1583006051997276
@@ -188,13 +188,13 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 3179641981739020027}
-        m_TargetAssemblyTypeName: LetterLock, Assembly-CSharp
-        m_MethodName: letter5PrevClicked
-        m_Mode: 1
+        m_TargetAssemblyTypeName: StudioXRCL.EscapeRoom.Core.LetterLock, Assembly-CSharp
+        m_MethodName: PrevLetter
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 4
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -233,9 +233,9 @@ RectTransform:
   - {fileID: 4125945902751880302}
   m_Father: {fileID: 899117425455745515}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 161.75, y: -57}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 203, y: 86}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4832393750583938262
@@ -319,19 +319,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 5878853832724951473}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 3179641981739020027}
-        m_TargetAssemblyTypeName: LetterLock, Assembly-CSharp
-        m_MethodName: ClearSequence
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!1 &836688383374938343
 GameObject:
   m_ObjectHideFlags: 0
@@ -452,19 +440,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 293360248226421873}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 3179641981739020027}
-        m_TargetAssemblyTypeName: LetterLock, Assembly-CSharp
-        m_MethodName: ExitUI
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!1 &986553883135320376
 GameObject:
   m_ObjectHideFlags: 0
@@ -1005,9 +981,9 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 8637288337737093047}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 339.5, y: -23.9}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 80, y: 40}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3861538790530108572
@@ -1093,13 +1069,13 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 3179641981739020027}
-        m_TargetAssemblyTypeName: LetterLock, Assembly-CSharp
-        m_MethodName: letter2NextClicked
-        m_Mode: 1
+        m_TargetAssemblyTypeName: StudioXRCL.EscapeRoom.Core.LetterLock, Assembly-CSharp
+        m_MethodName: NextLetter
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 1
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -1137,9 +1113,9 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 7745755143739983673}
   m_LocalEulerAnglesHint: {x: 180, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 220.5, y: -23.9}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 80, y: 40}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7693651085907441742
@@ -1225,9 +1201,9 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 3179641981739020027}
-        m_TargetAssemblyTypeName: LetterLock, Assembly-CSharp
-        m_MethodName: letter1PrevClicked
-        m_Mode: 1
+        m_TargetAssemblyTypeName: StudioXRCL.EscapeRoom.Core.LetterLock, Assembly-CSharp
+        m_MethodName: PrevLetter
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -1270,9 +1246,9 @@ RectTransform:
   - {fileID: 5267543352174819207}
   m_Father: {fileID: 899117425455745515}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 755.25, y: -57}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 203, y: 86}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5286398001863942047
@@ -1356,19 +1332,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1996622104582955976}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 3179641981739020027}
-        m_TargetAssemblyTypeName: LetterLock, Assembly-CSharp
-        m_MethodName: onEnter
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!1 &2859763319698648820
 GameObject:
   m_ObjectHideFlags: 0
@@ -1402,9 +1366,9 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 8637288337737093047}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 458.5, y: -23.9}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 80, y: 40}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2927908118988778693
@@ -1490,13 +1454,13 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 3179641981739020027}
-        m_TargetAssemblyTypeName: LetterLock, Assembly-CSharp
-        m_MethodName: letter3NextClicked
-        m_Mode: 1
+        m_TargetAssemblyTypeName: StudioXRCL.EscapeRoom.Core.LetterLock, Assembly-CSharp
+        m_MethodName: NextLetter
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 2
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -1621,19 +1585,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2586350218691636500}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 3179641981739020027}
-        m_TargetAssemblyTypeName: LetterLock, Assembly-CSharp
-        m_MethodName: EnterUI
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!1 &3279040564130830478
 GameObject:
   m_ObjectHideFlags: 0
@@ -1734,9 +1686,9 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 8637288337737093047}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 696.5, y: -23.9}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 80, y: 40}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8940828851775603014
@@ -1822,13 +1774,13 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 3179641981739020027}
-        m_TargetAssemblyTypeName: LetterLock, Assembly-CSharp
-        m_MethodName: letter5NextClicked
-        m_Mode: 1
+        m_TargetAssemblyTypeName: StudioXRCL.EscapeRoom.Core.LetterLock, Assembly-CSharp
+        m_MethodName: NextLetter
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 4
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -1866,9 +1818,9 @@ RectTransform:
   - {fileID: 5225001522025081667}
   m_Father: {fileID: 2504515158056015492}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 695.9, y: -50}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 93, y: 130}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8372274310910213265
@@ -1927,7 +1879,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &2477589887215770564
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2046,9 +1998,9 @@ RectTransform:
   - {fileID: 4684061708540200979}
   m_Father: {fileID: 2504515158056015492}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 458.50003, y: -50}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 93, y: 130}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4468588456354953337
@@ -2258,9 +2210,9 @@ RectTransform:
   - {fileID: 2783683759667952754}
   m_Father: {fileID: 2504515158056015492}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 221.1, y: -50}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 93, y: 130}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4110871165540493555
@@ -2545,9 +2497,9 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 7745755143739983673}
   m_LocalEulerAnglesHint: {x: 180, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 458.5, y: -23.9}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 80, y: 40}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6320832432958997195
@@ -2633,13 +2585,13 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 3179641981739020027}
-        m_TargetAssemblyTypeName: LetterLock, Assembly-CSharp
-        m_MethodName: letter3PrevClicked
-        m_Mode: 1
+        m_TargetAssemblyTypeName: StudioXRCL.EscapeRoom.Core.LetterLock, Assembly-CSharp
+        m_MethodName: PrevLetter
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 2
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -2949,9 +2901,9 @@ RectTransform:
   - {fileID: 8597478944903506561}
   m_Father: {fileID: 2504515158056015492}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 339.80002, y: -50}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 93, y: 130}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6526294449282188574
@@ -3025,9 +2977,9 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 8637288337737093047}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 220.5, y: -23.9}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 80, y: 40}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3436895396242983131
@@ -3113,9 +3065,9 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 3179641981739020027}
-        m_TargetAssemblyTypeName: LetterLock, Assembly-CSharp
-        m_MethodName: letter1NextClicked
-        m_Mode: 1
+        m_TargetAssemblyTypeName: StudioXRCL.EscapeRoom.Core.LetterLock, Assembly-CSharp
+        m_MethodName: NextLetter
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -3293,9 +3245,9 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 7745755143739983673}
   m_LocalEulerAnglesHint: {x: 180, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 339.5, y: -23.9}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 80, y: 40}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1807818650994876345
@@ -3381,13 +3333,13 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 3179641981739020027}
-        m_TargetAssemblyTypeName: LetterLock, Assembly-CSharp
-        m_MethodName: letter2PrevClicked
-        m_Mode: 1
+        m_TargetAssemblyTypeName: StudioXRCL.EscapeRoom.Core.LetterLock, Assembly-CSharp
+        m_MethodName: PrevLetter
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 1
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -3561,9 +3513,9 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 8637288337737093047}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 577.5, y: -23.9}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 80, y: 40}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2699459099601515613
@@ -3649,13 +3601,13 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 3179641981739020027}
-        m_TargetAssemblyTypeName: LetterLock, Assembly-CSharp
-        m_MethodName: letter4NextClicked
-        m_Mode: 1
+        m_TargetAssemblyTypeName: StudioXRCL.EscapeRoom.Core.LetterLock, Assembly-CSharp
+        m_MethodName: NextLetter
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 3
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -3693,9 +3645,9 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 7957886291081637367}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 866.015, y: -50}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 36, y: 85}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2389754124891354293
@@ -3785,9 +3737,9 @@ RectTransform:
   - {fileID: 3054165864143028069}
   m_Father: {fileID: 2504515158056015492}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 577.2, y: -50}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 93, y: 130}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1687585619969369185
@@ -4246,9 +4198,9 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 7957886291081637367}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 50.984985, y: -50}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 36, y: 85}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4440172680572863551
@@ -4338,9 +4290,9 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 7745755143739983673}
   m_LocalEulerAnglesHint: {x: 180, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 577.5, y: -23.9}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 80, y: 40}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5317516654705534374
@@ -4426,13 +4378,13 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 3179641981739020027}
-        m_TargetAssemblyTypeName: LetterLock, Assembly-CSharp
-        m_MethodName: letter4PrevClicked
-        m_Mode: 1
+        m_TargetAssemblyTypeName: StudioXRCL.EscapeRoom.Core.LetterLock, Assembly-CSharp
+        m_MethodName: PrevLetter
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 3
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -4561,21 +4513,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab561c6e6757d4197b136c98e0fdea2d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nextButton1: {fileID: 8074301878274956237}
-  prevButton1: {fileID: 1411793569781835057}
-  letter1: {fileID: 8887222724615833935}
-  nextButton2: {fileID: 82593329541563942}
-  prevButton2: {fileID: 3467075858280110962}
-  letter2: {fileID: 9023342514421460145}
-  nextButton3: {fileID: 8224015994353967292}
-  prevButton3: {fileID: 5198425571622882070}
-  letter3: {fileID: 6700525333601323798}
-  nextButton4: {fileID: 4210957070415158122}
-  prevButton4: {fileID: 2606944637532451875}
-  letter4: {fileID: 720874655366184156}
-  nextButton5: {fileID: 7222501678354594546}
-  prevButton5: {fileID: 4344719927337328866}
-  letter5: {fileID: 853695286557190492}
+  dials:
+  - letterDisplay: {fileID: 8887222724615833935}
+    correctIndex: 1
+    currentIndex: 0
+  - letterDisplay: {fileID: 9023342514421460145}
+    correctIndex: 1
+    currentIndex: 0
+  - letterDisplay: {fileID: 6700525333601323798}
+    correctIndex: 1
+    currentIndex: 0
+  - letterDisplay: {fileID: 720874655366184156}
+    correctIndex: 1
+    currentIndex: 0
+  - letterDisplay: {fileID: 853695286557190492}
+    correctIndex: 1
+    currentIndex: 0
   clearButton: {fileID: 1275745157809392810}
   enterButton: {fileID: 2258511492638638062}
   exitButton: {fileID: 1894615295179880050}
