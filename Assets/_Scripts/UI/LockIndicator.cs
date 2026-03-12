@@ -39,7 +39,7 @@ namespace StudioXRCL.EscapeRoom.UI
         /// <summary>
         /// Caches the required Image component.
         /// </summary>
-        private void Start()
+        private void Awake()
         {
             _image = GetComponent<Image>();
         }
