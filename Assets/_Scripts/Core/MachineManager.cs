@@ -18,14 +18,14 @@ namespace StudioXRCL.EscapeRoom.Core
         [System.Serializable]
         public class TeamTracker
         {
-            [Tooltip("The number of cards required to complete this team's task.")]
+            [Tooltip("The number of cards required for this team.")]
             public int requiredCards;
 
-            [Tooltip("The message or object revealed when the team's task is completed.")]
+            [Tooltip("The message or object revealed when all team's members are correctly entered.")]
             public GameObject hiddenMessage;
 
             [HideInInspector]
-            [Tooltip("Indicates whether this team has successfully completed their task.")]
+            [Tooltip("Indicates whether this team has successfully met their card requirement.")]
             public bool isCompleted = false;
 
             [HideInInspector]
@@ -71,6 +71,9 @@ namespace StudioXRCL.EscapeRoom.Core
         /// <summary> The index of the currently selected team. </summary>
         private int _currentTeamIndex = 0;
 
+        /// <summary> Gets the Render of the result indicator. </summary>
+        private Renderer _indicatorRenderer;
+
         #endregion
 
         #region Public Method definitions
@@ -80,7 +83,7 @@ namespace StudioXRCL.EscapeRoom.Core
         /// </summary>
         public void NextTeam()
         {
-            if (_currentTeamIndex == 7) // if at the last team then loop index back to the first team
+            if (_currentTeamIndex == teams.Length - 1)
             {
                 _currentTeamIndex = 0;
             }
@@ -97,9 +100,9 @@ namespace StudioXRCL.EscapeRoom.Core
         /// </summary>
         public void PreviousTeam()
         {
-            if (_currentTeamIndex == 0) //if at first team loop it back to the last team
+            if (_currentTeamIndex == 0)
             {
-                _currentTeamIndex = 7;
+                _currentTeamIndex = teams.Length - 1;
             }
             else
             {
@@ -118,47 +121,49 @@ namespace StudioXRCL.EscapeRoom.Core
             {
                 GameObject cardInSocket = socket.GetOldestInteractableSelected().transform.gameObject;
 
-                // 1. Array Safety Check for blank sides that spit the card back out
+                // Array Safety Check for blank sides that eject the card
                 if (_currentTeamIndex >= teams.Length)
                 {
-                    cardInSocket.SetActive(false);
-                    cardInSocket.transform.position = outputPos.position;
-                    cardInSocket.SetActive(true);
+                    EjectCard(cardInSocket);
                     return;
                 }
 
                 TeamTracker currentTeam = teams[_currentTeamIndex];
 
-                // 2. If team is already done, spit the card back out
+                // If team is already complete, eject the card
                 if (currentTeam.isCompleted)
                 {
-                    cardInSocket.SetActive(false);
-                    cardInSocket.transform.position = outputPos.position;
-                    cardInSocket.SetActive(true);
+                    EjectCard(cardInSocket);
                     return;
                 }
 
-                // 3. Count the attempt and add to the List 
                 currentTeam.totalAttempts++;
                 currentTeam.enteredCards.Add(cardInSocket);
 
-                // 4. Read the ID badge
-                if (cardInSocket.GetComponent<CardData>().targetTeamIndex == _currentTeamIndex)
-                {
-                    currentTeam.currentCards++;
-                }
+                CardData socketedCardData = cardInSocket.GetComponent<CardData>();
 
-                // 5. Clear the socket for the next card
+                if (socketedCardData != null)
+                {
+                    if (socketedCardData.targetTeamIndex == _currentTeamIndex)
+                    {
+                        currentTeam.currentCards++;
+                    }
+                }
+                else
+                {
+                    Debug.LogWarning("The object in the socket is missing a CardData script: " + cardInSocket.name);
+                }
+                
+                // Clear the socket for the next card
                 cardInSocket.SetActive(false);
             }
         }
 
         /// <summary>
-        /// Evaluates the current team's submitted cards to determine if the task is complete.
+        /// Evaluates the current team's submitted cards to determine if the puzzle is solved.
         /// </summary>
         public void OnSubmitPressed()
         {
-            // Safety check for blank sides
             if (_currentTeamIndex >= teams.Length) return;
 
             TeamTracker currentTeam = teams[_currentTeamIndex];
@@ -166,7 +171,7 @@ namespace StudioXRCL.EscapeRoom.Core
             if (currentTeam.isCompleted)
             {
                 StartCoroutine(FlashIndicator(Color.green));
-                return; // Stop checking
+                return;
             }
 
             // Check if they got the right amount of cards, with no extra wrong guesses
@@ -188,20 +193,19 @@ namespace StudioXRCL.EscapeRoom.Core
         /// </summary>
         public void ResetCurrentTeam()
         {
-            // Safety check for blank sides
             if (_currentTeamIndex >= teams.Length) return;
 
             TeamTracker currentTeam = teams[_currentTeamIndex];
             if (!currentTeam.isCompleted)
             {
-
                 foreach (GameObject card in currentTeam.enteredCards)
                 {
+                    if (card == null) continue;
+
                     card.SetActive(true);
                     card.transform.position = outputPos.position;
                 }
 
-                // Clear the memory 
                 currentTeam.enteredCards.Clear();
                 currentTeam.currentCards = 0;
                 currentTeam.totalAttempts = 0;
@@ -218,7 +222,12 @@ namespace StudioXRCL.EscapeRoom.Core
         /// </summary>
         private void Start()
         {
-            _defaultIndicatorColor = resultIndicator.GetComponent<Renderer>().material.color;
+            _indicatorRenderer = resultIndicator.GetComponent<Renderer>();
+
+            if (_indicatorRenderer != null)
+            {
+                _defaultIndicatorColor = _indicatorRenderer.material.color;
+            }
         }
 
         /// <summary>
@@ -228,16 +237,27 @@ namespace StudioXRCL.EscapeRoom.Core
         /// <returns>An IEnumerator to be used in a Coroutine.</returns>
         private IEnumerator FlashIndicator(Color color)
         {
-            Renderer indicatorRenderer = resultIndicator.GetComponent<Renderer>();
+            if (_indicatorRenderer == null)
+            {
+                yield break;
+            }
 
-            // Change to the new color
-            indicatorRenderer.material.color = color;
+            _indicatorRenderer.material.color = color;
 
-            // Wait for exactly 2 seconds
             yield return new WaitForSeconds(2f);
 
-            // Change it back to the absolute default color
-            indicatorRenderer.material.color = _defaultIndicatorColor;
+            _indicatorRenderer.material.color = _defaultIndicatorColor;
+        }
+
+        /// <summary>
+        /// Ejects a card by disabling it, moving it to the output position, and re-enabling it.
+        /// </summary>
+        /// <param name="card">The GameObject of the card to eject.</param>
+        private void EjectCard(GameObject card)
+        {
+            card.SetActive(false);
+            card.transform.position = outputPos.position;
+            card.SetActive(true);
         }
 
         #endregion
