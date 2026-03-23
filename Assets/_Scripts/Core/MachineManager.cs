@@ -68,6 +68,9 @@ namespace StudioXRCL.EscapeRoom.Core
         /// <summary> The original base color of the result indicator. </summary>
         private Color _defaultIndicatorColor;
 
+        /// <summary> How much the dial rotates to the next team. </summary>
+        private int dialRotation;
+
         /// <summary> The index of the currently selected team. </summary>
         private int _currentTeamIndex = 0;
 
@@ -91,7 +94,7 @@ namespace StudioXRCL.EscapeRoom.Core
             {
                 _currentTeamIndex++;
             }
-            float targetXAngle = -90f + (_currentTeamIndex * 45f);
+            float targetXAngle = -90f + (_currentTeamIndex * dialRotation);
             teamSelected.transform.localEulerAngles = new Vector3(targetXAngle, 90f, -90f);
         }
 
@@ -108,7 +111,7 @@ namespace StudioXRCL.EscapeRoom.Core
             {
                 _currentTeamIndex--;
             }
-            float targetXAngle = -90f + (_currentTeamIndex * 45f);
+            float targetXAngle = -90f + (_currentTeamIndex * dialRotation);
             teamSelected.transform.localEulerAngles = new Vector3(targetXAngle, 90f, -90f);
         }
 
@@ -222,6 +225,8 @@ namespace StudioXRCL.EscapeRoom.Core
         /// </summary>
         private void Start()
         {
+            dialRotation = 360/teams.Length;
+
             _indicatorRenderer = resultIndicator.GetComponent<Renderer>();
 
             if (_indicatorRenderer != null)
