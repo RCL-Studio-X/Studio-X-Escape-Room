@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using StudioXRCL.EscapeRoom.Utilities;
+using UnityEngine.Events;
 
 namespace StudioXRCL.EscapeRoom.Core
 {
@@ -39,6 +40,8 @@ namespace StudioXRCL.EscapeRoom.Core
         /// Cached map of expected symbol counts for fast validation.
         /// </summary>
         private Dictionary<SymbolType, int> _expectedMap;
+
+        public UnityEvent onCorrectSolution;
 
         /// <summary>
         /// Builds the expected symbol map when the object is initialized.

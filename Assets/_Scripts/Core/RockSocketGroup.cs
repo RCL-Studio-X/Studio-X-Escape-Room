@@ -96,7 +96,7 @@ namespace StudioXRCL.EscapeRoom.Core
         {
             // Detach + respawn all currently placed chunks.
 
-            Debug.Log("[Puzzle] Wrong answer!");
+            Debug.Log("[Rock Puzzle] Wrong answer!");
 
             respawner.RespawnEverything();
         }
@@ -106,8 +106,8 @@ namespace StudioXRCL.EscapeRoom.Core
         /// </summary>
         private void OnSolved()
         {
-            Debug.Log("[Puzzle] Solved!");
-
+            Debug.Log("[Rock Puzzle] Solved!");
+            puzzleRock.onCorrectSolution?.Invoke();
             // TODO: Unlock next stage
         }
     }
