@@ -48,7 +48,7 @@ namespace StudioXRCL.EscapeRoom.Core
         private IEnumerator RespawnRoutine()
         {
             if (interactionManager == null)
-                interactionManager = FindObjectOfType<XRInteractionManager>();
+                interactionManager = FindFirstObjectByType<XRInteractionManager>();
 
             var chunks = GatherChunks();
 
@@ -112,8 +112,8 @@ namespace StudioXRCL.EscapeRoom.Core
         {
             if (respawnAllInScene)
             {
-                // True includes inactive objects; remove true if you don't want that.
-                var found = FindObjectsOfType<SymbolChunk>(true);
+                // remove FindObjectsInactive.Include if you don't want to include inactive objects
+                var found = FindObjectsByType<SymbolChunk>(FindObjectsInactive.Include, FindObjectsSortMode.None);
                 return new List<SymbolChunk>(found);
             }
             else
