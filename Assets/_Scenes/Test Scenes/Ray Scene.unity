@@ -963,6 +963,18 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1769682683751764198, guid: f360a2f5df3b4f040bcb8cefd1dbfe75, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1940054953}
+    - target: {fileID: 1769682683751764198, guid: f360a2f5df3b4f040bcb8cefd1dbfe75, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ClearAllTrails
+      objectReference: {fileID: 0}
+    - target: {fileID: 1769682683751764198, guid: f360a2f5df3b4f040bcb8cefd1dbfe75, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: StudioXRCL.EscapeRoom.VFX.CreateTrail, Assembly-CSharp
+      objectReference: {fileID: 0}
     - target: {fileID: 3233963526540970083, guid: f360a2f5df3b4f040bcb8cefd1dbfe75, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -1731,6 +1743,17 @@ PrefabInstance:
       addedObject: {fileID: 2117279325}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f9a3ce553b3e7ac41b1cfb060cc4d968, type: 3}
+--- !u!114 &1940054953 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6443038801898167440, guid: f9a3ce553b3e7ac41b1cfb060cc4d968, type: 3}
+  m_PrefabInstance: {fileID: 1940054952}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e6144dfa27ac2348b93c0be6ca706a6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CreateWhiteboardTrail
 --- !u!20 &2102455934 stripped
 Camera:
   m_CorrespondingSourceObject: {fileID: 6177084908148273693, guid: 2cffcabdcd6971745b2d7406b28aa484, type: 3}

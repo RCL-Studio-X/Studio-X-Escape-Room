@@ -1,3 +1,4 @@
+using System.Collections.Generic; 
 using UnityEngine;
 
 namespace StudioXRCL.EscapeRoom.VFX
@@ -21,6 +22,8 @@ namespace StudioXRCL.EscapeRoom.VFX
         public Color color = Color.black;
 
         private GameObject currentTrail;
+        
+        private List<GameObject> _drawnTrails = new List<GameObject>(); 
 
         void OnTriggerEnter(Collider other)
         {
@@ -60,6 +63,9 @@ namespace StudioXRCL.EscapeRoom.VFX
             if (Physics.Raycast(origin, chalkTip.forward, out RaycastHit hit, maxDistance + rayOriginBackOffset, boardLayer))
             {
                 currentTrail = Instantiate(trailPrefab, hit.point, Quaternion.LookRotation(-hit.normal));
+                
+                _drawnTrails.Add(currentTrail); 
+                
                 ApplySettings(currentTrail);
             }
         }
@@ -67,6 +73,20 @@ namespace StudioXRCL.EscapeRoom.VFX
         public void EndTrail()
         {
             currentTrail = null;
+        }
+
+        public void ClearAllTrails()
+        {
+            // 1. Loop through every trail in our memory
+            foreach (GameObject trail in _drawnTrails)
+            {
+                if (trail != null)
+                {
+                    Destroy(trail); 
+                }
+            }
+            
+            _drawnTrails.Clear(); 
         }
 
         private void ApplySettings(GameObject trailObject)
