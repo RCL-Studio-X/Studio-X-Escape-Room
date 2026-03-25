@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 
 namespace StudioXRCL.EscapeRoom.VFX
 {
@@ -6,10 +6,15 @@ namespace StudioXRCL.EscapeRoom.VFX
     {
         [Header("References")]
         public GameObject trailPrefab;
+        [Tooltip("Drag your invisible sphere collider tip here!")]
+        public Transform chalkTip; 
 
         [Header("Board")]
         public LayerMask boardLayer;
         public float maxDistance = 5f;
+        
+        [Tooltip("How far back to pull the raycast so it doesn't get stuck inside the board.")]
+        public float rayOriginBackOffset = 0.2f;
 
         [Header("Style")]
         public float width = 0.01f;
@@ -17,38 +22,44 @@ namespace StudioXRCL.EscapeRoom.VFX
 
         private GameObject currentTrail;
 
+        void OnTriggerEnter(Collider other)
+        {
+            if (((1 << other.gameObject.layer) & boardLayer) != 0)
+            {
+                StartTrail();
+            }
+        }
+
+        void OnTriggerExit(Collider other)
+        {
+            if (((1 << other.gameObject.layer) & boardLayer) != 0)
+            {
+                EndTrail();
+            }
+        }
+
         void Update()
         {
-            if (!currentTrail)
-                return;
+            if (!currentTrail) return;
+            
+            Vector3 origin = chalkTip.position - (chalkTip.forward * rayOriginBackOffset);
 
-            if (Physics.Raycast(transform.position,
-                                transform.forward,
-                                out RaycastHit hit,
-                                maxDistance,
-                                boardLayer))
+            if (Physics.Raycast(origin, chalkTip.forward, out RaycastHit hit, maxDistance + rayOriginBackOffset, boardLayer))
             {
-                // Stick to board
                 currentTrail.transform.position = hit.point;
-
-                // Orient to board surface
-                currentTrail.transform.rotation =
-                    Quaternion.LookRotation(-hit.normal);
+                currentTrail.transform.rotation = Quaternion.LookRotation(-hit.normal);
             }
         }
 
         public void StartTrail()
         {
-            if (currentTrail)
-                return;
+            if (currentTrail) return;
 
-            if (Physics.Raycast(transform.position,
-                                transform.forward,
-                                out RaycastHit hit,
-                                maxDistance,
-                                boardLayer))
+            Vector3 origin = chalkTip.position - (chalkTip.forward * rayOriginBackOffset);
+
+            if (Physics.Raycast(origin, chalkTip.forward, out RaycastHit hit, maxDistance + rayOriginBackOffset, boardLayer))
             {
-                currentTrail = Instantiate(trailPrefab, hit.point, Quaternion.identity);
+                currentTrail = Instantiate(trailPrefab, hit.point, Quaternion.LookRotation(-hit.normal));
                 ApplySettings(currentTrail);
             }
         }
@@ -66,10 +77,8 @@ namespace StudioXRCL.EscapeRoom.VFX
             tr.startColor = color;
             tr.endColor = color;
 
-            // Important: keeps it flat
             tr.alignment = LineAlignment.TransformZ;
             tr.time = Mathf.Infinity;
         }
-
     }
 }
