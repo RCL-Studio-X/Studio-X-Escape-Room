@@ -6,6 +6,7 @@ namespace StudioXRCL.EscapeRoom.VFX
     {
         [Header("References")]
         public GameObject trailPrefab;
+        public Transform chalkTip;
 
         [Header("Board")]
         public LayerMask boardLayer;
@@ -15,8 +16,7 @@ namespace StudioXRCL.EscapeRoom.VFX
         public Color color = Color.black;
 
         private GameObject currentTrail;
-        [Tooltip("Invisible tip GameObject")]
-        public Transform chalkTip;
+        private bool isDrawing = false; 
 
         void OnTriggerEnter(Collider other)
         {
@@ -36,38 +36,34 @@ namespace StudioXRCL.EscapeRoom.VFX
 
         public void StartTrail()
         {
-            if (currentTrail)
-                return;
-
-            // Spawn the trail exactly at the chalk's tip
+            if (currentTrail) return;
+            
             currentTrail = Instantiate(trailPrefab, chalkTip.position, chalkTip.rotation);
-        
-            // Parent it to the chalkTip so it follows perfectly
-            currentTrail.transform.SetParent(chalkTip);
-
             ApplySettings(currentTrail);
+            
+            isDrawing = true; 
         }
 
         public void EndTrail()
         {
-            if (currentTrail != null)
+            isDrawing = false; // Turn off the Update loop
+            currentTrail = null;
+        }
+
+        void Update() 
+        {
+            if (isDrawing && currentTrail != null)
             {
-                // Un-parent the trail so it stays permanently behind on the board
-                currentTrail.transform.SetParent(null); 
-                
-                // Clear memory to draw a new trail
-                currentTrail = null;
+                currentTrail.transform.position = chalkTip.position;
             }
         }
 
         private void ApplySettings(GameObject trailObject)
         {
             var tr = trailObject.GetComponent<TrailRenderer>();
-
             tr.widthMultiplier = width;
             tr.startColor = color;
             tr.endColor = color;
-
             tr.alignment = LineAlignment.TransformZ;
             tr.time = Mathf.Infinity;
         }
