@@ -18,10 +18,13 @@ namespace StudioXRCL.EscapeRoom.VFX
         private GameObject currentTrail;
         private bool isDrawing = false; 
 
+        private Transform activeBoard; 
+
         void OnTriggerEnter(Collider other)
         {
             if (((1 << other.gameObject.layer) & boardLayer) != 0)
             {
+                activeBoard = other.transform; 
                 StartTrail();
             }
         }
@@ -30,9 +33,21 @@ namespace StudioXRCL.EscapeRoom.VFX
         {
             if (((1 << other.gameObject.layer) & boardLayer) != 0)
             {
+                activeBoard = null; 
                 EndTrail();
             }
         }
+
+        void Update() 
+        {
+            if (isDrawing && currentTrail != null && activeBoard != null)
+            {
+                Vector3 localTipPos = activeBoard.InverseTransformPoint(chalkTip.position);
+                localTipPos.z = 0.001f; 
+                currentTrail.transform.position = activeBoard.TransformPoint(localTipPos);
+            }
+        }
+
 
         public void StartTrail()
         {
@@ -46,18 +61,9 @@ namespace StudioXRCL.EscapeRoom.VFX
 
         public void EndTrail()
         {
-            isDrawing = false; // Turn off the Update loop
+            isDrawing = false; 
             currentTrail = null;
         }
-
-        void Update() 
-        {
-            if (isDrawing && currentTrail != null)
-            {
-                currentTrail.transform.position = chalkTip.position;
-            }
-        }
-
         private void ApplySettings(GameObject trailObject)
         {
             var tr = trailObject.GetComponent<TrailRenderer>();
