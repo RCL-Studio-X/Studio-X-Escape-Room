@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3735719760260207172}
   - component: {fileID: 6691681243600859046}
   - component: {fileID: 2209052987341125087}
-  m_Layer: 0
+  m_Layer: 31
   m_Name: Mesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -120,7 +120,7 @@ GameObject:
   - component: {fileID: 777689824936870532}
   - component: {fileID: 8333020846818242140}
   - component: {fileID: 421070426415651598}
-  m_Layer: 0
+  m_Layer: 31
   m_Name: Mesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -228,7 +228,8 @@ GameObject:
   - component: {fileID: 4565974353070300645}
   - component: {fileID: 2123210197314883314}
   - component: {fileID: 699468093385737696}
-  m_Layer: 0
+  - component: {fileID: 5756490137460033358}
+  m_Layer: 31
   m_Name: Employee Card 00 - Bethanie Wilson
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -243,14 +244,15 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 515519041885713728}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.7095966, y: -0, z: -0, w: -0.7046082}
+  m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: -0.7071068}
   m_LocalPosition: {x: 0.053, y: -0.2497, z: -0.0951}
   m_LocalScale: {x: 0.001453513, y: 0.001453513, z: 0.001453513}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 4373475621843596187}
+  - {fileID: 8621084006896657847}
   m_Father: {fileID: 843099576710398393}
-  m_LocalEulerAnglesHint: {x: -269.596, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -270, y: 0, z: 0}
 --- !u!54 &4565974353070300645
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -350,7 +352,9 @@ MonoBehaviour:
   m_StartingHoverFilters: []
   m_StartingSelectFilters: []
   m_StartingInteractionStrengthFilters: []
-  m_AttachTransform: {fileID: 0}
+  m_AutoFindParentInteractableInHierarchy: 0
+  m_ParentInteractableObject: {fileID: 0}
+  m_AttachTransform: {fileID: 8621084006896657847}
   m_SecondaryAttachTransform: {fileID: 0}
   m_UseDynamicAttach: 1
   m_MatchAttachPosition: 1
@@ -359,6 +363,7 @@ MonoBehaviour:
   m_ReinitializeDynamicAttachEverySingleGrab: 1
   m_AttachEaseInTime: 0.15
   m_MovementType: 2
+  m_PredictedVisualsTransform: {fileID: 0}
   m_VelocityDamping: 1
   m_VelocityScale: 1
   m_AngularVelocityDamping: 1
@@ -400,6 +405,10 @@ MonoBehaviour:
   m_StartingMultipleGrabTransformers: []
   m_AddDefaultGrabTransformers: 1
   m_FarAttachMode: 0
+  m_LimitLinearVelocity: 0
+  m_LimitAngularVelocity: 0
+  m_MaxLinearVelocityDelta: 10
+  m_MaxAngularVelocityDelta: 20
 --- !u!114 &699468093385737696
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -415,6 +424,50 @@ MonoBehaviour:
   originalLayer: 0
   outlineLayerName: Outline
   visualRoot: {fileID: 4713709133775320314}
+--- !u!114 &5756490137460033358
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 515519041885713728}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c3d05386f4fc4b778bea35077656876, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetTeamIndex: 3
+--- !u!1 &910087538876901997
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1640866329146224844}
+  m_Layer: 31
+  m_Name: Attach
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1640866329146224844
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 910087538876901997}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0.5, y: 0.5, z: 0.5, w: 0.5}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4041440424996400477}
+  m_LocalEulerAnglesHint: {x: -90, y: 90, z: 0}
 --- !u!1 &928577926049084096
 GameObject:
   m_ObjectHideFlags: 0
@@ -424,13 +477,13 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 843099576710398393}
-  m_Layer: 0
+  m_Layer: 31
   m_Name: Employee Cards
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &843099576710398393
 Transform:
   m_ObjectHideFlags: 0
@@ -440,7 +493,7 @@ Transform:
   m_GameObject: {fileID: 928577926049084096}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.54532003, y: 2.9458387, z: 1.9973363}
+  m_LocalPosition: {x: -0.545, y: 2.9458, z: 1.99733}
   m_LocalScale: {x: 9.289936, y: 9.289936, z: 9.289936}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -460,6 +513,130 @@ Transform:
   - {fileID: 7300445498637841935}
   m_Father: {fileID: 2037545985370328005}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1226643801856283882
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1371466312304088564}
+  m_Layer: 31
+  m_Name: Attach
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1371466312304088564
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1226643801856283882}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0.5, y: 0.5, z: 0.5, w: 0.5}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7300445498637841935}
+  m_LocalEulerAnglesHint: {x: -90, y: 90, z: 0}
+--- !u!1 &1252232257991316055
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8621084006896657847}
+  m_Layer: 31
+  m_Name: Attach
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8621084006896657847
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1252232257991316055}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0.5, y: 0.5, z: 0.5, w: 0.5}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5150528674812431637}
+  m_LocalEulerAnglesHint: {x: -90, y: 90, z: 0}
+--- !u!1 &2420831054013479985
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1851343971265626927}
+  m_Layer: 31
+  m_Name: Attach
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1851343971265626927
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2420831054013479985}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0.5, y: 0.5, z: 0.5, w: 0.5}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5519321477934909710}
+  m_LocalEulerAnglesHint: {x: -90, y: 90, z: 0}
+--- !u!1 &3297419771767880115
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4098755073005660100}
+  m_Layer: 31
+  m_Name: Attach
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4098755073005660100
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3297419771767880115}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0.5, y: 0.5, z: 0.5, w: 0.5}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7242298579967768274}
+  m_LocalEulerAnglesHint: {x: -90, y: 90, z: 0}
 --- !u!1 &3652119210029962069
 GameObject:
   m_ObjectHideFlags: 0
@@ -472,7 +649,8 @@ GameObject:
   - component: {fileID: 3313473328411541886}
   - component: {fileID: 3324088134950607689}
   - component: {fileID: 8523512229711400688}
-  m_Layer: 0
+  - component: {fileID: 7521575155054748446}
+  m_Layer: 31
   m_Name: Employee Card 13 - George Thomas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -493,6 +671,7 @@ Transform:
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 3262707804365749984}
+  - {fileID: 1371466312304088564}
   m_Father: {fileID: 843099576710398393}
   m_LocalEulerAnglesHint: {x: 90.518005, y: 0, z: 0}
 --- !u!54 &3313473328411541886
@@ -594,7 +773,9 @@ MonoBehaviour:
   m_StartingHoverFilters: []
   m_StartingSelectFilters: []
   m_StartingInteractionStrengthFilters: []
-  m_AttachTransform: {fileID: 0}
+  m_AutoFindParentInteractableInHierarchy: 0
+  m_ParentInteractableObject: {fileID: 0}
+  m_AttachTransform: {fileID: 1371466312304088564}
   m_SecondaryAttachTransform: {fileID: 0}
   m_UseDynamicAttach: 1
   m_MatchAttachPosition: 1
@@ -603,6 +784,7 @@ MonoBehaviour:
   m_ReinitializeDynamicAttachEverySingleGrab: 1
   m_AttachEaseInTime: 0.15
   m_MovementType: 2
+  m_PredictedVisualsTransform: {fileID: 0}
   m_VelocityDamping: 1
   m_VelocityScale: 1
   m_AngularVelocityDamping: 1
@@ -644,6 +826,10 @@ MonoBehaviour:
   m_StartingMultipleGrabTransformers: []
   m_AddDefaultGrabTransformers: 1
   m_FarAttachMode: 0
+  m_LimitLinearVelocity: 0
+  m_LimitAngularVelocity: 0
+  m_MaxLinearVelocityDelta: 10
+  m_MaxAngularVelocityDelta: 20
 --- !u!114 &8523512229711400688
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -659,6 +845,50 @@ MonoBehaviour:
   originalLayer: 0
   outlineLayerName: Outline
   visualRoot: {fileID: 63850564764425350}
+--- !u!114 &7521575155054748446
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3652119210029962069}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c3d05386f4fc4b778bea35077656876, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetTeamIndex: 0
+--- !u!1 &4041328308465193389
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7270042678990056140}
+  m_Layer: 31
+  m_Name: Attach
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7270042678990056140
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4041328308465193389}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0.5, y: 0.5, z: 0.5, w: 0.5}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1591606267770536736}
+  m_LocalEulerAnglesHint: {x: -90, y: 90, z: 0}
 --- !u!1 &4153470306144220652
 GameObject:
   m_ObjectHideFlags: 0
@@ -671,7 +901,8 @@ GameObject:
   - component: {fileID: 8200915353939897936}
   - component: {fileID: 164605425600610494}
   - component: {fileID: 4380877152902920616}
-  m_Layer: 0
+  - component: {fileID: 7287059505257642902}
+  m_Layer: 31
   m_Name: Employee Card 12 - Beatrice White
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -692,6 +923,7 @@ Transform:
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 6351614574628814616}
+  - {fileID: 4098755073005660100}
   m_Father: {fileID: 843099576710398393}
   m_LocalEulerAnglesHint: {x: 90.518005, y: 0, z: 0}
 --- !u!54 &8200915353939897936
@@ -793,7 +1025,9 @@ MonoBehaviour:
   m_StartingHoverFilters: []
   m_StartingSelectFilters: []
   m_StartingInteractionStrengthFilters: []
-  m_AttachTransform: {fileID: 0}
+  m_AutoFindParentInteractableInHierarchy: 0
+  m_ParentInteractableObject: {fileID: 0}
+  m_AttachTransform: {fileID: 4098755073005660100}
   m_SecondaryAttachTransform: {fileID: 0}
   m_UseDynamicAttach: 1
   m_MatchAttachPosition: 1
@@ -802,6 +1036,7 @@ MonoBehaviour:
   m_ReinitializeDynamicAttachEverySingleGrab: 1
   m_AttachEaseInTime: 0.15
   m_MovementType: 2
+  m_PredictedVisualsTransform: {fileID: 0}
   m_VelocityDamping: 1
   m_VelocityScale: 1
   m_AngularVelocityDamping: 1
@@ -843,6 +1078,10 @@ MonoBehaviour:
   m_StartingMultipleGrabTransformers: []
   m_AddDefaultGrabTransformers: 1
   m_FarAttachMode: 0
+  m_LimitLinearVelocity: 0
+  m_LimitAngularVelocity: 0
+  m_MaxLinearVelocityDelta: 10
+  m_MaxAngularVelocityDelta: 20
 --- !u!114 &4380877152902920616
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -858,6 +1097,19 @@ MonoBehaviour:
   originalLayer: 0
   outlineLayerName: Outline
   visualRoot: {fileID: 267388396739090348}
+--- !u!114 &7287059505257642902
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4153470306144220652}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c3d05386f4fc4b778bea35077656876, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetTeamIndex: 1
 --- !u!1 &4713709133775320314
 GameObject:
   m_ObjectHideFlags: 0
@@ -870,7 +1122,7 @@ GameObject:
   - component: {fileID: 1982180284845555481}
   - component: {fileID: 4478703270640516369}
   - component: {fileID: 3968424837606994961}
-  m_Layer: 0
+  m_Layer: 31
   m_Name: Mesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -966,6 +1218,99 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 141.37177, y: 100, z: 0.9779}
   m_Center: {x: 0, y: 0, z: -3.1110742}
+--- !u!1 &5174831843276281916
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7562446542986655695}
+  m_Layer: 31
+  m_Name: Attach
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7562446542986655695
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5174831843276281916}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0.5, y: 0.5, z: 0.5, w: 0.5}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4679575204980098505}
+  m_LocalEulerAnglesHint: {x: -90, y: 90, z: 0}
+--- !u!1 &5685744858046293675
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7805584926339575956}
+  m_Layer: 31
+  m_Name: Attach
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7805584926339575956
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5685744858046293675}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0.5, y: 0.5, z: 0.5, w: 0.5}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4626178658756081945}
+  m_LocalEulerAnglesHint: {x: -90, y: 90, z: 0}
+--- !u!1 &5797333747607680329
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2140780943705434712}
+  m_Layer: 31
+  m_Name: Attach
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2140780943705434712
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5797333747607680329}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0.5, y: 0.5, z: 0.5, w: 0.5}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7466480947187438267}
+  m_LocalEulerAnglesHint: {x: -90, y: 90, z: 0}
 --- !u!1 &6200579727896629297
 GameObject:
   m_ObjectHideFlags: 0
@@ -1324,6 +1669,37 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -3262789968867269347, guid: dd0d61c65c41fcd4a8ca77431697a66a, type: 3}
+--- !u!1 &6513622861254204211
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2593894083768101719}
+  m_Layer: 31
+  m_Name: Attach
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2593894083768101719
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6513622861254204211}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0.5, y: 0.5, z: 0.5, w: 0.5}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2658507101883123599}
+  m_LocalEulerAnglesHint: {x: -90, y: 90, z: 0}
 --- !u!1 &7068974525212267133
 GameObject:
   m_ObjectHideFlags: 0
@@ -1505,6 +1881,130 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 0}
+--- !u!1 &7869000332157342672
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7294316509317083836}
+  m_Layer: 31
+  m_Name: Attach
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7294316509317083836
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7869000332157342672}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0.5, y: 0.5, z: 0.5, w: 0.5}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7453945595086239606}
+  m_LocalEulerAnglesHint: {x: -90, y: 90, z: 0}
+--- !u!1 &8639247061896060896
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2434662467426348424}
+  m_Layer: 31
+  m_Name: Attach
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2434662467426348424
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8639247061896060896}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0.5, y: 0.5, z: 0.5, w: 0.5}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6697461695347706750}
+  m_LocalEulerAnglesHint: {x: -90, y: 90, z: 0}
+--- !u!1 &8806471100630265812
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3527393190442000149}
+  m_Layer: 31
+  m_Name: Attach
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3527393190442000149
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8806471100630265812}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0.5, y: 0.5, z: 0.5, w: 0.5}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6848729134306922390}
+  m_LocalEulerAnglesHint: {x: -90, y: 90, z: 0}
+--- !u!1 &8844299554719303468
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7643174726421753874}
+  m_Layer: 31
+  m_Name: Attach
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7643174726421753874
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8844299554719303468}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0.5, y: 0.5, z: 0.5, w: 0.5}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1235734798714459292}
+  m_LocalEulerAnglesHint: {x: -90, y: 90, z: 0}
 --- !u!1001 &843564942964727079
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1573,9 +2073,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: Employee Card 06 - Jackie Davis
       objectReference: {fileID: 0}
+    - target: {fileID: 2799086548761349655, guid: d0f152351fe9a9d47a0a0989ccba6104, type: 3}
+      propertyPath: m_Layer
+      value: 31
+      objectReference: {fileID: 0}
+    - target: {fileID: 3642118732427848384, guid: d0f152351fe9a9d47a0a0989ccba6104, type: 3}
+      propertyPath: m_AttachTransform
+      value: 
+      objectReference: {fileID: 7270042678990056140}
     - target: {fileID: 3642118732427848384, guid: d0f152351fe9a9d47a0a0989ccba6104, type: 3}
       propertyPath: m_InteractionLayers.m_Bits
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7690839863179494374, guid: d0f152351fe9a9d47a0a0989ccba6104, type: 3}
+      propertyPath: m_Layer
+      value: 31
       objectReference: {fileID: 0}
     - target: {fileID: 8610139514343129350, guid: d0f152351fe9a9d47a0a0989ccba6104, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
@@ -1583,14 +2095,38 @@ PrefabInstance:
       objectReference: {fileID: 1593429910322931289, guid: b729371455683c94b864a9c14fa5f0f5, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 2135397470020902407, guid: d0f152351fe9a9d47a0a0989ccba6104, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7270042678990056140}
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 2799086548761349655, guid: d0f152351fe9a9d47a0a0989ccba6104, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8149934274145900845}
   m_SourcePrefab: {fileID: 100100000, guid: d0f152351fe9a9d47a0a0989ccba6104, type: 3}
 --- !u!4 &1591606267770536736 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2135397470020902407, guid: d0f152351fe9a9d47a0a0989ccba6104, type: 3}
   m_PrefabInstance: {fileID: 843564942964727079}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &3273179846290445104 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2799086548761349655, guid: d0f152351fe9a9d47a0a0989ccba6104, type: 3}
+  m_PrefabInstance: {fileID: 843564942964727079}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &8149934274145900845
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3273179846290445104}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c3d05386f4fc4b778bea35077656876, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetTeamIndex: 2
 --- !u!1001 &901919423792401051
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1659,9 +2195,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: Employee Card 02 - Tilly Anderson
       objectReference: {fileID: 0}
+    - target: {fileID: 2799086548761349655, guid: d0f152351fe9a9d47a0a0989ccba6104, type: 3}
+      propertyPath: m_Layer
+      value: 31
+      objectReference: {fileID: 0}
+    - target: {fileID: 3642118732427848384, guid: d0f152351fe9a9d47a0a0989ccba6104, type: 3}
+      propertyPath: m_AttachTransform
+      value: 
+      objectReference: {fileID: 7643174726421753874}
     - target: {fileID: 3642118732427848384, guid: d0f152351fe9a9d47a0a0989ccba6104, type: 3}
       propertyPath: m_InteractionLayers.m_Bits
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7690839863179494374, guid: d0f152351fe9a9d47a0a0989ccba6104, type: 3}
+      propertyPath: m_Layer
+      value: 31
       objectReference: {fileID: 0}
     - target: {fileID: 8610139514343129350, guid: d0f152351fe9a9d47a0a0989ccba6104, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
@@ -1669,14 +2217,38 @@ PrefabInstance:
       objectReference: {fileID: 1721606272570711572, guid: a0437db234eac4841b5e09d647f8069c, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 2135397470020902407, guid: d0f152351fe9a9d47a0a0989ccba6104, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7643174726421753874}
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 2799086548761349655, guid: d0f152351fe9a9d47a0a0989ccba6104, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3357227008563587068}
   m_SourcePrefab: {fileID: 100100000, guid: d0f152351fe9a9d47a0a0989ccba6104, type: 3}
 --- !u!4 &1235734798714459292 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2135397470020902407, guid: d0f152351fe9a9d47a0a0989ccba6104, type: 3}
   m_PrefabInstance: {fileID: 901919423792401051}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &3052341642348807308 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2799086548761349655, guid: d0f152351fe9a9d47a0a0989ccba6104, type: 3}
+  m_PrefabInstance: {fileID: 901919423792401051}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &3357227008563587068
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3052341642348807308}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c3d05386f4fc4b778bea35077656876, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetTeamIndex: 0
 --- !u!1001 &2716902063057236826
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1745,9 +2317,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: Employee Card 03 - Robert Williams
       objectReference: {fileID: 0}
+    - target: {fileID: 2799086548761349655, guid: d0f152351fe9a9d47a0a0989ccba6104, type: 3}
+      propertyPath: m_Layer
+      value: 31
+      objectReference: {fileID: 0}
+    - target: {fileID: 3642118732427848384, guid: d0f152351fe9a9d47a0a0989ccba6104, type: 3}
+      propertyPath: m_AttachTransform
+      value: 
+      objectReference: {fileID: 1640866329146224844}
     - target: {fileID: 3642118732427848384, guid: d0f152351fe9a9d47a0a0989ccba6104, type: 3}
       propertyPath: m_InteractionLayers.m_Bits
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7690839863179494374, guid: d0f152351fe9a9d47a0a0989ccba6104, type: 3}
+      propertyPath: m_Layer
+      value: 31
       objectReference: {fileID: 0}
     - target: {fileID: 8610139514343129350, guid: d0f152351fe9a9d47a0a0989ccba6104, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
@@ -1755,9 +2339,33 @@ PrefabInstance:
       objectReference: {fileID: 3975631368674747657, guid: eaf15a71d722c414cbee6edc7849e22a, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 2135397470020902407, guid: d0f152351fe9a9d47a0a0989ccba6104, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1640866329146224844}
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 2799086548761349655, guid: d0f152351fe9a9d47a0a0989ccba6104, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 877632378004969137}
   m_SourcePrefab: {fileID: 100100000, guid: d0f152351fe9a9d47a0a0989ccba6104, type: 3}
+--- !u!1 &246636310238068045 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2799086548761349655, guid: d0f152351fe9a9d47a0a0989ccba6104, type: 3}
+  m_PrefabInstance: {fileID: 2716902063057236826}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &877632378004969137
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 246636310238068045}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c3d05386f4fc4b778bea35077656876, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetTeamIndex: 4
 --- !u!4 &4041440424996400477 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2135397470020902407, guid: d0f152351fe9a9d47a0a0989ccba6104, type: 3}
@@ -1851,9 +2459,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: Employee Card 11 - Benjamin Martinez
       objectReference: {fileID: 0}
+    - target: {fileID: 2799086548761349655, guid: d0f152351fe9a9d47a0a0989ccba6104, type: 3}
+      propertyPath: m_Layer
+      value: 31
+      objectReference: {fileID: 0}
+    - target: {fileID: 3642118732427848384, guid: d0f152351fe9a9d47a0a0989ccba6104, type: 3}
+      propertyPath: m_AttachTransform
+      value: 
+      objectReference: {fileID: 2593894083768101719}
     - target: {fileID: 3642118732427848384, guid: d0f152351fe9a9d47a0a0989ccba6104, type: 3}
       propertyPath: m_InteractionLayers.m_Bits
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7690839863179494374, guid: d0f152351fe9a9d47a0a0989ccba6104, type: 3}
+      propertyPath: m_Layer
+      value: 31
       objectReference: {fileID: 0}
     - target: {fileID: 8610139514343129350, guid: d0f152351fe9a9d47a0a0989ccba6104, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
@@ -1861,9 +2481,33 @@ PrefabInstance:
       objectReference: {fileID: -6108361489237166741, guid: 00f90e60f99fa754cac70b0df200cac3, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 2135397470020902407, guid: d0f152351fe9a9d47a0a0989ccba6104, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2593894083768101719}
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 2799086548761349655, guid: d0f152351fe9a9d47a0a0989ccba6104, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1016701736361086081}
   m_SourcePrefab: {fileID: 100100000, guid: d0f152351fe9a9d47a0a0989ccba6104, type: 3}
+--- !u!1 &2278474868191877023 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2799086548761349655, guid: d0f152351fe9a9d47a0a0989ccba6104, type: 3}
+  m_PrefabInstance: {fileID: 4127160590877972872}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1016701736361086081
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2278474868191877023}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c3d05386f4fc4b778bea35077656876, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetTeamIndex: 3
 --- !u!4 &2658507101883123599 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2135397470020902407, guid: d0f152351fe9a9d47a0a0989ccba6104, type: 3}
@@ -1937,9 +2581,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: Employee Card 09 - Charles Miller
       objectReference: {fileID: 0}
+    - target: {fileID: 2799086548761349655, guid: d0f152351fe9a9d47a0a0989ccba6104, type: 3}
+      propertyPath: m_Layer
+      value: 31
+      objectReference: {fileID: 0}
+    - target: {fileID: 3642118732427848384, guid: d0f152351fe9a9d47a0a0989ccba6104, type: 3}
+      propertyPath: m_AttachTransform
+      value: 
+      objectReference: {fileID: 2434662467426348424}
     - target: {fileID: 3642118732427848384, guid: d0f152351fe9a9d47a0a0989ccba6104, type: 3}
       propertyPath: m_InteractionLayers.m_Bits
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7690839863179494374, guid: d0f152351fe9a9d47a0a0989ccba6104, type: 3}
+      propertyPath: m_Layer
+      value: 31
       objectReference: {fileID: 0}
     - target: {fileID: 8610139514343129350, guid: d0f152351fe9a9d47a0a0989ccba6104, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
@@ -1947,14 +2603,38 @@ PrefabInstance:
       objectReference: {fileID: 2550957132837034200, guid: eeccdea9efc16f04aa5242be684379c6, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 2135397470020902407, guid: d0f152351fe9a9d47a0a0989ccba6104, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2434662467426348424}
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 2799086548761349655, guid: d0f152351fe9a9d47a0a0989ccba6104, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8779874917639726007}
   m_SourcePrefab: {fileID: 100100000, guid: d0f152351fe9a9d47a0a0989ccba6104, type: 3}
 --- !u!4 &6697461695347706750 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2135397470020902407, guid: d0f152351fe9a9d47a0a0989ccba6104, type: 3}
   m_PrefabInstance: {fileID: 4706364149609878905}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &7460220620842720110 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2799086548761349655, guid: d0f152351fe9a9d47a0a0989ccba6104, type: 3}
+  m_PrefabInstance: {fileID: 4706364149609878905}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &8779874917639726007
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7460220620842720110}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c3d05386f4fc4b778bea35077656876, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetTeamIndex: 4
 --- !u!1001 &4803623863120728465
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2023,9 +2703,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: Employee Card 04 - Ken Thompson
       objectReference: {fileID: 0}
+    - target: {fileID: 2799086548761349655, guid: d0f152351fe9a9d47a0a0989ccba6104, type: 3}
+      propertyPath: m_Layer
+      value: 31
+      objectReference: {fileID: 0}
+    - target: {fileID: 3642118732427848384, guid: d0f152351fe9a9d47a0a0989ccba6104, type: 3}
+      propertyPath: m_AttachTransform
+      value: 
+      objectReference: {fileID: 3527393190442000149}
     - target: {fileID: 3642118732427848384, guid: d0f152351fe9a9d47a0a0989ccba6104, type: 3}
       propertyPath: m_InteractionLayers.m_Bits
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7690839863179494374, guid: d0f152351fe9a9d47a0a0989ccba6104, type: 3}
+      propertyPath: m_Layer
+      value: 31
       objectReference: {fileID: 0}
     - target: {fileID: 8610139514343129350, guid: d0f152351fe9a9d47a0a0989ccba6104, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
@@ -2033,14 +2725,38 @@ PrefabInstance:
       objectReference: {fileID: -7174739433253767894, guid: 46abbfaeb5e3b9341aa4fb57cdceee58, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 2135397470020902407, guid: d0f152351fe9a9d47a0a0989ccba6104, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3527393190442000149}
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 2799086548761349655, guid: d0f152351fe9a9d47a0a0989ccba6104, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1635195948775798196}
   m_SourcePrefab: {fileID: 100100000, guid: d0f152351fe9a9d47a0a0989ccba6104, type: 3}
 --- !u!4 &6848729134306922390 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2135397470020902407, guid: d0f152351fe9a9d47a0a0989ccba6104, type: 3}
   m_PrefabInstance: {fileID: 4803623863120728465}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &7237772857925181318 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2799086548761349655, guid: d0f152351fe9a9d47a0a0989ccba6104, type: 3}
+  m_PrefabInstance: {fileID: 4803623863120728465}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1635195948775798196
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7237772857925181318}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c3d05386f4fc4b778bea35077656876, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetTeamIndex: 3
 --- !u!1001 &5853242502666229513
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2129,9 +2845,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: Employee Card 07 - Henry Garcia
       objectReference: {fileID: 0}
+    - target: {fileID: 2799086548761349655, guid: d0f152351fe9a9d47a0a0989ccba6104, type: 3}
+      propertyPath: m_Layer
+      value: 31
+      objectReference: {fileID: 0}
+    - target: {fileID: 3642118732427848384, guid: d0f152351fe9a9d47a0a0989ccba6104, type: 3}
+      propertyPath: m_AttachTransform
+      value: 
+      objectReference: {fileID: 1851343971265626927}
     - target: {fileID: 3642118732427848384, guid: d0f152351fe9a9d47a0a0989ccba6104, type: 3}
       propertyPath: m_InteractionLayers.m_Bits
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7690839863179494374, guid: d0f152351fe9a9d47a0a0989ccba6104, type: 3}
+      propertyPath: m_Layer
+      value: 31
       objectReference: {fileID: 0}
     - target: {fileID: 8610139514343129350, guid: d0f152351fe9a9d47a0a0989ccba6104, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
@@ -2139,14 +2867,38 @@ PrefabInstance:
       objectReference: {fileID: -8310366090528968611, guid: d292c5bab82988d4f9478b174498ed75, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 2135397470020902407, guid: d0f152351fe9a9d47a0a0989ccba6104, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1851343971265626927}
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 2799086548761349655, guid: d0f152351fe9a9d47a0a0989ccba6104, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4779469643409614479}
   m_SourcePrefab: {fileID: 100100000, guid: d0f152351fe9a9d47a0a0989ccba6104, type: 3}
 --- !u!4 &5519321477934909710 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2135397470020902407, guid: d0f152351fe9a9d47a0a0989ccba6104, type: 3}
   m_PrefabInstance: {fileID: 5853242502666229513}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &8638677495389690142 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2799086548761349655, guid: d0f152351fe9a9d47a0a0989ccba6104, type: 3}
+  m_PrefabInstance: {fileID: 5853242502666229513}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &4779469643409614479
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8638677495389690142}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c3d05386f4fc4b778bea35077656876, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetTeamIndex: 0
 --- !u!1001 &6724793935317539790
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2235,9 +2987,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: Employee Card 05 - James Jones
       objectReference: {fileID: 0}
+    - target: {fileID: 2799086548761349655, guid: d0f152351fe9a9d47a0a0989ccba6104, type: 3}
+      propertyPath: m_Layer
+      value: 31
+      objectReference: {fileID: 0}
+    - target: {fileID: 3642118732427848384, guid: d0f152351fe9a9d47a0a0989ccba6104, type: 3}
+      propertyPath: m_AttachTransform
+      value: 
+      objectReference: {fileID: 7562446542986655695}
     - target: {fileID: 3642118732427848384, guid: d0f152351fe9a9d47a0a0989ccba6104, type: 3}
       propertyPath: m_InteractionLayers.m_Bits
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7690839863179494374, guid: d0f152351fe9a9d47a0a0989ccba6104, type: 3}
+      propertyPath: m_Layer
+      value: 31
       objectReference: {fileID: 0}
     - target: {fileID: 8610139514343129350, guid: d0f152351fe9a9d47a0a0989ccba6104, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
@@ -2245,14 +3009,38 @@ PrefabInstance:
       objectReference: {fileID: 1916976055224288936, guid: 4aff74312173e6a4a9e7a5d4ba47d5bd, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 2135397470020902407, guid: d0f152351fe9a9d47a0a0989ccba6104, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7562446542986655695}
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 2799086548761349655, guid: d0f152351fe9a9d47a0a0989ccba6104, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4566983281165620975}
   m_SourcePrefab: {fileID: 100100000, guid: d0f152351fe9a9d47a0a0989ccba6104, type: 3}
 --- !u!4 &4679575204980098505 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2135397470020902407, guid: d0f152351fe9a9d47a0a0989ccba6104, type: 3}
   m_PrefabInstance: {fileID: 6724793935317539790}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &8902242171155060185 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2799086548761349655, guid: d0f152351fe9a9d47a0a0989ccba6104, type: 3}
+  m_PrefabInstance: {fileID: 6724793935317539790}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &4566983281165620975
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8902242171155060185}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c3d05386f4fc4b778bea35077656876, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetTeamIndex: 2
 --- !u!1001 &6742179281008011038
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2341,9 +3129,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: Employee Card 10 - Bob Taylor
       objectReference: {fileID: 0}
+    - target: {fileID: 2799086548761349655, guid: d0f152351fe9a9d47a0a0989ccba6104, type: 3}
+      propertyPath: m_Layer
+      value: 31
+      objectReference: {fileID: 0}
+    - target: {fileID: 3642118732427848384, guid: d0f152351fe9a9d47a0a0989ccba6104, type: 3}
+      propertyPath: m_AttachTransform
+      value: 
+      objectReference: {fileID: 7805584926339575956}
     - target: {fileID: 3642118732427848384, guid: d0f152351fe9a9d47a0a0989ccba6104, type: 3}
       propertyPath: m_InteractionLayers.m_Bits
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7690839863179494374, guid: d0f152351fe9a9d47a0a0989ccba6104, type: 3}
+      propertyPath: m_Layer
+      value: 31
       objectReference: {fileID: 0}
     - target: {fileID: 8610139514343129350, guid: d0f152351fe9a9d47a0a0989ccba6104, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
@@ -2351,14 +3151,38 @@ PrefabInstance:
       objectReference: {fileID: -1831762152056495456, guid: 0b58cddfba5ff2545b7d7a907ff630d2, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 2135397470020902407, guid: d0f152351fe9a9d47a0a0989ccba6104, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7805584926339575956}
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 2799086548761349655, guid: d0f152351fe9a9d47a0a0989ccba6104, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1149012253862136655}
   m_SourcePrefab: {fileID: 100100000, guid: d0f152351fe9a9d47a0a0989ccba6104, type: 3}
 --- !u!4 &4626178658756081945 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2135397470020902407, guid: d0f152351fe9a9d47a0a0989ccba6104, type: 3}
   m_PrefabInstance: {fileID: 6742179281008011038}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &8883722137920448777 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2799086548761349655, guid: d0f152351fe9a9d47a0a0989ccba6104, type: 3}
+  m_PrefabInstance: {fileID: 6742179281008011038}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1149012253862136655
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8883722137920448777}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c3d05386f4fc4b778bea35077656876, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetTeamIndex: 3
 --- !u!1001 &8807968244486458556
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2427,9 +3251,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: Employee Card 08 - Gladys Jackson
       objectReference: {fileID: 0}
+    - target: {fileID: 2799086548761349655, guid: d0f152351fe9a9d47a0a0989ccba6104, type: 3}
+      propertyPath: m_Layer
+      value: 31
+      objectReference: {fileID: 0}
+    - target: {fileID: 3642118732427848384, guid: d0f152351fe9a9d47a0a0989ccba6104, type: 3}
+      propertyPath: m_AttachTransform
+      value: 
+      objectReference: {fileID: 2140780943705434712}
     - target: {fileID: 3642118732427848384, guid: d0f152351fe9a9d47a0a0989ccba6104, type: 3}
       propertyPath: m_InteractionLayers.m_Bits
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7690839863179494374, guid: d0f152351fe9a9d47a0a0989ccba6104, type: 3}
+      propertyPath: m_Layer
+      value: 31
       objectReference: {fileID: 0}
     - target: {fileID: 8610139514343129350, guid: d0f152351fe9a9d47a0a0989ccba6104, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
@@ -2437,9 +3273,33 @@ PrefabInstance:
       objectReference: {fileID: -7353420738641666444, guid: d127d0bd053865448a89f36d62d52c66, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 2135397470020902407, guid: d0f152351fe9a9d47a0a0989ccba6104, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2140780943705434712}
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 2799086548761349655, guid: d0f152351fe9a9d47a0a0989ccba6104, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1228453577996544673}
   m_SourcePrefab: {fileID: 100100000, guid: d0f152351fe9a9d47a0a0989ccba6104, type: 3}
+--- !u!1 &6693591569304896171 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2799086548761349655, guid: d0f152351fe9a9d47a0a0989ccba6104, type: 3}
+  m_PrefabInstance: {fileID: 8807968244486458556}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1228453577996544673
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6693591569304896171}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c3d05386f4fc4b778bea35077656876, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetTeamIndex: 1
 --- !u!4 &7466480947187438267 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2135397470020902407, guid: d0f152351fe9a9d47a0a0989ccba6104, type: 3}
@@ -2509,15 +3369,51 @@ PrefabInstance:
       propertyPath: m_Name
       value: Employee Card 01 - Victoria Smith
       objectReference: {fileID: 0}
+    - target: {fileID: 2799086548761349655, guid: d0f152351fe9a9d47a0a0989ccba6104, type: 3}
+      propertyPath: m_Layer
+      value: 31
+      objectReference: {fileID: 0}
+    - target: {fileID: 3642118732427848384, guid: d0f152351fe9a9d47a0a0989ccba6104, type: 3}
+      propertyPath: m_AttachTransform
+      value: 
+      objectReference: {fileID: 7294316509317083836}
     - target: {fileID: 3642118732427848384, guid: d0f152351fe9a9d47a0a0989ccba6104, type: 3}
       propertyPath: m_InteractionLayers.m_Bits
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 7690839863179494374, guid: d0f152351fe9a9d47a0a0989ccba6104, type: 3}
+      propertyPath: m_Layer
+      value: 31
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 2135397470020902407, guid: d0f152351fe9a9d47a0a0989ccba6104, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7294316509317083836}
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 2799086548761349655, guid: d0f152351fe9a9d47a0a0989ccba6104, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5045044315462038190}
   m_SourcePrefab: {fileID: 100100000, guid: d0f152351fe9a9d47a0a0989ccba6104, type: 3}
+--- !u!1 &6632556276919330662 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2799086548761349655, guid: d0f152351fe9a9d47a0a0989ccba6104, type: 3}
+  m_PrefabInstance: {fileID: 8850638324326394225}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &5045044315462038190
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6632556276919330662}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c3d05386f4fc4b778bea35077656876, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetTeamIndex: 2
 --- !u!4 &7453945595086239606 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2135397470020902407, guid: d0f152351fe9a9d47a0a0989ccba6104, type: 3}

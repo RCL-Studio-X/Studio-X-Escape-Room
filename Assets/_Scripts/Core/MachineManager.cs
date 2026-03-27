@@ -1,449 +1,270 @@
+using System.Collections;
 using System.Collections.Generic;
-using UnityEngine.XR.Interaction.Toolkit; 
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.XR.Interaction.Toolkit;
 using UnityEngine.XR.Interaction.Toolkit.Interactors;
-using System.Collections;
 
-public class MachineManager : MonoBehaviour
+namespace StudioXRCL.EscapeRoom.Core
 {
-   [Header("UI & Setup")]
-    public List<GameObject> teamNum;
-    public Button nextButton;
-    public Button prevButton;
-    public Transform outputPos; // Where wrong cards get spit out
-    public GameObject resultIndicatorWrong;
-    public GameObject resultIndicatorRight;
-
-    private Color defaultIndicatorColorRight;
-    private Color defaultIndicatorColorWrong;
-
-    [Header("Interaction")]
-    public XRSocketInteractor socket;
-    private int currentTeamIndex = 0;
-
-    [Header("Team 1 Data")]
-    public GameObject George1; 
-    public GameObject Henry1; 
-    public GameObject Tilly1;
-    private bool team1Completed = false;
-    private int team1cards = 0;
-    private int team1TotalAttempts = 0;
-    private List<GameObject> team1Entered = new List<GameObject>(); 
-    public GameObject hiddenMessage1;
-
-
-    [Header("Team 2 Data")]
-    public GameObject Beatrice2;
-    public GameObject Glady2;
-    private bool team2Completed = false;
-    private int team2cards = 0;
-    private int team2TotalAttempts = 0;
-    private List<GameObject> team2Entered = new List<GameObject>(); 
-    public GameObject hiddenMessage2;
-
-
-    [Header("Team 3 Data")]
-    public GameObject Victoria3;
-    public GameObject James3;
-    public GameObject Jackie3;
-    private bool team3Completed = false;
-    private int team3cards = 0;
-    private int team3TotalAttempts = 0;
-    private List<GameObject> team3Entered = new List<GameObject>(); 
-    public GameObject hiddenMessage3;
-
-
-    [Header("Team 4 Data")]
-    public GameObject Ken4;
-    public GameObject Bob4;
-    public GameObject Benjamin4;
-    public GameObject Bethaine4;
-    private bool team4Completed = false;
-    private int team4cards = 0;
-    private int team4TotalAttempts = 0;
-    private List<GameObject> team4Entered = new List<GameObject>(); 
-    public GameObject hiddenMessage4;
-
-
-    [Header("Team 5 Data")]
-    public GameObject Charles5;
-    public GameObject Robert5;
-    private bool team5Completed = false;
-    private int team5cards = 0;
-    private int team5TotalAttempts = 0;
-    private List<GameObject> team5Entered = new List<GameObject>(); 
-    public GameObject hiddenMessage5;
-
-
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    /// <summary>
+    /// Manages the machine logic for evaluating team cards and displaying results.
+    /// </summary>
+    public class MachineManager : MonoBehaviour
     {
-        UpdateTeamDisplay();
-        defaultIndicatorColorRight = resultIndicatorRight.GetComponent<Renderer>().material.color;
-        defaultIndicatorColorWrong = resultIndicatorWrong.GetComponent<Renderer>().material.color;
-        
-    }
-
-    // Update is called once per frame
-    public void UpdateTeamDisplay()
+        /// <summary>
+        /// Tracks the progress and entered cards for a specific team.
+        /// </summary>
+        [System.Serializable]
+        public class TeamTracker
         {
-            foreach (GameObject team in teamNum)
-            {
-                team.SetActive(false);
-            }
+            [Tooltip("The number of cards required for this team.")]
+            public int requiredCards;
 
-            teamNum[currentTeamIndex].SetActive(true);
+            [Tooltip("The message or object revealed when all team's members are correctly entered.")]
+            public GameObject hiddenMessage;
 
-            prevButton.interactable = currentTeamIndex > 0;
-            nextButton.interactable = currentTeamIndex < teamNum.Count - 1;
-        }
-    
-    public void NextPage()
-        {
-            if (currentTeamIndex < teamNum.Count - 1)
-            {
-                currentTeamIndex++;
-                UpdateTeamDisplay();
-            }
-        }
+            [HideInInspector]
+            [Tooltip("Indicates whether this team has successfully met their card requirement.")]
+            public bool isCompleted = false;
 
-        public void PreviousPage()
-        {
-            if (currentTeamIndex > 0)
-            {
-                currentTeamIndex--;
-                UpdateTeamDisplay();
-            }
+            [HideInInspector]
+            [Tooltip("The current number of correct cards entered for this team.")]
+            public int currentCards = 0;
+
+            [HideInInspector]
+            [Tooltip("The total number of cards attempted for this team.")]
+            public int totalAttempts = 0;
+
+            [HideInInspector]
+            [Tooltip("List of card objects that have been entered for this team.")]
+            public List<GameObject> enteredCards = new List<GameObject>();
         }
 
-       public void checkCard()
+        #region Public Variable declarations
+
+        [Header("UI & Setup")]
+        [Tooltip("Transform position where incorrect cards are ejected.")]
+        public Transform outputPos;
+
+        [Tooltip("Indicator object that changes color based on result.")]
+        public GameObject resultIndicator;
+
+        [Tooltip("The UI or object representing the currently selected team.")]
+        public GameObject teamSelected;
+
+        [Header("Interaction")]
+        [Tooltip("The XR socket interactor for receiving cards.")]
+        public XRSocketInteractor socket;
+
+        [Header("Team Data")]
+        [Tooltip("Array of trackers containing data for each team.")]
+        public TeamTracker[] teams;
+
+        #endregion
+
+        #region Private Variable declarations
+
+        /// <summary> The original base color of the result indicator. </summary>
+        private Color _defaultIndicatorColor;
+
+        /// <summary> How much the dial rotates to the next team. </summary>
+        private float dialRotation=45;
+
+        /// <summary> The index of the currently selected team. </summary>
+        private int _currentTeamIndex = 0;
+
+        /// <summary> Gets the Render of the result indicator. </summary>
+        private Renderer _indicatorRenderer;
+
+        #endregion
+
+        #region Public Method definitions
+
+        /// <summary>
+        /// Cycles the machine selection to the next team.
+        /// </summary>
+        public void NextTeam()
+        {
+            if (_currentTeamIndex == teams.Length - 1)
+            {
+                _currentTeamIndex = 0;
+            }
+            else
+            {
+                _currentTeamIndex++;
+            }
+            float targetXAngle = -220f + (_currentTeamIndex * dialRotation);
+            teamSelected.transform.localEulerAngles = new Vector3(targetXAngle, 90f, -90f);
+        }
+
+        /// <summary>
+        /// Cycles the machine selection to the previous team.
+        /// </summary>
+        public void PreviousTeam()
+        {
+            if (_currentTeamIndex == 0)
+            {
+                _currentTeamIndex = teams.Length - 1;
+            }
+            else
+            {
+                _currentTeamIndex--;
+            }
+            float targetXAngle = -220f + (_currentTeamIndex * dialRotation);
+            teamSelected.transform.localEulerAngles = new Vector3(targetXAngle, 90f, -90f);
+        }
+
+        /// <summary>
+        /// Checks the card currently placed in the socket and processes it for the active team.
+        /// </summary>
+        public void CheckCard()
         {
             if (socket.hasSelection)
             {
                 GameObject cardInSocket = socket.GetOldestInteractableSelected().transform.gameObject;
 
-                if (currentTeamIndex == 0)
+                // Array Safety Check for blank sides that eject the card
+                if (_currentTeamIndex >= teams.Length)
                 {
-                    if (team1Completed)
-                    {
-                        cardInSocket.SetActive(false); 
-                        cardInSocket.transform.position = outputPos.position; 
-                        cardInSocket.SetActive(true); 
-                        return; 
-                    }
-                    // 1. Just Count Attempts
-                    team1TotalAttempts++;
-                    team1Entered.Add(cardInSocket);
-
-                    // 2. Just Count Correct Cards
-                    if (cardInSocket == George1 || cardInSocket == Henry1 || cardInSocket == Tilly1)
-                    {
-                        team1cards++;
-                    }
-
-                    // 3. Clear the socket for the next card
-                    cardInSocket.SetActive(false);
+                    EjectCard(cardInSocket);
+                    return;
                 }
 
-                if (currentTeamIndex == 1)
+                TeamTracker currentTeam = teams[_currentTeamIndex];
+
+                // If team is already complete, eject the card
+                if (currentTeam.isCompleted)
                 {
-                    if (team2Completed)
-                    {
-                        cardInSocket.SetActive(false); 
-                        cardInSocket.transform.position = outputPos.position; 
-                        cardInSocket.SetActive(true); 
-                        return; 
-                    }
-                    // 1. Just Count Attempts
-                    team2TotalAttempts++;
-                    team2Entered.Add(cardInSocket);
-
-                    // 2. Just Count Correct Cards
-                    if (cardInSocket == Beatrice2 || cardInSocket == Glady2)
-                    {
-                        team2cards++;
-                    }
-
-                    // 3. Clear the socket for the next card
-                    cardInSocket.SetActive(false);
+                    EjectCard(cardInSocket);
+                    return;
                 }
 
-                if (currentTeamIndex == 2)
+                currentTeam.totalAttempts++;
+                currentTeam.enteredCards.Add(cardInSocket);
+
+                CardData socketedCardData = cardInSocket.GetComponent<CardData>();
+
+                if (socketedCardData != null)
                 {
-                    if (team3Completed)
+                    if (socketedCardData.targetTeamIndex == _currentTeamIndex)
                     {
-                        cardInSocket.SetActive(false); 
-                        cardInSocket.transform.position = outputPos.position; 
-                        cardInSocket.SetActive(true); 
-                        return; 
+                        currentTeam.currentCards++;
                     }
-                    // 1. Just Count Attempts
-                    team3TotalAttempts++;
-                    team3Entered.Add(cardInSocket);
-
-                    // 2. Just Count Correct Cards
-                    if (cardInSocket == Victoria3 || cardInSocket == James3 || cardInSocket == Jackie3)
-                    {
-                        team3cards++;
-                    }
-
-                    // 3. Clear the socket for the next card
-                    cardInSocket.SetActive(false);
                 }
-
-                if (currentTeamIndex == 3)
+                else
                 {
-                    if (team4Completed)
-                    {
-                        cardInSocket.SetActive(false); 
-                        cardInSocket.transform.position = outputPos.position; 
-                        cardInSocket.SetActive(true); 
-                        return; 
-                    }
-                    // 1. Just Count Attempts
-                    team4TotalAttempts++;
-                    team4Entered.Add(cardInSocket);
-
-                    // 2. Just Count Correct Cards
-                    if (cardInSocket == Ken4 || cardInSocket == Bob4 || cardInSocket == Benjamin4 || cardInSocket == Bethaine4)
-                    {
-                        team4cards++;
-                    }
-
-                    // 3. Clear the socket for the next card
-                    cardInSocket.SetActive(false);
+                    Debug.LogWarning("The object in the socket is missing a CardData script: " + cardInSocket.name);
                 }
-
-                if (currentTeamIndex == 4)
-                {
-                    if (team5Completed)
-                    {
-                        cardInSocket.SetActive(false); 
-                        cardInSocket.transform.position = outputPos.position; 
-                        cardInSocket.SetActive(true); 
-                        return; 
-                    }
-                    // 1. Just Count Attempts
-                    team5TotalAttempts++;
-                    team5Entered.Add(cardInSocket);
-
-                    // 2. Just Count Correct Cards
-                    if (cardInSocket == Charles5 || cardInSocket == Robert5)
-                    {
-                        team5cards++;
-                    }
-                    // 3. Clear the socket for the next card
-                    cardInSocket.SetActive(false);
-                }
-
+                
+                // Clear the socket for the next card
+                cardInSocket.SetActive(false);
             }
         }
 
+        /// <summary>
+        /// Evaluates the current team's submitted cards to determine if the puzzle is solved.
+        /// </summary>
         public void OnSubmitPressed()
         {
-            // Check Team 1 Logic
-            if (currentTeamIndex == 0)
+            if (_currentTeamIndex >= teams.Length) return;
+
+            TeamTracker currentTeam = teams[_currentTeamIndex];
+
+            if (currentTeam.isCompleted)
             {
-                if (team1Completed)
-                {
-                    StartCoroutine(FlashIndicatorCorrect()); // Remind them it's done
-                    return; // Stop checking
-                }
-                else if (team1cards == 3 && team1TotalAttempts == 3)
-                {
-                    team1Completed = true;
-                    StartCoroutine(FlashIndicatorCorrect());
-                    hiddenMessage1.SetActive(true);
-                }
-                else
-                {
-                    ResetCurrentTeam(); 
-                    StartCoroutine(FlashIndicatorWrong());
-                }
+                StartCoroutine(FlashIndicator(Color.green));
+                return;
             }
 
-            if (currentTeamIndex == 1)
+            // Check if they got the right amount of cards, with no extra wrong guesses
+            if (currentTeam.currentCards == currentTeam.requiredCards && currentTeam.totalAttempts == currentTeam.requiredCards)
             {
-                if (team2Completed)
-                {
-                    StartCoroutine(FlashIndicatorCorrect()); // Remind them it's done
-                    return; // Stop checking
-                }
-                else if (team2cards == 2 && team2TotalAttempts == 2)
-                {
-                    team2Completed = true;
-                    StartCoroutine(FlashIndicatorCorrect());
-                    hiddenMessage2.SetActive(true);
-                }
-                else
-                {
-                    ResetCurrentTeam(); 
-                    StartCoroutine(FlashIndicatorWrong());
-
-                }
+                currentTeam.isCompleted = true;
+                StartCoroutine(FlashIndicator(Color.green));
+                currentTeam.hiddenMessage.SetActive(true);
             }
-
-            if (currentTeamIndex == 2)
+            else
             {
-                if (team3Completed)
-                {
-                    StartCoroutine(FlashIndicatorCorrect()); // Remind them it's done
-                    return; // Stop checking
-                }
-                else if (team3cards == 3 && team3TotalAttempts == 3)
-                {
-                    team3Completed = true;
-                    StartCoroutine(FlashIndicatorCorrect());
-                    hiddenMessage3.SetActive(true);
-                }
-                else
-                {
-                    ResetCurrentTeam(); 
-                    StartCoroutine(FlashIndicatorWrong());
-
-                }
-            }
-
-            if (currentTeamIndex == 3)
-            {
-                if (team4Completed)
-                {
-                    StartCoroutine(FlashIndicatorCorrect()); // Remind them it's done
-                    return; // Stop checking
-                }
-                else if (team4cards == 4 && team4TotalAttempts == 4)
-                {
-                    team4Completed = true;
-                    StartCoroutine(FlashIndicatorCorrect());
-                    hiddenMessage4.SetActive(true);
-                }
-                else
-                {
-                    ResetCurrentTeam(); 
-                    StartCoroutine(FlashIndicatorWrong());
-                }
-            }
-
-            if (currentTeamIndex == 4)
-            {
-                if (team5Completed)
-                {
-                    StartCoroutine(FlashIndicatorCorrect()); // Remind them it's done
-                    return; // Stop checking
-                }
-                else if (team5cards == 2 && team5TotalAttempts == 2)
-                {
-                    team5Completed = true;
-                    StartCoroutine(FlashIndicatorCorrect());
-                    hiddenMessage5.SetActive(true);
-                }
-                else
-                {
-                    ResetCurrentTeam(); 
-                    StartCoroutine(FlashIndicatorWrong());
-                }
+                ResetCurrentTeam();
+                StartCoroutine(FlashIndicator(Color.red));
             }
         }
 
-       void ResetCurrentTeam()
-    {
-        // RESET TEAM 1
-        if (currentTeamIndex == 0 && !team1Completed)
+        /// <summary>
+        /// Resets the current team's progress and ejects their entered cards.
+        /// </summary>
+        public void ResetCurrentTeam()
         {
-            // 1. Respawn all cards entered for this team
-            foreach(GameObject card in team1Entered)
+            if (_currentTeamIndex >= teams.Length) return;
+
+            TeamTracker currentTeam = teams[_currentTeamIndex];
+            if (!currentTeam.isCompleted)
             {
-                card.SetActive(true);
-                card.transform.position = outputPos.position;
+                foreach (GameObject card in currentTeam.enteredCards)
+                {
+                    if (card == null) continue;
+
+                    card.SetActive(true);
+                    card.transform.position = outputPos.position;
+                }
+
+                currentTeam.enteredCards.Clear();
+                currentTeam.currentCards = 0;
+                currentTeam.totalAttempts = 0;
+                Debug.Log("Team Reset");
             }
-            // 2. Clear the memory of this team
-            team1Entered.Clear();
-            team1cards = 0;
-            team1TotalAttempts = 0;
-            Debug.Log("Team 1 Reset");
         }
 
-        // RESET TEAM 2
-        if (currentTeamIndex == 1 && !team2Completed)
+        #endregion
+
+        #region Private Method definitions
+
+        /// <summary>
+        /// Initializes default components on startup.
+        /// </summary>
+        private void Start()
         {
-            foreach(GameObject card in team2Entered)
+            //dialRotation = 360f/teams.Length;
+
+            _indicatorRenderer = resultIndicator.GetComponent<Renderer>();
+
+            if (_indicatorRenderer != null)
             {
-                card.SetActive(true);
-                card.transform.position = outputPos.position;
+                _defaultIndicatorColor = _indicatorRenderer.material.color;
             }
-            team2Entered.Clear();
-            team2cards = 0;
-            team2TotalAttempts = 0;
         }
 
-        // RESET TEAM 3
-        if (currentTeamIndex == 2 && !team3Completed)
+        /// <summary>
+        /// Flashes the result indicator a specific color for a set duration.
+        /// </summary>
+        /// <param name="color">The color to flash the indicator material.</param>
+        /// <returns>An IEnumerator to be used in a Coroutine.</returns>
+        private IEnumerator FlashIndicator(Color color)
         {
-            foreach(GameObject card in team3Entered)
+            if (_indicatorRenderer == null)
             {
-                card.SetActive(true);
-                card.transform.position = outputPos.position; 
+                yield break;
             }
-            team3Entered.Clear();
-            team3cards = 0;
-            team3TotalAttempts = 0;
+
+            _indicatorRenderer.material.color = color;
+
+            yield return new WaitForSeconds(2f);
+
+            _indicatorRenderer.material.color = _defaultIndicatorColor;
         }
 
-        // RESET TEAM 4
-        if (currentTeamIndex == 3 && !team4Completed)
+        /// <summary>
+        /// Ejects a card by disabling it, moving it to the output position, and re-enabling it.
+        /// </summary>
+        /// <param name="card">The GameObject of the card to eject.</param>
+        private void EjectCard(GameObject card)
         {
-            foreach(GameObject card in team4Entered)
-            {
-                card.SetActive(true);
-                card.transform.position = outputPos.position;
-            }
-            team4Entered.Clear();
-            team4cards = 0;
-            team4TotalAttempts = 0;
+            card.SetActive(false);
+            card.transform.position = outputPos.position;
+            card.SetActive(true);
         }
 
-        // RESET TEAM 5
-        if (currentTeamIndex == 4 && !team5Completed)
-        {
-            foreach(GameObject card in team5Entered)
-            {
-                card.SetActive(true);
-                card.transform.position = outputPos.position;
-            }
-            team5Entered.Clear();
-            team5cards = 0;
-            team5TotalAttempts = 0;
-        }
-    }
-
-
-    private IEnumerator FlashIndicatorCorrect()
-    {
-        Renderer renderer = resultIndicatorRight.GetComponent<Renderer>();
-        
-        // Change to the new color (Green)
-        renderer.material.color = Color.green;
-
-        // Wait for exactly 2 seconds
-        yield return new WaitForSeconds(2f);
-
-        // Change it back to the absolute default color
-        renderer.material.color = defaultIndicatorColorRight;
-    }
-
-      private IEnumerator FlashIndicatorWrong()
-    {
-        Renderer renderer = resultIndicatorWrong.GetComponent<Renderer>();
-        
-        // Change to the new color (Red)
-        renderer.material.color = Color.red;
-
-        // Wait for exactly 2 seconds
-        yield return new WaitForSeconds(2f);
-
-        // Change it back to the absolute default color
-        renderer.material.color = defaultIndicatorColorWrong;
+        #endregion
     }
 }
-
