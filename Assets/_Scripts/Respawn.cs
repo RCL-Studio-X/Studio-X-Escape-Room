@@ -29,7 +29,7 @@ public class Respawn : MonoBehaviour
 
     private void OntriggerEnter(Collider collider)
     {
-        
+        // wroking on that
     }
 
     private void RespawnObject()
