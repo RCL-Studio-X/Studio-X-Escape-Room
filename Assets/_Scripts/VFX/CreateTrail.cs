@@ -7,7 +7,7 @@ namespace StudioXRCL.EscapeRoom.VFX
     {
         [Header("References")]
         public GameObject trailPrefab;
-        [Tooltip("Drag your invisible sphere collider tip here!")]
+        [Tooltip("Drag your invisible box collider tip here!")]
         public Transform chalkTip; 
 
         [Header("Board")]
@@ -23,7 +23,6 @@ namespace StudioXRCL.EscapeRoom.VFX
 
         private GameObject currentTrail;
         
-        private List<GameObject> _drawnTrails = new List<GameObject>(); 
 
         void OnTriggerEnter(Collider other)
         {
@@ -64,8 +63,15 @@ namespace StudioXRCL.EscapeRoom.VFX
             {
                 currentTrail = Instantiate(trailPrefab, hit.point, Quaternion.LookRotation(-hit.normal));
                 
-                _drawnTrails.Add(currentTrail); 
+                // Grab the reset script from the board we just hit
+                ChalkboardReset activeBoard = hit.collider.GetComponentInParent<ChalkboardReset>();
                 
+                // If the board has the script, put the ink in its specific container
+                if (activeBoard != null && activeBoard.trailContainer != null)
+                {
+                    currentTrail.transform.SetParent(activeBoard.trailContainer);
+                }
+
                 ApplySettings(currentTrail);
             }
         }
@@ -75,19 +81,7 @@ namespace StudioXRCL.EscapeRoom.VFX
             currentTrail = null;
         }
 
-        public void ClearAllTrails()
-        {
-            // 1. Loop through every trail in our memory
-            foreach (GameObject trail in _drawnTrails)
-            {
-                if (trail != null)
-                {
-                    Destroy(trail); 
-                }
-            }
-            
-            _drawnTrails.Clear(); 
-        }
+        
 
         private void ApplySettings(GameObject trailObject)
         {
