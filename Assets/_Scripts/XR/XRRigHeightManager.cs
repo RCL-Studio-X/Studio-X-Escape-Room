@@ -1,7 +1,6 @@
 using System.Collections;
 using Unity.XR.CoreUtils;
 using UnityEngine;
-using UnityEngine.XR;
 
 namespace StudioXRCL.EscapeRoom.XR
 {
@@ -38,8 +37,6 @@ namespace StudioXRCL.EscapeRoom.XR
 
         private XROrigin xrOrigin;
         private Vector3 initialLocalPosition;
-        private float initialOriginLocalY;
-        private float baseCameraYOffset;
         private float currentYOffset;
         private bool baselineInitialized;
 
@@ -96,44 +93,6 @@ namespace StudioXRCL.EscapeRoom.XR
         }
 
         /// <summary>
-        /// Registers the pre-render height correction callback.
-        /// </summary>
-        private void OnEnable()
-        {
-            Application.onBeforeRender += HandleBeforeRender;
-        }
-
-        /// <summary>
-        /// Unregisters the pre-render height correction callback.
-        /// </summary>
-        private void OnDisable()
-        {
-            Application.onBeforeRender -= HandleBeforeRender;
-        }
-
-        /// <summary>
-        /// Reapplies the current height after other systems update the rig.
-        /// </summary>
-        private void LateUpdate()
-        {
-            if (!enabled)
-            {
-                return;
-            }
-
-            if (!baselineInitialized)
-            {
-                return;
-            }
-
-            ApplyAbsoluteHeight(currentYOffset);
-        }
-
-        #endregion
-
-        #region Initialization
-
-        /// <summary>
         /// Waits for XR initialization, then caches the baseline rig height.
         /// </summary>
         /// <returns>Coroutine enumerator.</returns>
@@ -143,12 +102,6 @@ namespace StudioXRCL.EscapeRoom.XR
             yield return new WaitForEndOfFrame();
 
             initialLocalPosition = rigRoot.localPosition;
-            if (xrOrigin != null)
-            {
-                initialOriginLocalY = xrOrigin.Origin.transform.localPosition.y;
-                baseCameraYOffset = xrOrigin.CameraYOffset;
-            }
-
             baselineInitialized = true;
 
             switch (startupMode)
@@ -162,7 +115,7 @@ namespace StudioXRCL.EscapeRoom.XR
                     break;
 
                 case StartupMode.None:
-                    currentYOffset = GetCurrentAppliedYOffset();
+                    currentYOffset = rigRoot.localPosition.y - initialLocalPosition.y;
                     CurrentMode = RigHeightMode.Standing;
                     ApplyAbsoluteHeight(currentYOffset);
                     break;
@@ -172,24 +125,6 @@ namespace StudioXRCL.EscapeRoom.XR
         #endregion
 
         #region Public Method Definitions
-
-        /// <summary>
-        /// Reapplies the current height just before rendering.
-        /// </summary>
-        private void HandleBeforeRender()
-        {
-            if (!enabled)
-            {
-                return;
-            }
-
-            if (!baselineInitialized)
-            {
-                return;
-            }
-
-            ApplyAbsoluteHeight(currentYOffset);
-        }
 
         /// <summary>
         /// Default mode for users physically standing in real life.
@@ -248,31 +183,7 @@ namespace StudioXRCL.EscapeRoom.XR
         }
 
         /// <summary>
-        /// Gets the current height offset relative to the cached baseline.
-        /// </summary>
-        /// <returns>Current height offset in meters.</returns>
-        private float GetCurrentAppliedYOffset()
-        {
-            if (!baselineInitialized)
-            {
-                return 0f;
-            }
-
-            if (xrOrigin != null)
-            {
-                if (UsesFloorTracking())
-                {
-                    return xrOrigin.Origin.transform.localPosition.y - initialOriginLocalY;
-                }
-
-                return xrOrigin.CameraYOffset - baseCameraYOffset;
-            }
-
-            return rigRoot.localPosition.y - initialLocalPosition.y;
-        }
-
-        /// <summary>
-        /// Applies a height offset using the active XR rig setup.
+        /// Applies a height offset using the camera offset parent transform.
         /// </summary>
         /// <param name="yOffset">Height offset in meters.</param>
         private void ApplyAbsoluteHeight(float yOffset)
@@ -282,39 +193,9 @@ namespace StudioXRCL.EscapeRoom.XR
                 return;
             }
 
-            if (xrOrigin != null)
-            {
-                if (UsesFloorTracking())
-                {
-                    Vector3 originLocalPosition = xrOrigin.Origin.transform.localPosition;
-                    originLocalPosition.y = initialOriginLocalY + yOffset;
-                    xrOrigin.Origin.transform.localPosition = originLocalPosition;
-                }
-                else
-                {
-                    Vector3 originLocalPosition = xrOrigin.Origin.transform.localPosition;
-                    originLocalPosition.y = initialOriginLocalY;
-                    xrOrigin.Origin.transform.localPosition = originLocalPosition;
-                    xrOrigin.CameraYOffset = baseCameraYOffset + yOffset;
-                }
-
-                return;
-            }
-
             Vector3 newLocalPosition = initialLocalPosition;
             newLocalPosition.y += yOffset;
             rigRoot.localPosition = newLocalPosition;
-        }
-
-        /// <summary>
-        /// Returns whether floor tracking is active or requested.
-        /// </summary>
-        /// <returns>True when floor tracking is in use.</returns>
-        private bool UsesFloorTracking()
-        {
-            return xrOrigin != null &&
-                (xrOrigin.CurrentTrackingOriginMode == TrackingOriginModeFlags.Floor ||
-                 xrOrigin.RequestedTrackingOriginMode == XROrigin.TrackingOriginMode.Floor);
         }
 
         #endregion
