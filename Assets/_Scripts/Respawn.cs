@@ -27,9 +27,12 @@ public class Respawn : MonoBehaviour
 
     }
 
-    private void OntriggerEnter(Collider collider)
+    private void OnTriggerEnter(Collider collider)
     {
-        // wroking on that
+        if (collider.gameObject == gameObjectToRespawn)
+        {
+            IsInTheZone = true;
+        }
     }
 
     private void RespawnObject()
@@ -55,6 +58,7 @@ public class Respawn : MonoBehaviour
     {
         if (!IsInTheZone)
         {
+            Debug.Log("666");
             RespawnObject();
         }
 
