@@ -3969,7 +3969,10 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 7807248961681426849, guid: f9a3ce553b3e7ac41b1cfb060cc4d968, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1948201917}
+      addedObject: {fileID: 1948201923}
+    - targetCorrespondingSourceObject: {fileID: 7807248961681426849, guid: f9a3ce553b3e7ac41b1cfb060cc4d968, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1948201922}
   m_SourcePrefab: {fileID: 100100000, guid: f9a3ce553b3e7ac41b1cfb060cc4d968, type: 3}
 --- !u!1001 &904537632
 PrefabInstance:
@@ -5825,8 +5828,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 12.542814, y: 7.944252, z: 12.485723}
-  m_Center: {x: -3.583208, y: -0.1476407, z: 0.38586283}
+  m_Size: {x: 5.245084, y: 7.944252, z: 3.9115753}
+  m_Center: {x: -1.8526044, y: -0.1476407, z: -0.48075056}
 --- !u!4 &1482281490
 Transform:
   m_ObjectHideFlags: 0
@@ -7540,7 +7543,28 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 7807248961681426849, guid: f9a3ce553b3e7ac41b1cfb060cc4d968, type: 3}
   m_PrefabInstance: {fileID: 904110201}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1948201917
+--- !u!65 &1948201922
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1948201912}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.06836128, y: 0.010451622, z: 0.21479599}
+  m_Center: {x: 0.0033020973, y: 0.007168945, z: -0.08490214}
+--- !u!114 &1948201923
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -7552,7 +7576,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bcc96e09e80245c46924dfc766da6cd1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameObjectToRespawn: {fileID: 1948201912}
+  safeZone: {fileID: 1482281489}
 --- !u!1001 &1963115612
 PrefabInstance:
   m_ObjectHideFlags: 0
