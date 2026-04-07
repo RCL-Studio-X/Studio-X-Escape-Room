@@ -762,6 +762,7 @@ GameObject:
   - component: {fileID: 1239235834}
   - component: {fileID: 1239235833}
   - component: {fileID: 1239235832}
+  - component: {fileID: 1239235837}
   - component: {fileID: 1239235831}
   m_Layer: 0
   m_Name: WalkieTalkie
@@ -785,7 +786,7 @@ MonoBehaviour:
   m_InteractionManager: {fileID: 0}
   m_Colliders: []
   m_InteractionLayers:
-    m_Bits: 5
+    m_Bits: 4
   m_DistanceCalculationMode: 1
   m_SelectMode: 0
   m_FocusMode: 1
@@ -817,10 +818,34 @@ MonoBehaviour:
       m_Calls: []
   m_SelectEntered:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1239235837}
+        m_TargetAssemblyTypeName: WalkieSocketState, Assembly-CSharp
+        m_MethodName: OnSelectEntered
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_SelectExited:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1239235837}
+        m_TargetAssemblyTypeName: WalkieSocketState, Assembly-CSharp
+        m_MethodName: OnSelectExited
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_FirstFocusEntered:
     m_PersistentCalls:
       m_Calls: []
@@ -1015,6 +1040,22 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1239235837
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1239235830}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db2b783afa6719c48af79a0f0b763040, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  freeLayer:
+    m_Bits: 4
+  socketedLayer:
+    m_Bits: 8
 --- !u!1 &1239521395
 GameObject:
   m_ObjectHideFlags: 0
@@ -1825,7 +1866,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_InteractionManager: {fileID: 0}
   m_InteractionLayers:
-    m_Bits: 4
+    m_Bits: 12
   m_Handedness: 0
   m_AttachTransform: {fileID: 1239521396}
   m_KeepSelectedTargetValid: 1
@@ -2472,6 +2513,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: --- XR ---
       objectReference: {fileID: 0}
+    - target: {fileID: 4722509429594148488, guid: 2cffcabdcd6971745b2d7406b28aa484, type: 3}
+      propertyPath: m_InteractionLayers.m_Bits
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 5046959767158395813, guid: 2cffcabdcd6971745b2d7406b28aa484, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -2503,6 +2548,10 @@ PrefabInstance:
     - target: {fileID: 5395857901887732584, guid: 2cffcabdcd6971745b2d7406b28aa484, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5743716483228296754, guid: 2cffcabdcd6971745b2d7406b28aa484, type: 3}
+      propertyPath: m_InteractionLayers.m_Bits
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 6906109476937792085, guid: 2cffcabdcd6971745b2d7406b28aa484, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2587,6 +2636,7 @@ SceneRoots:
   - {fileID: 1105809983971172852}
   - {fileID: 618145767459511973}
   - {fileID: 6348387873296008935}
+  - {fileID: 1239235836}
   - {fileID: 1345451703}
   - {fileID: 190642732}
   - {fileID: 710005523}
@@ -2596,4 +2646,3 @@ SceneRoots:
   - {fileID: 1521503486}
   - {fileID: 1454859683}
   - {fileID: 766375201}
-  - {fileID: 1239235836}
