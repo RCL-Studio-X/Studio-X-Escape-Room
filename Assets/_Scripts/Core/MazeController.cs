@@ -39,7 +39,7 @@ namespace StudioXRCL.EscapeRoom.Maze
 
                 // 3. Apply the safe, clamped rotation to the Board and the Visual Handle
                 // We leave Y at 0 so the board doesn't spin like a record!
-                Quaternion safeRotation = Quaternion.Euler(clampedX, 0f, clampedZ);
+                Quaternion safeRotation = Quaternion.Euler(clampedX, 0f, -clampedZ);
                 mazeBoard.localRotation = safeRotation;
                 visualHandle.localRotation = safeRotation;
             }
