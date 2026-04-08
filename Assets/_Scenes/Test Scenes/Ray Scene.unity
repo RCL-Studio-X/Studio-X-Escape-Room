@@ -255,7 +255,7 @@ MonoBehaviour:
   m_ParentInteractableObject: {fileID: 0}
   m_AttachTransform: {fileID: 0}
   m_SecondaryAttachTransform: {fileID: 0}
-  m_UseDynamicAttach: 0
+  m_UseDynamicAttach: 1
   m_MatchAttachPosition: 1
   m_MatchAttachRotation: 1
   m_SnapToColliderVolume: 1
@@ -268,11 +268,11 @@ MonoBehaviour:
   m_AngularVelocityDamping: 1
   m_AngularVelocityScale: 1
   m_TrackPosition: 1
-  m_SmoothPosition: 0
+  m_SmoothPosition: 1
   m_SmoothPositionAmount: 8
   m_TightenPosition: 0.1
   m_TrackRotation: 1
-  m_SmoothRotation: 0
+  m_SmoothRotation: 1
   m_SmoothRotationAmount: 8
   m_TightenRotation: 0.1
   m_TrackScale: 1
@@ -653,7 +653,7 @@ Transform:
   m_GameObject: {fileID: 58549078}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.195, z: -0.90200007}
+  m_LocalPosition: {x: 0, y: 0.195, z: -0.749}
   m_LocalScale: {x: 2.6078932, y: 0.39094248, z: 0.20639116}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -760,7 +760,7 @@ Transform:
   m_GameObject: {fileID: 79463933}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.778, y: 0.233, z: -0.5753}
+  m_LocalPosition: {x: 0.757, y: 0.283, z: -0.553}
   m_LocalScale: {x: 0.1, y: 0.052407004, z: 0.1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3068,7 +3068,7 @@ Transform:
   m_GameObject: {fileID: 1115628556}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 1.0399998, y: 0.195, z: 0}
+  m_LocalPosition: {x: 1.038, y: 0.195, z: 0}
   m_LocalScale: {x: 2.0023298, y: 0.39094248, z: 0.2063912}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3519,7 +3519,19 @@ MonoBehaviour:
   ghostLayerName: GhostBall
   onPuzzleWon:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1551305828}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1300225919
 GameObject:
   m_ObjectHideFlags: 0
@@ -4583,7 +4595,7 @@ Transform:
   m_GameObject: {fileID: 1551305828}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.3107, y: 0.393, z: -3.514}
+  m_LocalPosition: {x: -2.121, y: 0.393, z: -3.5381}
   m_LocalScale: {x: 0.04, y: 0.04, z: 0.04}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -4644,7 +4656,7 @@ Transform:
   m_GameObject: {fileID: 1670286761}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.195, z: 0.807}
+  m_LocalPosition: {x: 0, y: 0.195, z: 0.802}
   m_LocalScale: {x: 2.6078932, y: 0.39094248, z: 0.20639116}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4678,7 +4690,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1670286761}
-  m_Enabled: 0
+  m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -5243,7 +5255,7 @@ Transform:
   m_GameObject: {fileID: 1869028111}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: -1.0409999, y: 0.195, z: 0}
+  m_LocalPosition: {x: -1.04, y: 0.195, z: 0}
   m_LocalScale: {x: 2.0023298, y: 0.39094248, z: 0.2063912}
   m_ConstrainProportionsScale: 0
   m_Children: []
