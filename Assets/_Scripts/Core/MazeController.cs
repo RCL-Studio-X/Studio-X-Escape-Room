@@ -1,9 +1,22 @@
 using UnityEngine;
 
-namespace StudioXRCL.EscapeRoom.Maze
+namespace StudioXRCL.EscapeRoom.Core
 {
     public class MazeController : MonoBehaviour
     {
+        [Header("References")]
+        [Tooltip("The actual maze board that the marble rolls on.")]
+        public Transform mazeBoard;
+        
+        [Tooltip("The invisible object with the XR Grab Interactable.")]
+        public Transform invisibleGrabbable;
+        
+        [Tooltip("The physical 3D handle the player sees on the table.")]
+        public Transform visualHandle;
+        
+        [Tooltip("An empty GameObject marking where the handle should rest.")]
+        public Transform resetAnchor;
+
         [Header("Settings")]
         [Tooltip("The maximum degrees the board can tilt in any direction.")]
         public float maxTiltAngle = 20f;
@@ -11,7 +24,6 @@ namespace StudioXRCL.EscapeRoom.Maze
         [Tooltip("How fast the board snaps back to flat when released.")]
         public float resetSpeed = 5f;
 
-        // NEW: How fast the board follows your hand. Lower = slower and heavier.
         [Tooltip("How fast the board follows the hand. Lower is smoother.")]
         public float followSpeed = 8f; 
 
@@ -28,10 +40,10 @@ namespace StudioXRCL.EscapeRoom.Maze
                 float clampedX = Mathf.Clamp(NormalizeAngle(rawEuler.x), -maxTiltAngle, maxTiltAngle);
                 float clampedZ = Mathf.Clamp(NormalizeAngle(rawEuler.z), -maxTiltAngle, maxTiltAngle);
 
-                // 3. Define the target rotation (remember to keep your negative signs if you needed them!)
+                // 3. Define the target rotation (adjust negative signs if it twists the wrong way)
                 Quaternion targetRotation = Quaternion.Euler(-clampedX, 0f, -clampedZ);
 
-                // 4. NEW: Smoothly Lerp the board to the target rotation so it feels heavy and doesn't break physics!
+                // 4. Smoothly Lerp the board to the target rotation
                 mazeBoard.localRotation = Quaternion.Lerp(mazeBoard.localRotation, targetRotation, Time.deltaTime * followSpeed);
                 visualHandle.localRotation = mazeBoard.localRotation;
             }
@@ -46,5 +58,21 @@ namespace StudioXRCL.EscapeRoom.Maze
                 visualHandle.localRotation = mazeBoard.localRotation;
             }
         }
-}
+
+        public void OnHandleGrabbed()
+        {
+            isGrabbed = true;
+        }
+
+        public void OnHandleReleased()
+        {
+            isGrabbed = false;
+        }
+
+        private float NormalizeAngle(float angle)
+        {
+            if (angle > 180f) return angle - 360f;
+            return angle;
+        }
+    }
 }
