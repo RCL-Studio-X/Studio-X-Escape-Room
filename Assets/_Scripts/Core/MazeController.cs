@@ -24,9 +24,6 @@ namespace StudioXRCL.EscapeRoom.Core
         [Tooltip("How fast the board snaps back to flat when released.")]
         public float resetSpeed = 5f;
 
-        [Tooltip("How fast the board follows the hand. Lower is smoother.")]
-        public float followSpeed = 8f; 
-
         private bool isGrabbed = false;
 
         void Update()
@@ -40,11 +37,11 @@ namespace StudioXRCL.EscapeRoom.Core
                 float clampedX = Mathf.Clamp(NormalizeAngle(rawEuler.x), -maxTiltAngle, maxTiltAngle);
                 float clampedZ = Mathf.Clamp(NormalizeAngle(rawEuler.z), -maxTiltAngle, maxTiltAngle);
 
-                // 3. Define the target rotation (adjust negative signs if it twists the wrong way)
+                // 3. Define the target rotation (with inverted axes)
                 Quaternion targetRotation = Quaternion.Euler(-clampedX, 0f, -clampedZ);
 
-                // 4. Smoothly Lerp the board to the target rotation
-                mazeBoard.localRotation = Quaternion.Lerp(mazeBoard.localRotation, targetRotation, Time.deltaTime * followSpeed);
+                // 4. Directly apply 1:1 rotation (No follow speed or smoothing)
+                mazeBoard.localRotation = targetRotation;
                 visualHandle.localRotation = mazeBoard.localRotation;
             }
             else
