@@ -61,6 +61,13 @@ namespace StudioXRCL.EscapeRoom.Core
         [Tooltip("Array of trackers containing data for each team.")]
         public TeamTracker[] teams;
 
+        [Header("Unity Events")]
+        [Tooltip("Event invoked when the current team is completed.")]
+        public UnityEngine.Events.UnityEvent onTeamCompleted;
+
+        [Tooltip("Event invoked when a team submits an incorrect set of cards.")]
+        public UnityEngine.Events.UnityEvent onIncorrectSubmission;
+
         #endregion
 
         #region Private Variable declarations
@@ -173,6 +180,7 @@ namespace StudioXRCL.EscapeRoom.Core
 
             if (currentTeam.isCompleted)
             {
+                onTeamCompleted?.Invoke();
                 StartCoroutine(FlashIndicator(Color.green));
                 return;
             }
@@ -181,11 +189,13 @@ namespace StudioXRCL.EscapeRoom.Core
             if (currentTeam.currentCards == currentTeam.requiredCards && currentTeam.totalAttempts == currentTeam.requiredCards)
             {
                 currentTeam.isCompleted = true;
+                onTeamCompleted?.Invoke();
                 StartCoroutine(FlashIndicator(Color.green));
                 currentTeam.hiddenMessage.SetActive(true);
             }
             else
             {
+                onIncorrectSubmission?.Invoke();
                 ResetCurrentTeam();
                 StartCoroutine(FlashIndicator(Color.red));
             }
