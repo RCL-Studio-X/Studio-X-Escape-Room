@@ -14,6 +14,10 @@ namespace StudioXRCL.EscapeRoom.Core
         [Tooltip("Indicates whether the puzzle has been successfully solved.")]
         public bool isSolved = false;
 
+        [Header("Unity Events")]
+        [Tooltip("Event triggered when the puzzle is solved.")]
+        public UnityEngine.Events.UnityEvent onPuzzleSolved;
+
         #endregion
 
         #region Private Variables
@@ -114,8 +118,7 @@ namespace StudioXRCL.EscapeRoom.Core
 
             if (isSolved)
             {
-                Debug.Log("Puzzle Solved!");
-                // Optional: Add visual feedback here 
+                onPuzzleSolved.Invoke();
             }
         }
 
