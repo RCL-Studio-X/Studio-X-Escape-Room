@@ -7,7 +7,7 @@ namespace StudioXRCL.EscapeRoom.Core
     /// </summary>
     public enum MineralType
     {
-        Gold,
+        Obsidian,
         FoolsGold,
         Coal,
         Iron,

@@ -14,6 +14,18 @@ namespace StudioXRCL.EscapeRoom.Core
         [Tooltip("Indicates whether the puzzle has been successfully solved.")]
         public bool isSolved = false;
 
+        [Header("Puzzle Configuration")]
+        /// <summary>
+        /// The exact combination of minerals needed to win.
+        /// </summary>
+        public List<MineralType> _requiredSolution = new List<MineralType>
+        {
+            MineralType.Obsidian,
+            MineralType.Amethyst,
+            MineralType.Emerald,
+            MineralType.Sapphire
+        };
+
         [Header("Unity Events")]
         [Tooltip("Event triggered when the puzzle is solved.")]
         public UnityEngine.Events.UnityEvent onPuzzleSolved;
@@ -26,17 +38,6 @@ namespace StudioXRCL.EscapeRoom.Core
         /// List to track the actual scripts on the objects inside the zone.
         /// </summary>
         private List<MineralData> _mineralsInZone = new List<MineralData>();
-
-        /// <summary>
-        /// The exact combination of minerals needed to win.
-        /// </summary>
-        private List<MineralType> _requiredSolution = new List<MineralType>
-        {
-            MineralType.Gold,
-            MineralType.Amethyst,
-            MineralType.Emerald,
-            MineralType.Sapphire
-        };
 
         #endregion
 
