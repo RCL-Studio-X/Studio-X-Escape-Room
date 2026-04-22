@@ -57,7 +57,7 @@ namespace StudioXRCL.EscapeRoom.Utilities
                 _myCollider = GetComponent<Collider>();
                 if (_myCollider == null)
                 {
-                    Debug.LogError("Respawn script requires a Collider component on the same GameObject or an assigned detectionCollider.");
+                    Debug.LogError("Respawn script requires a Collider component on the same GameObject or an assigned detectionCollider. Please add a Collider or assign one in the inspector for " + name + ".");
                 }
             }
 
@@ -72,7 +72,7 @@ namespace StudioXRCL.EscapeRoom.Utilities
                 _safeZone = boundary.GetSafeZone();
             } else
             {
-                Debug.LogError("No Boundary assigned to Respawn script. Please assign a Boundary GameObject.");
+                Debug.LogError("No Boundary assigned to Respawn script. Please assign a Boundary GameObject to" + name + ".");
             }
         }
 
