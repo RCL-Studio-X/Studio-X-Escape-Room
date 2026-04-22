@@ -131,6 +131,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 5257799698813841956}
     m_Modifications:
     - target: {fileID: 1018131701695098186, guid: 3e0279a770178964a91571a65d8edd12, type: 3}
+      propertyPath: m_ThrowOnDetach
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1018131701695098186, guid: 3e0279a770178964a91571a65d8edd12, type: 3}
       propertyPath: m_SelectExited.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 8168283038490807156}
@@ -299,6 +303,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 4882538137734017948}
     - target: {fileID: 4030469616386006520, guid: 94270ca281eec1c4c873a903a826bdbd, type: 3}
+      propertyPath: maxTiltAngle
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4030469616386006520, guid: 94270ca281eec1c4c873a903a826bdbd, type: 3}
       propertyPath: visualHandle
       value: 
       objectReference: {fileID: 508843787771468376}
@@ -306,6 +314,10 @@ PrefabInstance:
       propertyPath: invisibleGrabbable
       value: 
       objectReference: {fileID: 3014515165891886637}
+    - target: {fileID: 4030469616386006520, guid: 94270ca281eec1c4c873a903a826bdbd, type: 3}
+      propertyPath: movementSensitivity
+      value: 50
+      objectReference: {fileID: 0}
     - target: {fileID: 6850315094244441131, guid: 94270ca281eec1c4c873a903a826bdbd, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
