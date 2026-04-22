@@ -8,11 +8,15 @@ namespace StudioXRCL.EscapeRoom.Utilities
     /// </summary>
     public class Boundary : MonoBehaviour
     {
+        # region Private Variable Declarations
         /// <summary>
         /// Caches the collider component on this GameObject to be used as the safe zone boundary for the Respawn script.
         /// </summary>
         private Collider _safeZone;
 
+        #endregion
+
+        # region Unity Lifecycle Methods
         /// <summary>
         /// Unity Start method. Caches the collider component on this GameObject and ensures it is set as a trigger. Logs an error if no collider is found.
         /// </summary>
@@ -26,10 +30,17 @@ namespace StudioXRCL.EscapeRoom.Utilities
             }
         }
 
+        #endregion
+
+        # region Public Method Definitions
+        /// <summary>
+        /// Public getter for the safe zone collider.
+        /// </summary>
         public Collider GetSafeZone()
         {
             return _safeZone;
         }
+
+        #endregion
     }
 }
-
