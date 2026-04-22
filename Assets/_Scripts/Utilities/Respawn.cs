@@ -9,14 +9,17 @@ namespace StudioXRCL.EscapeRoom.Utilities
     {
         #region Public Variable Declarations
 
-        [Header("Respawn Settings")]
-
-        [Tooltip("The collider that defines the safe zone. If this object is no longer intersecting with this collider, it will respawn.")]
-        public Collider safeZone;
+        [Tooltip("The collider that detects when this object is outside of the safe zone. If left empty, the script will attempt to use a collider attached to this GameObject.")]
+        public Collider detectionCollider;
+        [Tooltip("The boundary that defines the safe zone.")]
+        public Boundary boundary;
 
         #endregion
 
         #region Private Variable Declarations
+
+        /// <summary> The collider that defines the safe zone. If this object is no longer intersecting with this collider, it will respawn. </summary>
+        private Collider _safeZone;
 
         /// <summary> The original world position of this object at startup. </summary>
         private Vector3 _originalPosition;
@@ -46,8 +49,31 @@ namespace StudioXRCL.EscapeRoom.Utilities
             _originalRotation = transform.rotation;
             _originalScale = transform.localScale;
 
-            _myCollider = GetComponent<Collider>();
+            if (detectionCollider != null)
+            {
+                _myCollider = detectionCollider;
+            } else
+            {
+                _myCollider = GetComponent<Collider>();
+                if (_myCollider == null)
+                {
+                    Debug.LogError("Respawn script requires a Collider component on the same GameObject or an assigned detectionCollider.");
+                }
+            }
+
             _rigidbody = GetComponent<Rigidbody>();
+            if (_rigidbody == null)
+            {
+                Debug.LogWarning("No Rigidbody component found on this GameObject: " + name + ". Velocity will not be reset on respawn.");
+            }
+
+            if (boundary != null)
+            {
+                _safeZone = boundary.GetSafeZone();
+            } else
+            {
+                Debug.LogError("No Boundary assigned to Respawn script. Please assign a Boundary GameObject.");
+            }
         }
 
         /// <summary>
@@ -56,12 +82,12 @@ namespace StudioXRCL.EscapeRoom.Utilities
         /// </summary>
         private void Update()
         {
-            if (safeZone == null || _myCollider == null)
+            if (_safeZone == null || _myCollider == null)
             {
                 return;
             }
 
-            if (!_myCollider.bounds.Intersects(safeZone.bounds))
+            if (!_myCollider.bounds.Intersects(_safeZone.bounds))
             {
                 RespawnObject();
             }
