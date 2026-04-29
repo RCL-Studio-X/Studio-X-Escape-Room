@@ -11,15 +11,17 @@ namespace StudioXRCL.EscapeRoom.Utilities
 
         [Tooltip("The collider that detects when this object is outside of the safe zone. If left empty, the script will attempt to use a collider attached to this GameObject.")]
         public Collider detectionCollider;
-        [Tooltip("The boundary that defines the safe zone.")]
-        public Boundary boundary;
+        [Tooltip("Boundaries that define the safe zone. If this object is not intersecting ANY of their safe-zone colliders, it will respawn.")]
+        public Boundary[] boundaries;
 
         #endregion
 
         #region Private Variable Declarations
 
-        /// <summary> The collider that defines the safe zone. If this object is no longer intersecting with this collider, it will respawn. </summary>
-        private Collider _safeZone;
+        /// <summary>
+        /// Safe-zone colliders gathered from <see cref="boundaries"/>. If this object is no longer intersecting ANY of these colliders, it will respawn.
+        /// </summary>
+        private Collider[] _safeZones;
 
         /// <summary> The original world position of this object at startup. </summary>
         private Vector3 _originalPosition;
@@ -67,12 +69,54 @@ namespace StudioXRCL.EscapeRoom.Utilities
                 Debug.LogWarning("No Rigidbody component found on this GameObject: " + name + ". Velocity will not be reset on respawn.");
             }
 
-            if (boundary != null)
+            if (boundaries != null && boundaries.Length > 0)
             {
-                _safeZone = boundary.GetSafeZone();
+                int safeZoneCount = 0;
+                for (int i = 0; i < boundaries.Length; i++)
+                {
+                    Boundary boundary = boundaries[i];
+                    if (boundary == null)
+                    {
+                        continue;
+                    }
+
+                    Collider safeZone = boundary.GetSafeZone();
+                    if (safeZone != null)
+                    {
+                        safeZoneCount++;
+                    }
+                }
+
+                if (safeZoneCount == 0)
+                {
+                    Debug.LogError("Boundaries were assigned, but none produced a valid safe zone collider for " + name + ". Please ensure each Boundary has a valid safe zone collider.");
+                    _safeZones = null;
+                }
+                else
+                {
+                    _safeZones = new Collider[safeZoneCount];
+                    int writeIndex = 0;
+                    for (int i = 0; i < boundaries.Length; i++)
+                    {
+                        Boundary boundary = boundaries[i];
+                        if (boundary == null)
+                        {
+                            continue;
+                        }
+
+                        Collider safeZone = boundary.GetSafeZone();
+                        if (safeZone == null)
+                        {
+                            continue;
+                        }
+
+                        _safeZones[writeIndex] = safeZone;
+                        writeIndex++;
+                    }
+                }
             } else
             {
-                Debug.LogError("No Boundary assigned to Respawn script. Please assign a Boundary GameObject to" + name + ".");
+                Debug.LogError("No Boundaries assigned to Respawn script. Please assign at least one Boundary GameObject to " + name + ".");
             }
         }
 
@@ -82,12 +126,28 @@ namespace StudioXRCL.EscapeRoom.Utilities
         /// </summary>
         private void Update()
         {
-            if (_safeZone == null || _myCollider == null)
+            if (_safeZones == null || _safeZones.Length == 0 || _myCollider == null)
             {
                 return;
             }
 
-            if (!_myCollider.bounds.Intersects(_safeZone.bounds))
+            bool isIntersectingAnySafeZone = false;
+            for (int i = 0; i < _safeZones.Length; i++)
+            {
+                Collider safeZone = _safeZones[i];
+                if (safeZone == null)
+                {
+                    continue;
+                }
+
+                if (_myCollider.bounds.Intersects(safeZone.bounds))
+                {
+                    isIntersectingAnySafeZone = true;
+                    break;
+                }
+            }
+
+            if (!isIntersectingAnySafeZone)
             {
                 RespawnObject();
             }
