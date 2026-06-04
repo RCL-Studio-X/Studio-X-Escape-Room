@@ -75,14 +75,17 @@ namespace StudioXRCL.EscapeRoom.Core
         /// <summary> The original base color of the result indicator. </summary>
         private Color _defaultIndicatorColor;
 
-        /// <summary> How much the dial rotates to the next team. </summary>
-        private float dialRotation=45;
+        /// <summary> How much the dial rotates to select the next team. </summary>
+        private float _dialRotation = 45f;
 
         /// <summary> The index of the currently selected team. </summary>
         private int _currentTeamIndex = 0;
 
-        /// <summary> Gets the Render of the result indicator. </summary>
+        /// <summary> Gets the Renderer of the result indicator. </summary>
         private Renderer _indicatorRenderer;
+
+        /// <summary> Delay in seconds between each card ejection to prevent physics collisions. </summary>
+        private const float CARD_EJECT_DELAY = 0.3f;
 
         #endregion
 
@@ -101,7 +104,7 @@ namespace StudioXRCL.EscapeRoom.Core
             {
                 _currentTeamIndex++;
             }
-            float targetXAngle = -220f + (_currentTeamIndex * dialRotation);
+            float targetXAngle = -220f + (_currentTeamIndex * _dialRotation);
             teamSelected.transform.localEulerAngles = new Vector3(targetXAngle, 90f, -90f);
         }
 
@@ -118,7 +121,7 @@ namespace StudioXRCL.EscapeRoom.Core
             {
                 _currentTeamIndex--;
             }
-            float targetXAngle = -220f + (_currentTeamIndex * dialRotation);
+            float targetXAngle = -220f + (_currentTeamIndex * _dialRotation);
             teamSelected.transform.localEulerAngles = new Vector3(targetXAngle, 90f, -90f);
         }
 
@@ -163,7 +166,7 @@ namespace StudioXRCL.EscapeRoom.Core
                 {
                     Debug.LogWarning("The object in the socket is missing a CardData script: " + cardInSocket.name);
                 }
-                
+
                 // Clear the socket for the next card
                 cardInSocket.SetActive(false);
             }
@@ -202,7 +205,7 @@ namespace StudioXRCL.EscapeRoom.Core
         }
 
         /// <summary>
-        /// Resets the current team's progress and ejects their entered cards.
+        /// Resets the current team's progress and ejects their entered cards one at a time.
         /// </summary>
         public void ResetCurrentTeam()
         {
@@ -211,18 +214,7 @@ namespace StudioXRCL.EscapeRoom.Core
             TeamTracker currentTeam = teams[_currentTeamIndex];
             if (!currentTeam.isCompleted)
             {
-                foreach (GameObject card in currentTeam.enteredCards)
-                {
-                    if (card == null) continue;
-
-                    card.SetActive(true);
-                    card.transform.position = outputPos.position;
-                }
-
-                currentTeam.enteredCards.Clear();
-                currentTeam.currentCards = 0;
-                currentTeam.totalAttempts = 0;
-                Debug.Log("Team Reset");
+                StartCoroutine(EjectCardsSequentially(currentTeam));
             }
         }
 
@@ -246,6 +238,30 @@ namespace StudioXRCL.EscapeRoom.Core
         }
 
         /// <summary>
+        /// Ejects each card in the team's entered list one at a time to prevent physics collisions.
+        /// </summary>
+        /// <param name="team">The TeamTracker whose cards should be ejected.</param>
+        /// <returns>An IEnumerator for use in a Coroutine.</returns>
+        private IEnumerator EjectCardsSequentially(TeamTracker team)
+        {
+            List<GameObject> cardsToEject = new List<GameObject>(team.enteredCards);
+
+            team.enteredCards.Clear();
+            team.currentCards = 0;
+            team.totalAttempts = 0;
+
+            foreach (GameObject card in cardsToEject)
+            {
+                if (card == null) continue;
+
+                EjectCard(card);
+                yield return new WaitForSeconds(CARD_EJECT_DELAY);
+            }
+
+            Debug.Log("Team Reset");
+        }
+
+        /// <summary>
         /// Flashes the result indicator a specific color for a set duration.
         /// </summary>
         /// <param name="color">The color to flash the indicator material.</param>
@@ -265,13 +281,22 @@ namespace StudioXRCL.EscapeRoom.Core
         }
 
         /// <summary>
-        /// Ejects a card by disabling it, moving it to the output position, and re-enabling it.
+        /// Ejects a card by disabling it, moving it to the output position, wiping its Rigidbody
+        /// velocity to prevent physics explosions, then re-enabling it.
         /// </summary>
         /// <param name="card">The GameObject of the card to eject.</param>
         private void EjectCard(GameObject card)
         {
             card.SetActive(false);
             card.transform.position = outputPos.position;
+
+            Rigidbody rb = card.GetComponent<Rigidbody>();
+            if (rb != null)
+            {
+                rb.linearVelocity = Vector3.zero;
+                rb.angularVelocity = Vector3.zero;
+            }
+
             card.SetActive(true);
         }
 
