@@ -6,11 +6,11 @@ This project was created by Studio X student employees.
 
 ## Technologies Used
 
-[Unity Editor 6000.0.58f2](https://unity.com/releases/editor/whats-new/6000.0.58f2) was used for game development, using the XR interaction toolkit. 
+[Unity Editor 6000.0.6f71](https://unity.com/releases/editor/whats-new/6000.0.67f1) is used for game development, using the XR interaction toolkit. 
 
-[Blender](https://www.blender.org/) was used for 3D modeling and texturing. All 3D models in the game were created by Studio X student employees.
+[Blender](https://www.blender.org/) is used for 3D modeling and texturing. All 3D models in the game were created by Studio X student employees.
 
-[GitHub Desktop](https://desktop.github.com/download/) was used for version control.
+[GitHub Desktop](https://desktop.github.com/download/) is used for version control.
 
 ## How To Play
 
@@ -25,16 +25,18 @@ Project Lead:
 
 Coding Team:
 - Fenway Powers (Lead) (Staff)
-- Daniel Lin
+- Daniel Lin (Fall 2025)
 - Ray Watkins
 - Ouriya Boshi Levine
 - Sherkeem Duprey
 - Jelena Hristov
 - Rain Xia
+- Tianyu Zhang (Spring 2026)
 
 Modeling Team:
 - Aadi Rajbhandary (Lead)
 - Caroline Li
 - Caleb Kohn-Blank
-- Tianyu Zhang
+- Tianyu Zhang (Fall 2025)
 - Hyeji Kim
+- Daniel Lin (Spring 2026)

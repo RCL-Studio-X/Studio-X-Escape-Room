@@ -144,6 +144,8 @@ MonoBehaviour:
   m_DisableVisualsWhenBlockedInGroup: 1
   m_StartingSelectedInteractable: {fileID: 0}
   m_StartingTargetFilter: {fileID: 0}
+  m_AutoFindParentInteractableInHierarchy: 0
+  m_ParentInteractableObject: {fileID: 0}
   m_HoverEntered:
     m_PersistentCalls:
       m_Calls: []
@@ -1850,6 +1852,8 @@ MonoBehaviour:
   m_DisableVisualsWhenBlockedInGroup: 1
   m_StartingSelectedInteractable: {fileID: 0}
   m_StartingTargetFilter: {fileID: 0}
+  m_AutoFindParentInteractableInHierarchy: 0
+  m_ParentInteractableObject: {fileID: 0}
   m_HoverEntered:
     m_PersistentCalls:
       m_Calls: []
@@ -5833,16 +5837,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c190f8360ee59c34793aa699fe579000, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _playerCamera: {fileID: 6177084908148273693}
-  requiredMatch:
-  - externalAxisMode: 0
-    localAxis: {x: -1, y: 0, z: 0}
-    externalAxis: {x: 0, y: 0, z: 1}
-    tolerance: 0.8
-  - externalAxisMode: 0
-    localAxis: {x: 0, y: -1, z: 0}
-    externalAxis: {x: 0, y: 1, z: 0}
-    tolerance: 0.8
+  playerCamera: {fileID: 0}
+  requiredMatches: []
   onEnterAligned:
     m_PersistentCalls:
       m_Calls:
@@ -5963,6 +5959,7 @@ GameObject:
   - component: {fileID: 6231903539416123180}
   - component: {fileID: 3997242506847307333}
   - component: {fileID: 191646637282506311}
+  - component: {fileID: 3752678274469970305}
   m_Layer: 2
   m_Name: XR Origin (XR Rig)
   m_TagString: Untagged
@@ -6123,6 +6120,21 @@ MonoBehaviour:
   m_AimAssistRequiredSpeed: 0.25
   m_AimAssistPercent: 0.8
   m_AimAssistMaxSpeedPercent: 10
+--- !u!114 &3752678274469970305
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8242463091353387567}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e3d924a2b9a721449012d9bbd1b18ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rigRoot: {fileID: 0}
+  startupMode: 1
+  sittingYOffset: 0.45
 --- !u!1 &8247849465534725781
 GameObject:
   m_ObjectHideFlags: 0
@@ -6852,6 +6864,8 @@ MonoBehaviour:
   m_DisableVisualsWhenBlockedInGroup: 1
   m_StartingSelectedInteractable: {fileID: 0}
   m_StartingTargetFilter: {fileID: 0}
+  m_AutoFindParentInteractableInHierarchy: 0
+  m_ParentInteractableObject: {fileID: 0}
   m_HoverEntered:
     m_PersistentCalls:
       m_Calls: []
