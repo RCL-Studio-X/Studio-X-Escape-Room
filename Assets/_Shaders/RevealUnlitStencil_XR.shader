@@ -17,14 +17,17 @@ Shader "Custom/RevealUnlitStencil_XR"
         Tags
         {
             "RenderPipeline"="UniversalPipeline"
-            "Queue"="Geometry"
-            "RenderType"="Opaque"
+            "Queue"="Transparent"
+            "RenderType"="Transparent"
         }
 
         Pass
         {
             Name "UnlitStencilGated"
             Tags { "LightMode"="UniversalForward" }
+
+            Blend SrcAlpha OneMinusSrcAlpha
+            ZWrite Off
 
             // Only draw where stencil == 1 (written by the mask)
             Stencil
@@ -106,7 +109,8 @@ Shader "Custom/RevealUnlitStencil_XR"
             {
                 UNITY_SETUP_STEREO_EYE_INDEX_POST_VERTEX(IN);
 
-                float3 albedo = SAMPLE_TEXTURE2D(_BaseMap, sampler_BaseMap, IN.uv).rgb * _BaseColor.rgb;
+                float4 baseSample = SAMPLE_TEXTURE2D(_BaseMap, sampler_BaseMap, IN.uv) * _BaseColor;
+                float3 albedo = baseSample.rgb;
 
                 // Fake flashlight lighting
                 float3 N = SafeNormalize(IN.normalWS);
@@ -131,7 +135,7 @@ Shader "Custom/RevealUnlitStencil_XR"
 
                 float3 lit = albedo * (_Ambient + diffuse) + spec;
 
-                return half4(lit, 1.0);
+                return half4(lit, baseSample.a);
             }
             ENDHLSL
         }
