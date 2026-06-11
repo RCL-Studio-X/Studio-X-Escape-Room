@@ -4,6 +4,7 @@ Shader "Custom/RevealUnlitStencil_XR"
     {
         _BaseMap ("Texture", 2D) = "white" {}
         _BaseColor ("Color", Color) = (1,1,1,1)
+        _AlphaCutoff ("Alpha Cutoff", Range(0,1)) = 0.5
 
         [Header(Fake Lighting)]
         _Ambient ("Ambient", Range(0,1)) = 0.35
@@ -17,14 +18,17 @@ Shader "Custom/RevealUnlitStencil_XR"
         Tags
         {
             "RenderPipeline"="UniversalPipeline"
-            "Queue"="Geometry"
-            "RenderType"="Opaque"
+            "Queue"="AlphaTest"
+            "RenderType"="TransparentCutout"
         }
 
         Pass
         {
             Name "UnlitStencilGated"
             Tags { "LightMode"="UniversalForward" }
+
+            Blend Off
+            ZWrite On
 
             // Only draw where stencil == 1 (written by the mask)
             Stencil
@@ -53,6 +57,7 @@ Shader "Custom/RevealUnlitStencil_XR"
             CBUFFER_START(UnityPerMaterial)
                 float4 _BaseMap_ST;
                 float4 _BaseColor;
+                float _AlphaCutoff;
 
                 float _Ambient;
                 float _FlashBoost;
@@ -106,7 +111,10 @@ Shader "Custom/RevealUnlitStencil_XR"
             {
                 UNITY_SETUP_STEREO_EYE_INDEX_POST_VERTEX(IN);
 
-                float3 albedo = SAMPLE_TEXTURE2D(_BaseMap, sampler_BaseMap, IN.uv).rgb * _BaseColor.rgb;
+                float4 baseSample = SAMPLE_TEXTURE2D(_BaseMap, sampler_BaseMap, IN.uv) * _BaseColor;
+                clip(baseSample.a - _AlphaCutoff);
+
+                float3 albedo = baseSample.rgb;
 
                 // Fake flashlight lighting
                 float3 N = SafeNormalize(IN.normalWS);
