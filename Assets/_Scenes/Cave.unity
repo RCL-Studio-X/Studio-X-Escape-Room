@@ -15263,6 +15263,37 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1492017755}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1497070252
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1497070253}
+  m_Layer: 0
+  m_Name: Rocks
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1497070253
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1497070252}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0.037122756, y: 0.39226916, z: 0.32858735, w: 0.85835725}
+  m_LocalPosition: {x: 4.99, y: -6.61, z: -26.08}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: -18.755, y: 43.268, z: 34.4}
 --- !u!1 &1511068431
 GameObject:
   m_ObjectHideFlags: 0
@@ -24761,3 +24792,4 @@ SceneRoots:
   - {fileID: 1905162048}
   - {fileID: 1360459015}
   - {fileID: 443550691}
+  - {fileID: 1497070253}
