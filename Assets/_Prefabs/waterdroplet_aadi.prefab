@@ -152,7 +152,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   audioSource: {fileID: -1015155729732868799}
   clip: {fileID: 8300000, guid: 228bdb47f2537994db16935ed35767e4, type: 3}
-  pitch: 1.5
+  currentPitch: 1
+  lifetime: 2
 --- !u!82 &-1015155729732868799
 AudioSource:
   m_ObjectHideFlags: 0
