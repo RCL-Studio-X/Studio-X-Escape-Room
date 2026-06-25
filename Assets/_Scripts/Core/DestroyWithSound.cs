@@ -21,6 +21,10 @@ namespace StudioXRCL.EscapeRoom.Core
         [Tooltip("Pitch to use when playing the clip. Set this externally (e.g., by a GameManager) before collision.")]
         public float currentPitch = 1.0f;
 
+        [Header("Destroy")]
+        [Tooltip("Seconds after creation before the object destroys itself. Set slightly longer than your longest clip.")]
+        public float lifetime = 3f;
+
         #endregion
 
         #region Private Variable Declarations
@@ -29,6 +33,18 @@ namespace StudioXRCL.EscapeRoom.Core
         /// Ensures the collision behavior only runs once.
         /// </summary>
         private bool _triggered = false;
+
+        #endregion
+
+        #region Unity Lifecycle Methods
+
+        /// <summary>
+        /// Schedules the GameObject to destroy itself after <see cref="lifetime"/> seconds.
+        /// </summary>
+        private void Start()
+        {
+            Destroy(gameObject, lifetime);
+        }
 
         #endregion
 
@@ -79,23 +95,17 @@ namespace StudioXRCL.EscapeRoom.Core
         }
 
         /// <summary>
-        /// Plays the configured impact sound using the configured pitch and destroys the GameObject
-        /// after the sound finishes.
+        /// Plays the configured impact sound using the configured pitch.
+        /// Destruction is already scheduled via Start(); no need to handle it here.
         /// </summary>
         private void PlayImpactSoundAndDestroy()
         {
             if (audioSource == null || clip == null)
-            {
-                Destroy(gameObject);
                 return;
-            }
 
             audioSource.spatialBlend = 1f;
             audioSource.pitch = currentPitch;
             audioSource.PlayOneShot(clip);
-
-            float duration = clip.length / Mathf.Max(0.01f, Mathf.Abs(currentPitch));
-            Destroy(gameObject, duration);
         }
 
         #endregion

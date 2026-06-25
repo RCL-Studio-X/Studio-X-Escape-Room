@@ -4,6 +4,8 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
+using System.Linq;
+
 
 namespace StudioXRCL.EscapeRoom.Core
 {
@@ -68,12 +70,16 @@ namespace StudioXRCL.EscapeRoom.Core
         [Tooltip("Event invoked when the lock becomes unlocked.")]
         public UnityEvent onUnlocked;
 
+        [Tooltip("Quick workaround for the skull puzzle.")]
+        public bool usingAlternate;
+
         #endregion
 
         #region Private Variable declarations
 
         /// <summary> Array of letters the user can cycle through. </summary>
         private string[] _letterList = { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J" };
+        private string[] _letterListAlternate = { "A", "N", "C", "D", "E", "F", "S", "H", "I", "T" };
 
         #endregion
 
@@ -87,15 +93,30 @@ namespace StudioXRCL.EscapeRoom.Core
         {
             LockDial dial = dials[dialIndex]; // Grab the specific dial
 
-            if (dial.currentIndex == _letterList.Length - 1)
+            if (usingAlternate)
             {
-                dial.currentIndex = 0;
+                if (dial.currentIndex == _letterListAlternate.Length - 1)
+                {
+                    dial.currentIndex = 0;
+                }
+                else
+                {
+                    dial.currentIndex++;
+                }
+                dial.letterDisplay.SetText(_letterListAlternate[dial.currentIndex]);
             }
             else
             {
-                dial.currentIndex++;
+                if (dial.currentIndex == _letterList.Length - 1)
+                {
+                    dial.currentIndex = 0;
+                }
+                else
+                {
+                    dial.currentIndex++;
+                }
+                dial.letterDisplay.SetText(_letterList[dial.currentIndex]);
             }
-            dial.letterDisplay.SetText(_letterList[dial.currentIndex]);
         }
 
         /// <summary>
@@ -106,15 +127,31 @@ namespace StudioXRCL.EscapeRoom.Core
         {
             LockDial dial = dials[dialIndex];
 
-            if (dial.currentIndex == 0)
+            if (usingAlternate)
             {
-                dial.currentIndex = _letterList.Length - 1;
+                if (dial.currentIndex == 0)
+                {
+                    dial.currentIndex = _letterListAlternate.Length - 1;
+                }
+                else
+                {
+                    dial.currentIndex--;
+                }
+                dial.letterDisplay.SetText(_letterListAlternate[dial.currentIndex]);
             }
             else
             {
-                dial.currentIndex--;
+                if (dial.currentIndex == 0)
+                {
+                    dial.currentIndex = _letterList.Length - 1;
+                }
+                else
+                {
+                    dial.currentIndex--;
+                }
+                dial.letterDisplay.SetText(_letterList[dial.currentIndex]);
             }
-            dial.letterDisplay.SetText(_letterList[dial.currentIndex]);
+            
         }
 
         
@@ -126,13 +163,25 @@ namespace StudioXRCL.EscapeRoom.Core
         /// Clears the current sequence and resets all dials.
         /// </summary>
         private void ClearSequence()
-        {
-            // One simple loop resets every single dial
-            foreach (LockDial dial in dials)
+        {   
+            if (usingAlternate)
             {
-                dial.currentIndex = 0;
-                dial.letterDisplay.SetText(_letterList[0]);
+                foreach (LockDial dial in dials)
+                {
+                    dial.currentIndex = 0;
+                    dial.letterDisplay.SetText(_letterListAlternate[0]);
+                }
             }
+            else
+            {
+                foreach (LockDial dial in dials)
+                {
+                    dial.currentIndex = 0;
+                    dial.letterDisplay.SetText(_letterList[0]);
+                }
+            }
+            // One simple loop resets every single dial
+            
             ChangeAllIndicatorsColor("white");
         }
 
@@ -164,14 +213,33 @@ namespace StudioXRCL.EscapeRoom.Core
             bool isCorrect = true;
 
             // Loop through all dials. If even ONE is wrong, fail the whole lock.
-            foreach (LockDial dial in dials)
+
+            if (usingAlternate)
             {
-                if (dial.currentIndex != dial.correctIndex)
+                string text = "";
+
+                foreach (LockDial dial in dials)
                 {
-                    isCorrect = false;
-                    break; // Stop checking, we already know it's wrong
+                    text += _letterListAlternate[dial.correctIndex];
+                }
+
+                // Now check if text contains S, T, A, N, C
+                char[] required = { 'S', 'T', 'A', 'N', 'C' };
+
+                bool hasAllLetters = required.All(letter => text.Contains(letter));
+            }
+            else
+            {
+                foreach (LockDial dial in dials)
+                {
+                    if (dial.currentIndex != dial.correctIndex)
+                    {
+                        isCorrect = false;
+                        break; // Stop checking, we already know it's wrong
+                    }
                 }
             }
+            
 
             if (isCorrect)
             {
