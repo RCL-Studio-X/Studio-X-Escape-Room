@@ -10153,11 +10153,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1.9955467, y: 0.09360651, z: 2.0252633}
   m_Center: {x: -0.014859537, y: -0.6612216, z: 0.0074317055}
---- !u!4 &758083852 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 4abbb5b1262a941d5adf37ec3241cde3, type: 3}
-  m_PrefabInstance: {fileID: 1794801962}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &760480866 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 622398102192588205, guid: d94f4dd5a5ebeb7479ba136da9614a50, type: 3}
@@ -16753,47 +16748,47 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 758083852}
+    m_TransformParent: {fileID: 669061538}
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 08dc38a3b16bab940937c53fe0a92b2d, type: 3}
       propertyPath: m_LocalScale.x
-      value: 1.1666665
+      value: 0.011666664
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 08dc38a3b16bab940937c53fe0a92b2d, type: 3}
       propertyPath: m_LocalScale.y
-      value: 1.1666665
+      value: 0.011666665
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 08dc38a3b16bab940937c53fe0a92b2d, type: 3}
       propertyPath: m_LocalScale.z
-      value: 1.1666665
+      value: 0.011666664
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 08dc38a3b16bab940937c53fe0a92b2d, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.25633484
+      value: 0.004514746
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 08dc38a3b16bab940937c53fe0a92b2d, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.015512505
+      value: -0.0018632684
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 08dc38a3b16bab940937c53fe0a92b2d, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 1.1608347
+      value: -0.00015512496
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 08dc38a3b16bab940937c53fe0a92b2d, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.70710677
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 08dc38a3b16bab940937c53fe0a92b2d, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: 0.7071069
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 08dc38a3b16bab940937c53fe0a92b2d, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.0000005364418
+      value: 0.00000033717475
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 08dc38a3b16bab940937c53fe0a92b2d, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0.0000003371748
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 08dc38a3b16bab940937c53fe0a92b2d, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -23492,15 +23487,15 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
-    - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 4abbb5b1262a941d5adf37ec3241cde3, type: 3}
-      insertIndex: 1
-      addedObject: {fileID: 333393536}
     - targetCorrespondingSourceObject: {fileID: -7091148544645285759, guid: 4abbb5b1262a941d5adf37ec3241cde3, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1270350138}
     - targetCorrespondingSourceObject: {fileID: -7091148544645285759, guid: 4abbb5b1262a941d5adf37ec3241cde3, type: 3}
       insertIndex: -1
       addedObject: {fileID: 178707058}
+    - targetCorrespondingSourceObject: {fileID: -7091148544645285759, guid: 4abbb5b1262a941d5adf37ec3241cde3, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 333393536}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 4abbb5b1262a941d5adf37ec3241cde3, type: 3}
       insertIndex: -1
